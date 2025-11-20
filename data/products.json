@@ -768,5 +768,35 @@
     "featured": false,
     "new": true,
     "sku": "HOME-025"
+  },
+  {
+    "id": "home_026",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - молочний, діаметр - 27 см, набір - 4 шт.",
+      "en": "material - jute, colour - milk, d - 27 cm, set - 4 pcs."
+    },
+    "price": 800,
+    "currency": "UAH",
+    "images": [
+      "/images/products/12home.placemat1.JPG",
+      "/images/products/12home.placemat2.JPG",
+      "/images/products/12home.placemat3.JPG"
+    ],
+    "colors": ["молочний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 27,
+      "unit": "cm"
+    },
+    "quantity": 4,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-026"
   }
 ]
