@@ -17,8 +17,12 @@
       "/images/products/1home.placemat2.JPG",
       "/images/products/1home.placemat3.JPG"
     ],
-    "colors": ["натуральний"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 30,
       "unit": "cm"
@@ -47,8 +51,12 @@
       "/images/products/2home.placemat2.JPG",
       "/images/products/2home.placemat3.JPG"
     ],
-    "colors": ["чорний"],
-    "materials": ["джут"],
+    "colors": [
+      "чорний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 30,
       "unit": "cm"
@@ -77,8 +85,12 @@
       "/images/products/3home.placemat3.JPG",
       "/images/products/3home.plavemat1.JPG"
     ],
-    "colors": ["голубий"],
-    "materials": ["джут"],
+    "colors": [
+      "голубий"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 28,
       "unit": "cm"
@@ -107,8 +119,12 @@
       "/images/products/4home.placemat2.JPG",
       "/images/products/4home.placemat3.JPG"
     ],
-    "colors": ["натуральний"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 26,
       "unit": "cm"
@@ -137,8 +153,12 @@
       "/images/products/5home.placemat2.JPG",
       "/images/products/5home.placemat3.JPG"
     ],
-    "colors": ["натуральний"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 23,
       "unit": "cm"
@@ -167,8 +187,13 @@
       "/images/products/6home.placemat2.JPG",
       "/images/products/6home.placemat3.JPG"
     ],
-    "colors": ["натуральний", "голубий"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний",
+      "голубий"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 26,
       "unit": "cm"
@@ -197,8 +222,13 @@
       "/images/products/7home.placemat2.JPG",
       "/images/products/7home.placemat3.JPG"
     ],
-    "colors": ["натуральний", "чорний"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний",
+      "чорний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 21,
       "unit": "cm"
@@ -227,8 +257,13 @@
       "/images/products/8home.placemat2.JPG",
       "/images/products/8home.placemat3.JPG"
     ],
-    "colors": ["натуральний", "молочний"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний",
+      "молочний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 34,
       "unit": "cm"
@@ -257,8 +292,14 @@
       "/images/products/9home.placemat2.JPG",
       "/images/products/9home.placemat3.JPG"
     ],
-    "colors": ["натуральний", "чорний", "червоний"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний",
+      "чорний",
+      "червоний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "width": 25,
       "height": 22,
@@ -288,8 +329,12 @@
       "/images/products/10home.placemat2.JPG",
       "/images/products/10home.placemat3.JPG"
     ],
-    "colors": ["натуральний"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "width": 23,
       "height": 24,
@@ -319,8 +364,13 @@
       "/images/products/11home.placemat2.JPG",
       "/images/products/11home.placemat3.JPG"
     ],
-    "colors": ["натуральний", "зелений"],
-    "materials": ["джут"],
+    "colors": [
+      "натуральний",
+      "зелений"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "width": 24.5,
       "height": 24.5,
@@ -334,443 +384,6 @@
   },
   {
     "id": "home_012",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для смаколиків",
-      "en": "Bread basket"
-    },
-    "description": {
-      "ua": "матеріал - джут, дерево, колір - натурального джуту, діаметр - 20 см, висота - 7 см",
-      "en": "material - jute, wood, colour - natural, d - 20 cm, h - 7 cm"
-    },
-    "price": 480,
-    "currency": "UAH",
-    "images": [
-      "/images/products/1home.organizer.jute1JPG.jpg",
-      "/images/products/1home.organizer.jute2.JPG",
-      "/images/products/1home.organizer.jute3.JPG"
-    ],
-    "colors": ["натуральний"],
-    "materials": ["джут", "дерево"],
-    "dimensions": {
-      "diameter": 20,
-      "height": 7,
-      "unit": "cm"
-    },
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-012"
-  },
-  {
-    "id": "home_013",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для смаколиків",
-      "en": "Bread basket"
-    },
-    "description": {
-      "ua": "матеріал - джут, дерево, колір - натурального джуту, діаметр - 25 см, висота - 7 см",
-      "en": "material - jute, wood, colour - natural, d - 25 cm, h - 7 cm"
-    },
-    "price": 550,
-    "currency": "UAH",
-    "images": [
-      "/images/products/2home.organizer.jute1.JPG",
-      "/images/products/2home.organizer.jute2.JPG",
-      "/images/products/2home.organizer.jute3.JPG"
-    ],
-    "colors": ["натуральний"],
-    "materials": ["джут", "дерево"],
-    "dimensions": {
-      "diameter": 25,
-      "height": 7,
-      "unit": "cm"
-    },
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-013"
-  },
-  {
-    "id": "home_014",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для смаколиків",
-      "en": "Bread basket"
-    },
-    "description": {
-      "ua": "матеріал - джут, дерево, колір - натурального джуту, 25/17 см, висота - 6,5 см",
-      "en": "material - jute, wood, colour - natural, 25/17 cm, h - 6,5 cm"
-    },
-    "price": 550,
-    "currency": "UAH",
-    "images": [
-      "/images/products/3home.organizer.jute1.JPG",
-      "/images/products/3home.organizer.jute2.JPG",
-      "/images/products/3home.organizer.jute3.JPG"
-    ],
-    "colors": ["натуральний"],
-    "materials": ["джут", "дерево"],
-    "dimensions": {
-      "width": 25,
-      "depth": 17,
-      "height": 6.5,
-      "unit": "cm"
-    },
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-014"
-  },
-  {
-    "id": "home_015",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для смаколиків",
-      "en": "Jute basket"
-    },
-    "description": {
-      "ua": "матеріал - джут, дерево, колір - натурального джуту, чорний, червоний, 20/15 см, висота - 7 см",
-      "en": "material - jute, wood, colour - natural, black, red, 20/15 cm, h - 7 cm"
-    },
-    "price": 450,
-    "currency": "UAH",
-    "images": [
-      "/images/products/4home.organizer.jute1.JPG",
-      "/images/products/4home.organizer.jute2.JPG",
-      "/images/products/4home.organizer.jute3.JPG"
-    ],
-    "colors": ["натуральний", "чорний", "червоний"],
-    "materials": ["джут", "дерево"],
-    "dimensions": {
-      "width": 20,
-      "depth": 15,
-      "height": 7,
-      "unit": "cm"
-    },
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-015"
-  },
-  {
-    "id": "home_016",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для дрібничок",
-      "en": "Jute basket"
-    },
-    "description": {
-      "ua": "матеріал - джут, колір - молочний , 10/10/11 см",
-      "en": "material - jute, colour - milk, 10/10/11 cm"
-    },
-    "price": 350,
-    "currency": "UAH",
-    "images": [
-      "/images/products/5home.organizer.jute1.JPG",
-      "/images/products/5home.organizer.jute2.JPG",
-      "/images/products/5home.organizer.jute3.JPG"
-    ],
-    "colors": ["молочний"],
-    "materials": ["джут"],
-    "dimensions": {
-      "width": 10,
-      "depth": 10,
-      "height": 11,
-      "unit": "cm"
-    },
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-016"
-  },
-  {
-    "id": "home_017",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для дрібничок",
-      "en": "Organizer"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, колір - бежевий, 14/14/10 см",
-      "en": "material - cotton cord, colour - beige, 14/14/10 cm"
-    },
-    "price": 450,
-    "currency": "UAH",
-    "images": [
-      "/images/products/6home.organizer.cot1.JPG",
-      "/images/products/6home.organizer.cot2.JPG",
-      "/images/products/6home.organizer.cot3.JPG"
-    ],
-    "colors": ["бежевий"],
-    "materials": ["бавовняний шнур"],
-    "dimensions": {
-      "width": 14,
-      "depth": 14,
-      "height": 10,
-      "unit": "cm"
-    },
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-017"
-  },
-  {
-    "id": "home_018",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для дрібничок",
-      "en": "Organizer"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, колір - чорний , 13/13/12 см",
-      "en": "material - cotton cord, colour - black, 13/13/12 cm"
-    },
-    "price": 450,
-    "currency": "UAH",
-    "images": [
-      "/images/products/7home.organizer.cot1.JPG",
-      "/images/products/7home.organizer.cot2.JPG",
-      "/images/products/7home.organizer.cot3.JPG"
-    ],
-    "colors": ["чорний"],
-    "materials": ["бавовняний шнур"],
-    "dimensions": {
-      "width": 13,
-      "depth": 13,
-      "height": 12,
-      "unit": "cm"
-    },
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-018"
-  },
-  {
-    "id": "home_019",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для дрібничок",
-      "en": "Organizer"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, колір - білий, 9/9/10,5 см",
-      "en": "material - cotton cord, colour - white, 9/9/10,5 cm"
-    },
-    "price": 350,
-    "currency": "UAH",
-    "images": [
-      "/images/products/8home.organizer.cot1.JPG",
-      "/images/products/8home.organizer.cot2.JPG",
-      "/images/products/8home.organizer.cot3.JPG"
-    ],
-    "colors": ["білий"],
-    "materials": ["бавовняний шнур"],
-    "dimensions": {
-      "width": 9,
-      "depth": 9,
-      "height": 10.5,
-      "unit": "cm"
-    },
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-019"
-  },
-  {
-    "id": "home_020",
-    "category": "home",
-    "name": {
-      "ua": "Набір кошиків для дрібничок",
-      "en": "Organizer set"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, колір - білий, 8/8/10,5 см, набір - 2 шт.",
-      "en": "material - cotton cord, colour - white, 8/8/10,5 cm, 2 pcs set."
-    },
-    "price": 480,
-    "currency": "UAH",
-    "images": [
-      "/images/products/9home.organizer.cot1.JPG",
-      "/images/products/9home.organizer.cot2.JPG",
-      "/images/products/9home.organizer.cot3.JPG"
-    ],
-    "colors": ["білий"],
-    "materials": ["бавовняний шнур"],
-    "dimensions": {
-      "width": 8,
-      "depth": 8,
-      "height": 10.5,
-      "unit": "cm"
-    },
-    "quantity": 2,
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-020"
-  },
-  {
-    "id": "home_021",
-    "category": "home",
-    "name": {
-      "ua": "Набір кошиків для дрібничок",
-      "en": "Organizer set"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, колір - пастельно-коричневий, 8/8/10,5 см, набір - 2 шт.",
-      "en": "material - cotton cord, colour - pastel brown, 8/8/10,5 cm, 2 pcs set."
-    },
-    "price": 480,
-    "currency": "UAH",
-    "images": [
-      "/images/products/10home.organizer.cot1.JPG",
-      "/images/products/10home.organizer.cot2.JPG",
-      "/images/products/10home.organizer.cot3.JPG"
-    ],
-    "colors": ["пастельно-коричневий"],
-    "materials": ["бавовняний шнур"],
-    "dimensions": {
-      "width": 8,
-      "depth": 8,
-      "height": 10.5,
-      "unit": "cm"
-    },
-    "quantity": 2,
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-021"
-  },
-  {
-    "id": "home_022",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для дрібничок",
-      "en": "Organizer"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, дерево, колір - молочний, 15,5/20/7 см, 1 шт.",
-      "en": "material - cotton cord, wood, colour - milk, 15,5/20/7 cm, 1 pcs"
-    },
-    "price": 500,
-    "currency": "UAH",
-    "images": [
-      "/images/products/11home.organizer.cot1.JPG",
-      "/images/products/11home.organizer.cot2.JPG",
-      "/images/products/11home.organizer.cot3.JPG"
-    ],
-    "colors": ["молочний"],
-    "materials": ["бавовняний шнур", "дерево"],
-    "dimensions": {
-      "width": 15.5,
-      "depth": 20,
-      "height": 7,
-      "unit": "cm"
-    },
-    "quantity": 1,
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-022"
-  },
-  {
-    "id": "home_023",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для дрібничок",
-      "en": "Organizer"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, колір - пастельно-коричневий, 12/20/7 см, 1 шт.",
-      "en": "material - cotton cord, colour - pastel brown, 12/20/7 cm, 1 pcs"
-    },
-    "price": 450,
-    "currency": "UAH",
-    "images": [
-      "/images/products/12home.organizer.cot1.JPG",
-      "/images/products/12home.organizer.cot2.JPG",
-      "/images/products/12home.organizer.cot3.JPG"
-    ],
-    "colors": ["пастельно-коричневий"],
-    "materials": ["бавовняний шнур"],
-    "dimensions": {
-      "width": 12,
-      "depth": 20,
-      "height": 7,
-      "unit": "cm"
-    },
-    "quantity": 1,
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-023"
-  },
-  {
-    "id": "home_024",
-    "category": "home",
-    "name": {
-      "ua": "Набір кошиків для дрібничок",
-      "en": "Organizer set"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, колір - мокко, 11/21/6 см, 10,5/19/6 см, набір - 2 шт.",
-      "en": "material - cotton cord, colour - moccacino, 11/21/6 cm, 10,5/19/6 cm, 2 pcs set."
-    },
-    "price": 650,
-    "currency": "UAH",
-    "images": [
-      "/images/products/13home.organizer.cot1.JPG",
-      "/images/products/13home.organizer.cot2.JPG",
-      "/images/products/13home.organizer.cot3.JPG"
-    ],
-    "colors": ["мокко"],
-    "materials": ["бавовняний шнур"],
-    "dimensions": {
-      "width": 11,
-      "depth": 21,
-      "height": 6,
-      "unit": "cm"
-    },
-    "quantity": 2,
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-024"
-  },
-  {
-    "id": "home_025",
-    "category": "home",
-    "name": {
-      "ua": "Кошик для дрібничок",
-      "en": "Organizer"
-    },
-    "description": {
-      "ua": "матеріал - бавовняний шнур, дерево, колір - капучіно, 20/20/7 см, 1 шт.",
-      "en": "material - cotton cord, wood, colour - cappuccino , 20/20/7 cm, 1 pcs"
-    },
-    "price": 550,
-    "currency": "UAH",
-    "images": [
-      "/images/products/14home.organizer.cot1.JPG",
-      "/images/products/14home.organizer.cot2.JPG"
-    ],
-    "colors": ["капучіно"],
-    "materials": ["бавовняний шнур", "дерево"],
-    "dimensions": {
-      "width": 20,
-      "depth": 20,
-      "height": 7,
-      "unit": "cm"
-    },
-    "quantity": 1,
-    "inStock": true,
-    "featured": false,
-    "new": true,
-    "sku": "HOME-025"
-  },
-  {
-    "id": "home_026",
     "category": "home",
     "name": {
       "ua": "Набір підтарільників",
@@ -787,13 +400,518 @@
       "/images/products/12home.placemat2.JPG",
       "/images/products/12home.placemat3.JPG"
     ],
-    "colors": ["молочний"],
-    "materials": ["джут"],
+    "colors": [
+      "молочний"
+    ],
+    "materials": [
+      "джут"
+    ],
     "dimensions": {
       "diameter": 27,
       "unit": "cm"
     },
     "quantity": 4,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-012"
+  },
+  {
+    "id": "home_013",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для смаколиків",
+      "en": "Bread basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, діаметр - 20 см, висота - 7 см",
+      "en": "material - jute, wood, colour - natural, d - 20 cm, h - 7 cm"
+    },
+    "price": 480,
+    "currency": "UAH",
+    "images": [
+      "/images/products/1home.organizer.jute1JPG.jpg",
+      "/images/products/1home.organizer.jute2.JPG",
+      "/images/products/1home.organizer.jute3.JPG"
+    ],
+    "colors": [
+      "натуральний"
+    ],
+    "materials": [
+      "джут",
+      "дерево"
+    ],
+    "dimensions": {
+      "diameter": 20,
+      "height": 7,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-013"
+  },
+  {
+    "id": "home_014",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для смаколиків",
+      "en": "Bread basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, діаметр - 25 см, висота - 7 см",
+      "en": "material - jute, wood, colour - natural, d - 25 cm, h - 7 cm"
+    },
+    "price": 550,
+    "currency": "UAH",
+    "images": [
+      "/images/products/2home.organizer.jute1.JPG",
+      "/images/products/2home.organizer.jute2.JPG",
+      "/images/products/2home.organizer.jute3.JPG"
+    ],
+    "colors": [
+      "натуральний"
+    ],
+    "materials": [
+      "джут",
+      "дерево"
+    ],
+    "dimensions": {
+      "diameter": 25,
+      "height": 7,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-014"
+  },
+  {
+    "id": "home_015",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для смаколиків",
+      "en": "Bread basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, 25/17 см, висота - 6,5 см",
+      "en": "material - jute, wood, colour - natural, 25/17 cm, h - 6,5 cm"
+    },
+    "price": 550,
+    "currency": "UAH",
+    "images": [
+      "/images/products/3home.organizer.jute1.JPG",
+      "/images/products/3home.organizer.jute2.JPG",
+      "/images/products/3home.organizer.jute3.JPG"
+    ],
+    "colors": [
+      "натуральний"
+    ],
+    "materials": [
+      "джут",
+      "дерево"
+    ],
+    "dimensions": {
+      "width": 25,
+      "depth": 17,
+      "height": 6.5,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-015"
+  },
+  {
+    "id": "home_016",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для смаколиків",
+      "en": "Jute basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, чорний, червоний, 20/15 см, висота - 7 см",
+      "en": "material - jute, wood, colour - natural, black, red, 20/15 cm, h - 7 cm"
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/4home.organizer.jute1.JPG",
+      "/images/products/4home.organizer.jute2.JPG",
+      "/images/products/4home.organizer.jute3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "чорний",
+      "червоний"
+    ],
+    "materials": [
+      "джут",
+      "дерево"
+    ],
+    "dimensions": {
+      "width": 20,
+      "depth": 15,
+      "height": 7,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-016"
+  },
+  {
+    "id": "home_017",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Jute basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - молочний , 10/10/11 см",
+      "en": "material - jute, colour - milk, 10/10/11 cm"
+    },
+    "price": 350,
+    "currency": "UAH",
+    "images": [
+      "/images/products/5home.organizer.jute1.JPG",
+      "/images/products/5home.organizer.jute2.JPG",
+      "/images/products/5home.organizer.jute3.JPG"
+    ],
+    "colors": [
+      "молочний"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "height": 11,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-017"
+  },
+  {
+    "id": "home_018",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - бежевий, 14/14/10 см",
+      "en": "material - cotton cord, colour - beige, 14/14/10 cm"
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/6home.organizer.cot1.JPG",
+      "/images/products/6home.organizer.cot2.JPG",
+      "/images/products/6home.organizer.cot3.JPG"
+    ],
+    "colors": [
+      "бежевий"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 14,
+      "depth": 14,
+      "height": 10,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-018"
+  },
+  {
+    "id": "home_019",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - чорний , 13/13/12 см",
+      "en": "material - cotton cord, colour - black, 13/13/12 cm"
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/7home.organizer.cot1.JPG",
+      "/images/products/7home.organizer.cot2.JPG",
+      "/images/products/7home.organizer.cot3.JPG"
+    ],
+    "colors": [
+      "чорний"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 13,
+      "depth": 13,
+      "height": 12,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-019"
+  },
+  {
+    "id": "home_020",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - білий, 9/9/10,5 см",
+      "en": "material - cotton cord, colour - white, 9/9/10,5 cm"
+    },
+    "price": 350,
+    "currency": "UAH",
+    "images": [
+      "/images/products/8home.organizer.cot1.JPG",
+      "/images/products/8home.organizer.cot2.JPG",
+      "/images/products/8home.organizer.cot3.JPG"
+    ],
+    "colors": [
+      "білий"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 9,
+      "depth": 9,
+      "height": 10.5,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-020"
+  },
+  {
+    "id": "home_021",
+    "category": "home",
+    "name": {
+      "ua": "Набір кошиків для дрібничок",
+      "en": "Organizer set"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - білий, 8/8/10,5 см, набір - 2 шт.",
+      "en": "material - cotton cord, colour - white, 8/8/10,5 cm, 2 pcs set."
+    },
+    "price": 480,
+    "currency": "UAH",
+    "images": [
+      "/images/products/9home.organizer.cot1.JPG",
+      "/images/products/9home.organizer.cot2.JPG",
+      "/images/products/9home.organizer.cot3.JPG"
+    ],
+    "colors": [
+      "білий"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 8,
+      "depth": 8,
+      "height": 10.5,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-021"
+  },
+  {
+    "id": "home_022",
+    "category": "home",
+    "name": {
+      "ua": "Набір кошиків для дрібничок",
+      "en": "Organizer set"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - пастельно-коричневий, 8/8/10,5 см, набір - 2 шт.",
+      "en": "material - cotton cord, colour - pastel brown, 8/8/10,5 cm, 2 pcs set."
+    },
+    "price": 480,
+    "currency": "UAH",
+    "images": [
+      "/images/products/10home.organizer.cot1.JPG",
+      "/images/products/10home.organizer.cot2.JPG",
+      "/images/products/10home.organizer.cot3.JPG"
+    ],
+    "colors": [
+      "пастельно-коричневий"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 8,
+      "depth": 8,
+      "height": 10.5,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-022"
+  },
+  {
+    "id": "home_023",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, дерево, колір - молочний, 15,5/20/7 см, 1 шт.",
+      "en": "material - cotton cord, wood, colour - milk, 15,5/20/7 cm, 1 pcs"
+    },
+    "price": 500,
+    "currency": "UAH",
+    "images": [
+      "/images/products/11home.organizer.cot1.JPG",
+      "/images/products/11home.organizer.cot2.JPG",
+      "/images/products/11home.organizer.cot3.JPG"
+    ],
+    "colors": [
+      "молочний"
+    ],
+    "materials": [
+      "бавовняний шнур",
+      "дерево"
+    ],
+    "dimensions": {
+      "width": 15.5,
+      "depth": 20,
+      "height": 7,
+      "unit": "cm"
+    },
+    "quantity": 1,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-023"
+  },
+  {
+    "id": "home_024",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - пастельно-коричневий, 12/20/7 см, 1 шт.",
+      "en": "material - cotton cord, colour - pastel brown, 12/20/7 cm, 1 pcs"
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/12home.organizer.cot1.JPG",
+      "/images/products/12home.organizer.cot2.JPG",
+      "/images/products/12home.organizer.cot3.JPG"
+    ],
+    "colors": [
+      "пастельно-коричневий"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 20,
+      "height": 7,
+      "unit": "cm"
+    },
+    "quantity": 1,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-024"
+  },
+  {
+    "id": "home_025",
+    "category": "home",
+    "name": {
+      "ua": "Набір кошиків для дрібничок",
+      "en": "Organizer set"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - мокко, 11/21/6 см, 10,5/19/6 см, набір - 2 шт.",
+      "en": "material - cotton cord, colour - moccacino, 11/21/6 cm, 10,5/19/6 cm, 2 pcs set."
+    },
+    "price": 650,
+    "currency": "UAH",
+    "images": [
+      "/images/products/13home.organizer.cot1.JPG",
+      "/images/products/13home.organizer.cot2.JPG",
+      "/images/products/13home.organizer.cot3.JPG"
+    ],
+    "colors": [
+      "мокко"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 11,
+      "depth": 21,
+      "height": 6,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-025"
+  },
+  {
+    "id": "home_026",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, дерево, колір - капучіно, 20/20/7 см, 1 шт.",
+      "en": "material - cotton cord, wood, colour - cappuccino , 20/20/7 cm, 1 pcs"
+    },
+    "price": 550,
+    "currency": "UAH",
+    "images": [
+      "/images/products/14home.organizer.cot1.JPG",
+      "/images/products/14home.organizer.cot2.JPG"
+    ],
+    "colors": [
+      "капучіно"
+    ],
+    "materials": [
+      "бавовняний шнур",
+      "дерево"
+    ],
+    "dimensions": {
+      "width": 20,
+      "depth": 20,
+      "height": 7,
+      "unit": "cm"
+    },
+    "quantity": 1,
     "inStock": true,
     "featured": false,
     "new": true,
