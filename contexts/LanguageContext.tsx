@@ -63,29 +63,24 @@ const translations: Record<Language, Record<string, string>> = {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('ua')
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    // Load language from localStorage
+    // Load language from localStorage on client side
     const saved = localStorage.getItem('language') as Language
     if (saved && (saved === 'ua' || saved === 'en')) {
       setLanguageState(saved)
     }
-    setMounted(true)
   }, [])
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
-    localStorage.setItem('language', lang)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('language', lang)
+    }
   }
 
   const t = (key: string): string => {
     return translations[language][key] || key
-  }
-
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return <>{children}</>
   }
 
   return (

@@ -3,6 +3,7 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Toaster } from 'sonner'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export const metadata: Metadata = {
   title: 'knitt_lyelya.ua | Авторські сумки ручної роботи',
@@ -18,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body>
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
-        <Toaster position="top-right" richColors />
+        <LanguageProvider>
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+          <Toaster position="top-right" richColors />
+        </LanguageProvider>
       </body>
     </html>
   )

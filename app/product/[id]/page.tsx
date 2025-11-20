@@ -3,44 +3,49 @@
 import { useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { ChevronRight, Minus, Plus } from 'lucide-react'
+import Image from 'next/image'
+import { ChevronRight, Minus, Plus, ChevronLeft, ChevronRight as ChevronRightIcon } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { toast } from 'sonner'
-
-// Временные данные товара
-const productData: Record<string, any> = {
-  prod_001: {
-    id: 'prod_001',
-    name: "Сумка 'Польовий квіт'",
-    price: 1500,
-    category: 'ethno',
-    description: 'Елегантна сумка з етнічним орнаментом. Виконана вручну з якісних матеріалів. Ідеально підходить для повсякденного використання та особливих випадків.',
-    colors: ['Бежевий', 'Теракот'],
-    materials: 'Натуральна шкіра, тканина з вишивкою',
-    dimensions: '30 x 25 x 10 см',
-    weight: '0.5 кг',
-    inStock: true,
-  },
-}
+import { getProductById } from '@/lib/products'
+import { ImageZoom } from '@/components/ui/ImageZoom'
 
 export default function ProductPage() {
   const params = useParams()
   const id = params.id as string
-  const product = productData[id] || productData['prod_001']
+  const product = getProductById(id)
+  const { language } = useLanguage()
 
   const [quantity, setQuantity] = useState(1)
-  const [selectedColor, setSelectedColor] = useState(product.colors[0])
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isZoomOpen, setIsZoomOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<'description' | 'specs' | 'delivery'>('description')
 
   const addItem = useCartStore((state) => state.addItem)
 
+  if (!product) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <h1 className="text-2xl font-heading font-semibold mb-4">Товар не знайдено</h1>
+        <Link href="/catalog/home" className="text-primary hover:underline">
+          Повернутися до каталогу
+        </Link>
+      </div>
+    )
+  }
+
+  const productName = language === 'ua' ? product.name.ua : product.name.en
+  const productDescription = language === 'ua' ? product.description.ua : product.description.en
+  const images = product.images || []
+  const colors = product.colors || []
+
   const handleAddToCart = () => {
     addItem({
       id: product.id,
-      name: product.name,
+      name: productName,
       price: product.price,
-      image: '/images/placeholder.jpg',
-      color: selectedColor,
+      image: images[0] || '',
     })
 
     toast.success(`${quantity} товар(ів) додано в кошик`)
@@ -54,6 +59,18 @@ export default function ProductPage() {
     setQuantity(quantity + 1)
   }
 
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+  }
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  }
+
+  const handleImageClick = () => {
+    setIsZoomOpen(true)
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Breadcrumbs */}
@@ -61,71 +78,117 @@ export default function ProductPage() {
         <Link href="/" className="hover:text-primary">Головна</Link>
         <ChevronRight className="h-4 w-4" />
         <Link href={`/catalog/${product.category}`} className="hover:text-primary">
-          {product.category === 'ethno' ? 'Етно' : 'Базові'}
+          Каталог
         </Link>
         <ChevronRight className="h-4 w-4" />
-        <span className="text-gray-900 font-medium">{product.name}</span>
+        <span className="text-gray-900 font-medium">{productName}</span>
       </nav>
 
       <div className="grid md:grid-cols-2 gap-12">
         {/* Left: Images */}
         <div>
           {/* Main Image */}
-          <div className="aspect-[3/4] bg-secondary rounded-2xl mb-4 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-secondary to-accent opacity-60"></div>
-            <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-              <span className="text-lg">Фото товару</span>
-            </div>
+          <div
+            className="aspect-[3/4] bg-secondary rounded-2xl mb-4 relative overflow-hidden cursor-zoom-in group"
+            onClick={handleImageClick}
+          >
+            {images.length > 0 && (
+              <Image
+                src={images[currentImageIndex]}
+                alt={productName}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            )}
+
+            {/* Navigation arrows */}
+            {images.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handlePrevImage()
+                  }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <ChevronLeft className="h-6 w-6 text-gray-900" />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleNextImage()
+                  }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <ChevronRightIcon className="h-6 w-6 text-gray-900" />
+                </button>
+              </>
+            )}
           </div>
 
           {/* Thumbnails */}
-          <div className="grid grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="aspect-square bg-secondary rounded-lg cursor-pointer hover:opacity-75 transition-opacity"
-              ></div>
-            ))}
-          </div>
+          {images.length > 1 && (
+            <div className="grid grid-cols-4 gap-4">
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`aspect-square bg-secondary rounded-lg cursor-pointer hover:opacity-75 transition-opacity relative overflow-hidden ${
+                    index === currentImageIndex ? 'ring-2 ring-primary' : ''
+                  }`}
+                >
+                  <Image
+                    src={image}
+                    alt={`${productName} - ${index + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="25vw"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right: Info */}
         <div>
           <h1 className="text-3xl md:text-4xl font-heading font-semibold mb-4">
-            {product.name}
+            {productName}
           </h1>
 
           <p className="text-sm text-gray-600 mb-6">
-            Артикул: {product.id.toUpperCase()}
+            Артикул: {product.sku || product.id.toUpperCase()}
           </p>
 
           <div className="text-4xl font-semibold text-primary mb-6">
             {product.price} грн
           </div>
 
-          <p className="text-gray-700 mb-6">
-            {product.description}
-          </p>
-
-          {/* Color Selection */}
-          <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-900 mb-3">Колір</h3>
-            <div className="flex space-x-3">
-              {product.colors.map((color: string) => (
-                <button
-                  key={color}
-                  onClick={() => setSelectedColor(color)}
-                  className={`px-4 py-2 rounded-lg border-2 transition-all ${
-                    selectedColor === color
-                      ? 'border-primary bg-primary text-white'
-                      : 'border-gray-300 hover:border-primary'
-                  }`}
-                >
-                  {color}
-                </button>
-              ))}
-            </div>
+          <div className="mb-8">
+            <h3 className="text-lg font-medium text-gray-900 mb-3">Опис товару</h3>
+            <p className="text-gray-700 text-base leading-relaxed">
+              {productDescription}
+            </p>
           </div>
+
+          {/* Color Selection - only if colors exist */}
+          {colors.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-sm font-medium text-gray-900 mb-3">Колір</h3>
+              <div className="flex flex-wrap gap-2">
+                {colors.map((color: string) => (
+                  <span
+                    key={color}
+                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                  >
+                    {color}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Quantity */}
           <div className="mb-8">
@@ -201,9 +264,9 @@ export default function ProductPage() {
 
             {activeTab === 'description' && (
               <div className="text-gray-700">
-                <p>{product.description}</p>
+                <p>{productDescription}</p>
                 <p className="mt-4">
-                  Кожна сумка виконана вручну з дотриманням традиційних технологій
+                  Кожен виріб виконаний вручну з дотриманням традиційних технологій
                   та з використанням сучасних матеріалів високої якості.
                 </p>
               </div>
@@ -211,18 +274,28 @@ export default function ProductPage() {
 
             {activeTab === 'specs' && (
               <div className="space-y-3">
-                <div className="flex justify-between py-2 border-b">
-                  <span className="text-gray-600">Матеріали:</span>
-                  <span className="font-medium">{product.materials}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b">
-                  <span className="text-gray-600">Розміри:</span>
-                  <span className="font-medium">{product.dimensions}</span>
-                </div>
-                <div className="flex justify-between py-2 border-b">
-                  <span className="text-gray-600">Вага:</span>
-                  <span className="font-medium">{product.weight}</span>
-                </div>
+                {product.materials && (
+                  <div className="flex justify-between py-2 border-b">
+                    <span className="text-gray-600">Матеріали:</span>
+                    <span className="font-medium">{product.materials.join(', ')}</span>
+                  </div>
+                )}
+                {product.dimensions && (
+                  <div className="flex justify-between py-2 border-b">
+                    <span className="text-gray-600">Розміри:</span>
+                    <span className="font-medium">
+                      {product.dimensions.diameter
+                        ? `Ø ${product.dimensions.diameter} ${product.dimensions.unit}`
+                        : `${product.dimensions.width} x ${product.dimensions.height} ${product.dimensions.unit}`}
+                    </span>
+                  </div>
+                )}
+                {product.quantity && (
+                  <div className="flex justify-between py-2 border-b">
+                    <span className="text-gray-600">Кількість в наборі:</span>
+                    <span className="font-medium">{product.quantity} шт</span>
+                  </div>
+                )}
               </div>
             )}
 
@@ -247,6 +320,16 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
+
+      {/* Image Zoom Modal */}
+      {isZoomOpen && (
+        <ImageZoom
+          images={images}
+          currentIndex={currentImageIndex}
+          onClose={() => setIsZoomOpen(false)}
+          alt={productName}
+        />
+      )}
     </div>
   )
 }

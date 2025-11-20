@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Column 1: About */}
           <div>
             <h3 className="text-lg font-heading font-semibold text-white mb-4">
@@ -16,60 +16,36 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Column 2: Navigation */}
-          <div>
-            <h3 className="text-lg font-heading font-semibold text-white mb-4">
-              Навігація
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/catalog/ethno" className="text-sm hover:text-primary transition-colors">
-                  Етно
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalog/basic" className="text-sm hover:text-primary transition-colors">
-                  Базові
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalog/home" className="text-sm hover:text-primary transition-colors">
-                  Для дому
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-sm hover:text-primary transition-colors">
-                  Про бренд
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Contacts */}
+          {/* Column 2: Contacts */}
           <div>
             <h3 className="text-lg font-heading font-semibold text-white mb-4">
               Контакти
             </h3>
             <ul className="space-y-2 text-sm">
-              <li>Телефон: +380 XX XXX XX XX</li>
-              <li>Email: info@designerbags.ua</li>
+              <li>
+                <a href="tel:+380954440531" className="hover:text-primary transition-colors">
+                  Телефон: +38095 444 0531
+                </a>
+              </li>
+              <li>
+                <a href="mailto:knitt.lyelya@gmail.com" className="hover:text-primary transition-colors">
+                  Email: knitt.lyelya@gmail.com
+                </a>
+              </li>
               <li>Пн-Пт: 10:00 - 18:00</li>
             </ul>
           </div>
 
-          {/* Column 4: Social Media */}
+          {/* Column 3: Social Media */}
           <div>
             <h3 className="text-lg font-heading font-semibold text-white mb-4">
               Соціальні мережі
             </h3>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/knitt_lyelya.ua?igsh=YXNxYmFycHNoam9k" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 <Instagram className="h-6 w-6" />
               </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
+              <a href="https://t.me/+380954440531" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 <Send className="h-6 w-6" />
               </a>
             </div>

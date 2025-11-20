@@ -1,58 +1,33 @@
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ProductGrid } from '@/components/product/ProductGrid'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { getAllProducts, getNewProducts, getFeaturedProducts } from '@/lib/products'
 
-// Временные данные для прототипа
-const newProducts = [
-  {
-    id: 'prod_001',
-    name: "Сумка 'Польовий квіт'",
-    price: 1500,
-    image: '/images/placeholder-bag-1.jpg',
-    category: 'ethno',
-  },
-  {
-    id: 'prod_002',
-    name: "Сумка 'Класика'",
-    price: 1800,
-    image: '/images/placeholder-bag-2.jpg',
-    category: 'basic',
-  },
-  {
-    id: 'prod_003',
-    name: "Сумка 'Етно шик'",
-    price: 2200,
-    image: '/images/placeholder-bag-3.jpg',
-    category: 'ethno',
-  },
-  {
-    id: 'prod_004',
-    name: "Сумка 'Мінімал'",
-    price: 1600,
-    image: '/images/placeholder-bag-4.jpg',
-    category: 'basic',
-  },
-]
-
-const bestsellers = newProducts.slice(0, 6)
+const allProducts = getAllProducts()
+const newProducts = getNewProducts()
+const featuredProducts = getFeaturedProducts()
 
 export default function HomePage() {
+  const { t } = useLanguage()
   return (
     <div>
       {/* Hero Section */}
       <section className="relative h-[600px] bg-gradient-to-br from-secondary to-cream flex items-center justify-center">
         <div className="text-center px-4 max-w-3xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-gray-900 mb-6">
-            Авторські сумки ручної роботи
+            {t('home.hero.title')}
           </h1>
           <p className="text-lg md:text-xl text-gray-700 mb-8">
-            Поєднання етнічних мотивів та сучасного дизайну
+            {t('home.hero.subtitle')}
           </p>
           <Link
-            href="/catalog/ethno"
+            href="/catalog/home"
             className="inline-flex items-center px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
           >
-            Переглянути каталог
+            {t('common.viewCatalog')}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>
@@ -62,46 +37,60 @@ export default function HomePage() {
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl md:text-4xl font-heading font-semibold">
-            Нові надходження
+            {t('home.newArrivals')}
           </h2>
           <Link
-            href="/catalog/ethno"
+            href="/catalog/home"
             className="text-primary hover:text-primary-dark font-medium flex items-center"
           >
-            Дивитись все
+            {t('common.viewAll')}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>
         <ProductGrid products={newProducts} />
       </section>
 
+      {/* Banner */}
+      <section className="py-16 px-4 max-w-7xl mx-auto">
+        <div className="relative h-64 md:h-96 bg-gradient-to-br from-secondary to-cream rounded-2xl overflow-hidden flex items-center justify-center">
+          <div className="text-center px-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-semibold text-gray-900 mb-4">
+              Баннер
+            </h2>
+            <p className="text-lg md:text-xl text-gray-700">
+              Місце для вашого оголошення
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Bestsellers */}
       <section className="py-16 px-4 max-w-7xl mx-auto bg-white rounded-2xl">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl md:text-4xl font-heading font-semibold">
-            Хіти продажів
+            {t('home.bestsellers')}
           </h2>
         </div>
-        <ProductGrid products={bestsellers} />
+        <ProductGrid products={featuredProducts} />
       </section>
 
       {/* Collections Preview */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-heading font-semibold text-center mb-12">
-          Наші колекції
+          {t('home.collections')}
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Ethno Collection */}
+          {/* Home Collection */}
           <Link
-            href="/catalog/ethno"
+            href="/catalog/home"
             className="group relative h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-accent to-primary"
           >
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white">
                 <h3 className="text-4xl font-heading font-semibold mb-4">
-                  Етно
+                  Home
                 </h3>
-                <p className="text-lg mb-4">Традиційні мотиви у сучасному виконанні</p>
+                <p className="text-lg mb-4">Вироби для дому з натуральних матеріалів</p>
                 <span className="inline-flex items-center text-white group-hover:translate-x-2 transition-transform">
                   Переглянути колекцію
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -110,24 +99,17 @@ export default function HomePage() {
             </div>
           </Link>
 
-          {/* Basic Collection */}
-          <Link
-            href="/catalog/basic"
-            className="group relative h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-700 to-gray-900"
-          >
+          {/* Coming Soon Collection */}
+          <div className="group relative h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-700 to-gray-900 opacity-50 cursor-not-allowed">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white">
                 <h3 className="text-4xl font-heading font-semibold mb-4">
-                  Базові
+                  Скоро
                 </h3>
-                <p className="text-lg mb-4">Класичні моделі на кожен день</p>
-                <span className="inline-flex items-center text-white group-hover:translate-x-2 transition-transform">
-                  Переглянути колекцію
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </span>
+                <p className="text-lg mb-4">Нові колекції незабаром</p>
               </div>
             </div>
-          </Link>
+          </div>
         </div>
       </section>
 

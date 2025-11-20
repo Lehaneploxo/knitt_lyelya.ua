@@ -1,25 +1,7 @@
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { ProductGrid } from '@/components/product/ProductGrid'
-
-// Временные данные
-const productsData = {
-  ethno: [
-    { id: 'prod_001', name: "Сумка 'Польовий квіт'", price: 1500, image: '/images/placeholder-bag-1.jpg', category: 'ethno' },
-    { id: 'prod_003', name: "Сумка 'Етно шик'", price: 2200, image: '/images/placeholder-bag-3.jpg', category: 'ethno' },
-    { id: 'prod_005', name: "Сумка 'Вишиванка'", price: 1900, image: '/images/placeholder-bag-5.jpg', category: 'ethno' },
-    { id: 'prod_007', name: "Сумка 'Традиція'", price: 1700, image: '/images/placeholder-bag-7.jpg', category: 'ethno' },
-  ],
-  basic: [
-    { id: 'prod_002', name: "Сумка 'Класика'", price: 1800, image: '/images/placeholder-bag-2.jpg', category: 'basic' },
-    { id: 'prod_004', name: "Сумка 'Мінімал'", price: 1600, image: '/images/placeholder-bag-4.jpg', category: 'basic' },
-    { id: 'prod_006', name: "Сумка 'Елеганс'", price: 2000, image: '/images/placeholder-bag-6.jpg', category: 'basic' },
-  ],
-  home: [
-    { id: 'prod_008', name: "Кошик 'Затишок'", price: 800, image: '/images/placeholder-home-1.jpg', category: 'home' },
-    { id: 'prod_009', name: "Органайзер 'Порядок'", price: 600, image: '/images/placeholder-home-2.jpg', category: 'home' },
-  ],
-}
+import { getProductsByCategory } from '@/lib/products'
 
 const categoryInfo: Record<string, { title: string; description: string }> = {
   ethno: {
@@ -42,7 +24,7 @@ export default async function CatalogPage({
   params: Promise<{ category: string }>
 }) {
   const { category } = await params
-  const products = productsData[category as keyof typeof productsData] || []
+  const products = getProductsByCategory(category)
   const info = categoryInfo[category] || { title: 'Каталог', description: '' }
 
   return (

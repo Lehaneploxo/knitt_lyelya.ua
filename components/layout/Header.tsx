@@ -5,24 +5,25 @@ import { ShoppingCart, Menu, X } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [language, setLanguage] = useState<'ua' | 'en'>('ua')
+  const { language, setLanguage, t } = useLanguage()
   const totalItems = useCartStore((state) => state.getTotalItems())
 
   const navigation = [
-    { name: 'Етно', href: '/catalog/ethno' },
-    { name: 'Базові', href: '/catalog/basic' },
-    { name: 'Дім', href: '/catalog/home' },
-    { name: 'Про бренд', href: '/about' },
-    { name: 'Контакти', href: '/contacts' },
+    { name: t('nav.ethno'), href: '/catalog/ethno' },
+    { name: t('nav.basic'), href: '/catalog/basic' },
+    { name: t('nav.home'), href: '/catalog/home' },
+    { name: t('nav.about'), href: '/about' },
+    { name: t('nav.contacts'), href: '/contacts' },
   ]
 
   const handleLanguageChange = () => {
     const newLang = language === 'ua' ? 'en' : 'ua'
     setLanguage(newLang)
-    toast.info(`Мова змінена на ${newLang === 'ua' ? 'українську' : 'English'}`)
+    toast.info(`${newLang === 'ua' ? 'Мова змінена на українську' : 'Language changed to English'}`)
   }
 
   return (

@@ -116,8 +116,10 @@ export default function ContactsPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Телефон</h3>
-                  <p className="text-gray-600">+380 XX XXX XX XX</p>
-                  <p className="text-sm text-gray-500">Пн-Пт: 10:00 - 18:00</p>
+                  <a href="tel:+380954440531" className="text-gray-600 hover:text-primary">
+                    +38095 444 0531
+                  </a>
+                  <p className="text-sm text-gray-500">Також Telegram та WhatsApp</p>
                 </div>
               </div>
 
@@ -127,7 +129,9 @@ export default function ContactsPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-gray-600">info@knitt-lyelya.ua</p>
+                  <a href="mailto:knitt.lyelya@gmail.com" className="text-gray-600 hover:text-primary">
+                    knitt.lyelya@gmail.com
+                  </a>
                   <p className="text-sm text-gray-500">Відповімо протягом 24 годин</p>
                 </div>
               </div>
@@ -147,7 +151,7 @@ export default function ContactsPage() {
                 <h3 className="font-semibold mb-4">Соціальні мережі</h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/knitt_lyelya.ua?igsh=YXNxYmFycHNoam9k"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center w-12 h-12 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"
@@ -155,7 +159,7 @@ export default function ContactsPage() {
                     <Instagram className="h-5 w-5" />
                   </a>
                   <a
-                    href="https://t.me"
+                    href="https://t.me/+380954440531"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center w-12 h-12 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"

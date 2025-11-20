@@ -1,0 +1,772 @@
+[
+  {
+    "id": "home_001",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Елегантний набір з 4 підтарільників ручної роботи з натурального джуту. Діаметр 30 см. Ідеально підходить для сервірування столу, додає природної теплоти та затишку вашому дому. Кожен виріб виконаний вручну з дотриманням традиційних технологій плетіння.",
+      "en": "Elegant set of 4 handmade placemats from natural jute. Diameter 30 cm. Perfect for table setting, adds natural warmth and coziness to your home. Each piece is handcrafted using traditional weaving techniques."
+    },
+    "price": 750,
+    "currency": "UAH",
+    "images": [
+      "/images/products/1home.placemat1.JPG",
+      "/images/products/1home.placemat2.JPG",
+      "/images/products/1home.placemat3.JPG"
+    ],
+    "colors": ["натуральний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 30,
+      "unit": "cm"
+    },
+    "quantity": 4,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-001"
+  },
+  {
+    "id": "home_002",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Стильний набір з 2 підтарільників ручної роботи з джуту чорного кольору. Діаметр 30 см. Чудово доповнить сучасний інтер'єр та додасть елегантності вашому столу. Виготовлено вручну з екологічно чистих матеріалів.",
+      "en": "Stylish set of 2 handmade placemats from black jute. Diameter 30 cm. Perfectly complements modern interiors and adds elegance to your table. Handcrafted from eco-friendly materials."
+    },
+    "price": 500,
+    "currency": "UAH",
+    "images": [
+      "/images/products/2home.placemat1.JPG",
+      "/images/products/2home.placemat2.JPG",
+      "/images/products/2home.placemat3.JPG"
+    ],
+    "colors": ["чорний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 30,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-002"
+  },
+  {
+    "id": "home_003",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Яскравий набір з 2 підтарільників ручної роботи з джуту голубого кольору. Діаметр 28 см. Додасть свіжості та яскравих акцентів вашому столу. Ідеально для літніх сніданків та святкових обідів.",
+      "en": "Bright set of 2 handmade placemats from blue jute. Diameter 28 cm. Adds freshness and bright accents to your table. Perfect for summer breakfasts and festive dinners."
+    },
+    "price": 500,
+    "currency": "UAH",
+    "images": [
+      "/images/products/3home.placemat2.JPG",
+      "/images/products/3home.placemat3.JPG",
+      "/images/products/3home.plavemat1.JPG"
+    ],
+    "colors": ["голубий"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 28,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-003"
+  },
+  {
+    "id": "home_004",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників Ажур",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Вишуканий набір з 2 підтарільників з ажурним плетінням з натурального джуту. Діаметр 26 см. Витончена робота майстра створює унікальний візерунок. Ідеальний подарунок для цінителів ручної роботи.",
+      "en": "Exquisite set of 2 placemats with openwork weaving from natural jute. Diameter 26 cm. Delicate craftsmanship creates a unique pattern. Perfect gift for handmade enthusiasts."
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/4home.placemat1.JPG",
+      "/images/products/4home.placemat2.JPG",
+      "/images/products/4home.placemat3.JPG"
+    ],
+    "colors": ["натуральний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 26,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-004"
+  },
+  {
+    "id": "home_005",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників Ажур",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Компактний набір з 2 підтарільників з ажурним візерунком з натурального джуту. Діаметр 23 см. Ідеальний розмір для десертних тарілок або чашок. Створює затишну атмосферу за столом.",
+      "en": "Compact set of 2 placemats with openwork pattern from natural jute. Diameter 23 cm. Perfect size for dessert plates or cups. Creates a cozy atmosphere at the table."
+    },
+    "price": 420,
+    "currency": "UAH",
+    "images": [
+      "/images/products/5home.placemat1.JPG",
+      "/images/products/5home.placemat2.JPG",
+      "/images/products/5home.placemat3.JPG"
+    ],
+    "colors": ["натуральний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 23,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-005"
+  },
+  {
+    "id": "home_006",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Оригінальний набір з 2 підтарільників у поєднанні натурального джуту та голубого кольору. Діаметр 26 см. Гармонійне поєднання природних відтінків створює неповторний стиль. Ручна робота з любов'ю до деталей.",
+      "en": "Original set of 2 placemats combining natural jute and blue color. Diameter 26 cm. Harmonious combination of natural shades creates a unique style. Handcrafted with attention to detail."
+    },
+    "price": 470,
+    "currency": "UAH",
+    "images": [
+      "/images/products/6home.placemat1.JPG",
+      "/images/products/6home.placemat2.JPG",
+      "/images/products/6home.placemat3.JPG"
+    ],
+    "colors": ["натуральний", "голубий"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 26,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-006"
+  },
+  {
+    "id": "home_007",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників Соняx",
+      "en": "Placemat set Sunflower"
+    },
+    "description": {
+      "ua": "Чарівний набір з 2 підтарільників з візерунком соняшника у поєднанні натурального джуту та чорного кольору. Діаметр 21 см. Символ сонця та радості на вашому столі. Унікальний дизайн та якісне виконання.",
+      "en": "Charming set of 2 placemats with sunflower pattern combining natural jute and black color. Diameter 21 cm. Symbol of sun and joy on your table. Unique design and quality craftsmanship."
+    },
+    "price": 420,
+    "currency": "UAH",
+    "images": [
+      "/images/products/7home.placemat1.JPG",
+      "/images/products/7home.placemat2.JPG",
+      "/images/products/7home.placemat3.JPG"
+    ],
+    "colors": ["натуральний", "чорний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 21,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-007"
+  },
+  {
+    "id": "home_008",
+    "category": "home",
+    "name": {
+      "ua": "Підтарільник",
+      "en": "Placemat"
+    },
+    "description": {
+      "ua": "Великий підтарільник ручної роботи у ніжному поєднанні натурального джуту та молочного кольору. Діаметр 34 см. Ідеальний для великих сервіровочних тарілок. Створює елегантну та м'яку атмосферу за столом.",
+      "en": "Large handmade placemat in a delicate combination of natural jute and milk color. Diameter 34 cm. Perfect for large serving plates. Creates an elegant and soft atmosphere at the table."
+    },
+    "price": 250,
+    "currency": "UAH",
+    "images": [
+      "/images/products/8home.placemat1.JPG",
+      "/images/products/8home.placemat2.JPG",
+      "/images/products/8home.placemat3.JPG"
+    ],
+    "colors": ["натуральний", "молочний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "diameter": 34,
+      "unit": "cm"
+    },
+    "quantity": 1,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-008"
+  },
+  {
+    "id": "home_009",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Яскравий набір з 2 підтарільників у поєднанні натурального джуту, чорного та червоного кольорів. Розмір 25×22 см. Контрастне та стильне рішення для вашого столу. Додає енергії та святковості.",
+      "en": "Bright set of 2 placemats combining natural jute, black and red colors. Size 25×22 cm. Contrasting and stylish solution for your table. Adds energy and festivity."
+    },
+    "price": 420,
+    "currency": "UAH",
+    "images": [
+      "/images/products/9home.placemat1.JPG",
+      "/images/products/9home.placemat2.JPG",
+      "/images/products/9home.placemat3.JPG"
+    ],
+    "colors": ["натуральний", "чорний", "червоний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "width": 25,
+      "height": 22,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-009"
+  },
+  {
+    "id": "home_010",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Класичний набір з 2 підтарільників з натурального джуту. Розмір 23×24 см. Універсальний розмір для щоденного використання. Природна краса джуту створює теплу та затишну атмосферу.",
+      "en": "Classic set of 2 placemats from natural jute. Size 23×24 cm. Universal size for daily use. Natural beauty of jute creates a warm and cozy atmosphere."
+    },
+    "price": 400,
+    "currency": "UAH",
+    "images": [
+      "/images/products/10home.placemat1.JPG",
+      "/images/products/10home.placemat2.JPG",
+      "/images/products/10home.placemat3.JPG"
+    ],
+    "colors": ["натуральний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "width": 23,
+      "height": 24,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-010"
+  },
+  {
+    "id": "home_011",
+    "category": "home",
+    "name": {
+      "ua": "Набір підтарільників",
+      "en": "Placemat set"
+    },
+    "description": {
+      "ua": "Свіжий набір з 2 підтарільників у поєднанні натурального джуту та зеленого кольору. Розмір 24,5×24,5 см. Нагадує про весняну природу та додає життєвої енергії вашому інтер'єру. Ідеально для еко-стилю.",
+      "en": "Fresh set of 2 placemats combining natural jute and green color. Size 24.5×24.5 cm. Reminds of spring nature and adds vital energy to your interior. Perfect for eco-style."
+    },
+    "price": 420,
+    "currency": "UAH",
+    "images": [
+      "/images/products/11home.placemat1.JPG",
+      "/images/products/11home.placemat2.JPG",
+      "/images/products/11home.placemat3.JPG"
+    ],
+    "colors": ["натуральний", "зелений"],
+    "materials": ["джут"],
+    "dimensions": {
+      "width": 24.5,
+      "height": 24.5,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-011"
+  },
+  {
+    "id": "home_012",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для смаколиків",
+      "en": "Bread basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, діаметр - 20 см, висота - 7 см",
+      "en": "material - jute, wood, colour - natural, d - 20 cm, h - 7 cm"
+    },
+    "price": 480,
+    "currency": "UAH",
+    "images": [
+      "/images/products/1home.organizer.jute1JPG.jpg",
+      "/images/products/1home.organizer.jute2.JPG",
+      "/images/products/1home.organizer.jute3.JPG"
+    ],
+    "colors": ["натуральний"],
+    "materials": ["джут", "дерево"],
+    "dimensions": {
+      "diameter": 20,
+      "height": 7,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-012"
+  },
+  {
+    "id": "home_013",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для смаколиків",
+      "en": "Bread basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, діаметр - 25 см, висота - 7 см",
+      "en": "material - jute, wood, colour - natural, d - 25 cm, h - 7 cm"
+    },
+    "price": 550,
+    "currency": "UAH",
+    "images": [
+      "/images/products/2home.organizer.jute1.JPG",
+      "/images/products/2home.organizer.jute2.JPG",
+      "/images/products/2home.organizer.jute3.JPG"
+    ],
+    "colors": ["натуральний"],
+    "materials": ["джут", "дерево"],
+    "dimensions": {
+      "diameter": 25,
+      "height": 7,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-013"
+  },
+  {
+    "id": "home_014",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для смаколиків",
+      "en": "Bread basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, 25/17 см, висота - 6,5 см",
+      "en": "material - jute, wood, colour - natural, 25/17 cm, h - 6,5 cm"
+    },
+    "price": 550,
+    "currency": "UAH",
+    "images": [
+      "/images/products/3home.organizer.jute1.JPG",
+      "/images/products/3home.organizer.jute2.JPG",
+      "/images/products/3home.organizer.jute3.JPG"
+    ],
+    "colors": ["натуральний"],
+    "materials": ["джут", "дерево"],
+    "dimensions": {
+      "width": 25,
+      "depth": 17,
+      "height": 6.5,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-014"
+  },
+  {
+    "id": "home_015",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для смаколиків",
+      "en": "Jute basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, чорний, червоний, 20/15 см, висота - 7 см",
+      "en": "material - jute, wood, colour - natural, black, red, 20/15 cm, h - 7 cm"
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/4home.organizer.jute1.JPG",
+      "/images/products/4home.organizer.jute2.JPG",
+      "/images/products/4home.organizer.jute3.JPG"
+    ],
+    "colors": ["натуральний", "чорний", "червоний"],
+    "materials": ["джут", "дерево"],
+    "dimensions": {
+      "width": 20,
+      "depth": 15,
+      "height": 7,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-015"
+  },
+  {
+    "id": "home_016",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Jute basket"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - молочний , 10/10/11 см",
+      "en": "material - jute, colour - milk, 10/10/11 cm"
+    },
+    "price": 350,
+    "currency": "UAH",
+    "images": [
+      "/images/products/5home.organizer.jute1.JPG",
+      "/images/products/5home.organizer.jute2.JPG",
+      "/images/products/5home.organizer.jute3.JPG"
+    ],
+    "colors": ["молочний"],
+    "materials": ["джут"],
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "height": 11,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-016"
+  },
+  {
+    "id": "home_017",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - бежевий, 14/14/10 см",
+      "en": "material - cotton cord, colour - beige, 14/14/10 cm"
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/6home.organizer.cot1.JPG",
+      "/images/products/6home.organizer.cot2.JPG",
+      "/images/products/6home.organizer.cot3.JPG"
+    ],
+    "colors": ["бежевий"],
+    "materials": ["бавовняний шнур"],
+    "dimensions": {
+      "width": 14,
+      "depth": 14,
+      "height": 10,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-017"
+  },
+  {
+    "id": "home_018",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - чорний , 13/13/12 см",
+      "en": "material - cotton cord, colour - black, 13/13/12 cm"
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/7home.organizer.cot1.JPG",
+      "/images/products/7home.organizer.cot2.JPG",
+      "/images/products/7home.organizer.cot3.JPG"
+    ],
+    "colors": ["чорний"],
+    "materials": ["бавовняний шнур"],
+    "dimensions": {
+      "width": 13,
+      "depth": 13,
+      "height": 12,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-018"
+  },
+  {
+    "id": "home_019",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - білий, 9/9/10,5 см",
+      "en": "material - cotton cord, colour - white, 9/9/10,5 cm"
+    },
+    "price": 350,
+    "currency": "UAH",
+    "images": [
+      "/images/products/8home.organizer.cot1.JPG",
+      "/images/products/8home.organizer.cot2.JPG",
+      "/images/products/8home.organizer.cot3.JPG"
+    ],
+    "colors": ["білий"],
+    "materials": ["бавовняний шнур"],
+    "dimensions": {
+      "width": 9,
+      "depth": 9,
+      "height": 10.5,
+      "unit": "cm"
+    },
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-019"
+  },
+  {
+    "id": "home_020",
+    "category": "home",
+    "name": {
+      "ua": "Набір кошиків для дрібничок",
+      "en": "Organizer set"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - білий, 8/8/10,5 см, набір - 2 шт.",
+      "en": "material - cotton cord, colour - white, 8/8/10,5 cm, 2 pcs set."
+    },
+    "price": 480,
+    "currency": "UAH",
+    "images": [
+      "/images/products/9home.organizer.cot1.JPG",
+      "/images/products/9home.organizer.cot2.JPG",
+      "/images/products/9home.organizer.cot3.JPG"
+    ],
+    "colors": ["білий"],
+    "materials": ["бавовняний шнур"],
+    "dimensions": {
+      "width": 8,
+      "depth": 8,
+      "height": 10.5,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-020"
+  },
+  {
+    "id": "home_021",
+    "category": "home",
+    "name": {
+      "ua": "Набір кошиків для дрібничок",
+      "en": "Organizer set"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - пастельно-коричневий, 8/8/10,5 см, набір - 2 шт.",
+      "en": "material - cotton cord, colour - pastel brown, 8/8/10,5 cm, 2 pcs set."
+    },
+    "price": 480,
+    "currency": "UAH",
+    "images": [
+      "/images/products/10home.organizer.cot1.JPG",
+      "/images/products/10home.organizer.cot2.JPG",
+      "/images/products/10home.organizer.cot3.JPG"
+    ],
+    "colors": ["пастельно-коричневий"],
+    "materials": ["бавовняний шнур"],
+    "dimensions": {
+      "width": 8,
+      "depth": 8,
+      "height": 10.5,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-021"
+  },
+  {
+    "id": "home_022",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, дерево, колір - молочний, 15,5/20/7 см, 1 шт.",
+      "en": "material - cotton cord, wood, colour - milk, 15,5/20/7 cm, 1 pcs"
+    },
+    "price": 500,
+    "currency": "UAH",
+    "images": [
+      "/images/products/11home.organizer.cot1.JPG",
+      "/images/products/11home.organizer.cot2.JPG",
+      "/images/products/11home.organizer.cot3.JPG"
+    ],
+    "colors": ["молочний"],
+    "materials": ["бавовняний шнур", "дерево"],
+    "dimensions": {
+      "width": 15.5,
+      "depth": 20,
+      "height": 7,
+      "unit": "cm"
+    },
+    "quantity": 1,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-022"
+  },
+  {
+    "id": "home_023",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - пастельно-коричневий, 12/20/7 см, 1 шт.",
+      "en": "material - cotton cord, colour - pastel brown, 12/20/7 cm, 1 pcs"
+    },
+    "price": 450,
+    "currency": "UAH",
+    "images": [
+      "/images/products/12home.organizer.cot1.JPG",
+      "/images/products/12home.organizer.cot2.JPG",
+      "/images/products/12home.organizer.cot3.JPG"
+    ],
+    "colors": ["пастельно-коричневий"],
+    "materials": ["бавовняний шнур"],
+    "dimensions": {
+      "width": 12,
+      "depth": 20,
+      "height": 7,
+      "unit": "cm"
+    },
+    "quantity": 1,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-023"
+  },
+  {
+    "id": "home_024",
+    "category": "home",
+    "name": {
+      "ua": "Набір кошиків для дрібничок",
+      "en": "Organizer set"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - мокко, 11/21/6 см, 10,5/19/6 см, набір - 2 шт.",
+      "en": "material - cotton cord, colour - moccacino, 11/21/6 cm, 10,5/19/6 cm, 2 pcs set."
+    },
+    "price": 650,
+    "currency": "UAH",
+    "images": [
+      "/images/products/13home.organizer.cot1.JPG",
+      "/images/products/13home.organizer.cot2.JPG",
+      "/images/products/13home.organizer.cot3.JPG"
+    ],
+    "colors": ["мокко"],
+    "materials": ["бавовняний шнур"],
+    "dimensions": {
+      "width": 11,
+      "depth": 21,
+      "height": 6,
+      "unit": "cm"
+    },
+    "quantity": 2,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-024"
+  },
+  {
+    "id": "home_025",
+    "category": "home",
+    "name": {
+      "ua": "Кошик для дрібничок",
+      "en": "Organizer"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, дерево, колір - капучіно, 20/20/7 см, 1 шт.",
+      "en": "material - cotton cord, wood, colour - cappuccino , 20/20/7 cm, 1 pcs"
+    },
+    "price": 550,
+    "currency": "UAH",
+    "images": [
+      "/images/products/14home.organizer.cot1.JPG",
+      "/images/products/14home.organizer.cot2.JPG"
+    ],
+    "colors": ["капучіно"],
+    "materials": ["бавовняний шнур", "дерево"],
+    "dimensions": {
+      "width": 20,
+      "depth": 20,
+      "height": 7,
+      "unit": "cm"
+    },
+    "quantity": 1,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-025"
+  }
+]
