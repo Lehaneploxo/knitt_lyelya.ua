@@ -23,7 +23,7 @@ export function Header() {
   const handleLanguageChange = () => {
     const newLang = language === 'ua' ? 'en' : 'ua'
     setLanguage(newLang)
-    toast.info(`${newLang === 'ua' ? 'Мова змінена на українську' : 'Language changed to English'}`)
+    toast.info(t(newLang === 'ua' ? 'header.languageChanged.ua' : 'header.languageChanged.en'))
   }
 
   return (

@@ -1,12 +1,17 @@
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function AboutPage() {
+  const { t } = useLanguage()
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-8 text-center">
-          Про бренд knitt_lyelya
+          {t('about.title')}
         </h1>
 
         <div className="grid md:grid-cols-2 gap-12 mb-16">
@@ -16,16 +21,13 @@ export default function AboutPage() {
           {/* Text */}
           <div className="flex flex-col justify-center">
             <h2 className="text-2xl font-heading font-semibold mb-4">
-              Наша історія
+              {t('about.ourStory')}
             </h2>
             <p className="text-gray-700 mb-4">
-              Кожна сумка — це історія, створена вручну з любов'ю до деталей.
-              Ми поєднуємо традиційні українські орнаменти з сучасними трендами,
-              щоб ви могли виразити свою індивідуальність та підтримати вітчизняного виробника.
+              {t('about.story1')}
             </p>
             <p className="text-gray-700 mb-4">
-              Наші вироби створюються з якісних матеріалів, які забезпечують довговічність
-              та зручність у використанні. Кожна деталь продумана до дрібниць.
+              {t('about.story2')}
             </p>
           </div>
         </div>
@@ -33,7 +35,7 @@ export default function AboutPage() {
         {/* Values */}
         <div className="mb-16">
           <h2 className="text-3xl font-heading font-semibold mb-8 text-center">
-            Наші цінності
+            {t('about.values')}
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -42,10 +44,10 @@ export default function AboutPage() {
                 1
               </div>
               <h3 className="text-xl font-heading font-semibold mb-2">
-                Якість
+                {t('about.value1.title')}
               </h3>
               <p className="text-gray-600">
-                Використовуємо тільки найкращі матеріали та перевірені технології виробництва
+                {t('about.value1.text')}
               </p>
             </div>
 
@@ -54,10 +56,10 @@ export default function AboutPage() {
                 2
               </div>
               <h3 className="text-xl font-heading font-semibold mb-2">
-                Унікальність
+                {t('about.value2.title')}
               </h3>
               <p className="text-gray-600">
-                Кожна сумка - авторська робота з унікальним дизайном та етнічними мотивами
+                {t('about.value2.text')}
               </p>
             </div>
 
@@ -66,10 +68,10 @@ export default function AboutPage() {
                 3
               </div>
               <h3 className="text-xl font-heading font-semibold mb-2">
-                Традиції
+                {t('about.value3.title')}
               </h3>
               <p className="text-gray-600">
-                Підтримуємо та розвиваємо українську культуру через сучасний дизайн
+                {t('about.value3.text')}
               </p>
             </div>
           </div>
@@ -78,7 +80,7 @@ export default function AboutPage() {
         {/* Process */}
         <div className="mb-16">
           <h2 className="text-3xl font-heading font-semibold mb-8 text-center">
-            Процес створення
+            {t('about.process')}
           </h2>
 
           <div className="space-y-6">
@@ -87,9 +89,9 @@ export default function AboutPage() {
                 1
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-1">Дизайн</h3>
+                <h3 className="text-lg font-semibold mb-1">{t('about.process1.title')}</h3>
                 <p className="text-gray-600">
-                  Розробка унікального дизайну з урахуванням сучасних трендів та етнічних мотивів
+                  {t('about.process1.text')}
                 </p>
               </div>
             </div>
@@ -99,9 +101,9 @@ export default function AboutPage() {
                 2
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-1">Вибір матеріалів</h3>
+                <h3 className="text-lg font-semibold mb-1">{t('about.process2.title')}</h3>
                 <p className="text-gray-600">
-                  Підбір якісної натуральної шкіри, тканин та фурнітури
+                  {t('about.process2.text')}
                 </p>
               </div>
             </div>
@@ -111,9 +113,9 @@ export default function AboutPage() {
                 3
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-1">Ручна робота</h3>
+                <h3 className="text-lg font-semibold mb-1">{t('about.process3.title')}</h3>
                 <p className="text-gray-600">
-                  Кожна сумка виконується вручну майстрами з багаторічним досвідом
+                  {t('about.process3.text')}
                 </p>
               </div>
             </div>
@@ -123,9 +125,9 @@ export default function AboutPage() {
                 4
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-1">Контроль якості</h3>
+                <h3 className="text-lg font-semibold mb-1">{t('about.process4.title')}</h3>
                 <p className="text-gray-600">
-                  Перевірка кожної деталі перед відправкою клієнту
+                  {t('about.process4.text')}
                 </p>
               </div>
             </div>
@@ -135,16 +137,16 @@ export default function AboutPage() {
         {/* CTA */}
         <div className="text-center bg-cream rounded-2xl p-12">
           <h2 className="text-3xl font-heading font-semibold mb-4">
-            Готові обрати свою сумку?
+            {t('about.cta.title')}
           </h2>
           <p className="text-gray-700 mb-8">
-            Перегляньте нашу колекцію авторських сумок ручної роботи
+            {t('about.cta.subtitle')}
           </p>
           <Link
             href="/catalog/ethno"
             className="inline-flex items-center px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
           >
-            Переглянути колекції
+            {t('about.cta.button')}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>

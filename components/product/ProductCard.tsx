@@ -18,7 +18,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isZoomOpen, setIsZoomOpen] = useState(false)
   const addItem = useCartStore((state) => state.addItem)
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
 
   const productName = language === 'ua' ? product.name.ua : product.name.en
   const productDescription = language === 'ua' ? product.description.ua : product.description.en
@@ -35,7 +35,7 @@ export function ProductCard({ product }: ProductCardProps) {
       image: images[0] || '',
     })
 
-    toast.success('Товар додано в кошик')
+    toast.success(t('common.addedToCart'))
   }
 
   const handlePrevImage = (e: React.MouseEvent) => {
@@ -119,7 +119,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {productDescription}
           </p>
           <p className="text-xl font-semibold text-primary mb-4">
-            {product.price} грн
+            {product.price} {t('common.currency')}
           </p>
 
           {/* Add to Cart Button */}
@@ -128,7 +128,7 @@ export function ProductCard({ product }: ProductCardProps) {
             className="w-full flex items-center justify-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
           >
             <ShoppingCart className="h-4 w-4 mr-2" />
-            Додати в кошик
+            {t('common.addToCart')}
           </button>
         </div>
       </div>

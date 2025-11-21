@@ -3,9 +3,11 @@
 import Link from 'next/link'
 import { Minus, Plus, X, ShoppingBag } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, getTotalPrice } = useCartStore()
+  const { t } = useLanguage()
 
   if (items.length === 0) {
     return (
@@ -13,16 +15,16 @@ export default function CartPage() {
         <div className="text-center">
           <ShoppingBag className="h-24 w-24 mx-auto text-gray-400 mb-4" />
           <h1 className="text-3xl font-heading font-semibold mb-4">
-            Ваш кошик порожній
+            {t('cart.empty.title')}
           </h1>
           <p className="text-gray-600 mb-8">
-            Додайте товари до кошика, щоб продовжити покупки
+            {t('cart.empty.description')}
           </p>
           <Link
             href="/catalog/ethno"
             className="inline-block px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
           >
-            Повернутись до покупок
+            {t('cart.empty.button')}
           </Link>
         </div>
       </div>
@@ -32,7 +34,7 @@ export default function CartPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl md:text-4xl font-heading font-semibold mb-8">
-        Кошик
+        {t('cart.title')}
       </h1>
 
       <div className="grid lg:grid-cols-3 gap-8">
@@ -55,11 +57,11 @@ export default function CartPage() {
                     </h3>
                     {item.color && (
                       <p className="text-sm text-gray-600 mb-2">
-                        Колір: {item.color}
+                        {t('cart.color')}: {item.color}
                       </p>
                     )}
                     <p className="text-primary font-semibold">
-                      {item.price} грн
+                      {item.price} {t('common.currency')}
                     </p>
                   </div>
 
@@ -105,7 +107,7 @@ export default function CartPage() {
                     </div>
 
                     <p className="font-semibold">
-                      {item.price * item.quantity} грн
+                      {item.price * item.quantity} {t('common.currency')}
                     </p>
                   </div>
                 </div>
@@ -117,7 +119,7 @@ export default function CartPage() {
             href="/catalog/ethno"
             className="inline-block mt-6 text-primary hover:text-primary-dark font-medium"
           >
-            ← Продовжити покупки
+            ← {t('common.continueShopping')}
           </Link>
         </div>
 
@@ -125,25 +127,25 @@ export default function CartPage() {
         <div className="lg:col-span-1">
           <div className="bg-white rounded-lg p-6 shadow-sm sticky top-24">
             <h2 className="text-xl font-heading font-semibold mb-6">
-              Разом
+              {t('cart.total')}
             </h2>
 
             <div className="space-y-3 mb-6">
               <div className="flex justify-between text-gray-700">
-                <span>Сума товарів:</span>
-                <span className="font-medium">{getTotalPrice()} грн</span>
+                <span>{t('cart.subtotal')}</span>
+                <span className="font-medium">{getTotalPrice()} {t('common.currency')}</span>
               </div>
               <div className="flex justify-between text-gray-700">
-                <span>Доставка:</span>
-                <span className="text-sm">Розраховується при оформленні</span>
+                <span>{t('cart.delivery')}</span>
+                <span className="text-sm">{t('cart.deliveryCalculated')}</span>
               </div>
             </div>
 
             <div className="border-t pt-4 mb-6">
               <div className="flex justify-between items-center">
-                <span className="text-lg font-semibold">Всього до оплати:</span>
+                <span className="text-lg font-semibold">{t('cart.totalToPay')}</span>
                 <span className="text-2xl font-bold text-primary">
-                  {getTotalPrice()} грн
+                  {getTotalPrice()} {t('common.currency')}
                 </span>
               </div>
             </div>
@@ -152,7 +154,7 @@ export default function CartPage() {
               href="/checkout"
               className="block w-full py-3 bg-primary text-white text-center rounded-lg hover:bg-primary-dark transition-colors font-medium"
             >
-              Оформити замовлення
+              {t('common.checkout')}
             </Link>
           </div>
         </div>

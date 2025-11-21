@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCartStore } from '@/store/cartStore'
 import { toast } from 'sonner'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CheckoutPage() {
   const router = useRouter()
   const { items, getTotalPrice, clearCart } = useCartStore()
+  const { t } = useLanguage()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [formData, setFormData] = useState({
@@ -35,7 +37,7 @@ export default function CheckoutPage() {
 
     // Базовая валидация
     if (!formData.firstName || !formData.lastName || !formData.phone || !formData.email) {
-      toast.error('Заповніть всі обов\'язкові поля')
+      toast.error(t('checkout.errorRequired'))
       setIsSubmitting(false)
       return
     }
@@ -48,12 +50,12 @@ export default function CheckoutPage() {
       // Очистка корзины
       clearCart()
 
-      toast.success('Замовлення успішно оформлено!')
+      toast.success(t('checkout.success'))
 
       // Редирект на страницу успеха
       router.push('/order/success')
     } catch (error) {
-      toast.error('Помилка при оформленні замовлення')
+      toast.error(t('checkout.error'))
     } finally {
       setIsSubmitting(false)
     }
@@ -67,7 +69,7 @@ export default function CheckoutPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl md:text-4xl font-heading font-semibold mb-8">
-        Оформлення замовлення
+        {t('checkout.title')}
       </h1>
 
       <form onSubmit={handleSubmit}>
@@ -77,13 +79,13 @@ export default function CheckoutPage() {
             {/* Contact Information */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h2 className="text-xl font-heading font-semibold mb-6">
-                1. Контактна інформація
+                {t('checkout.contactInfo')}
               </h2>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Ім'я *
+                    {t('checkout.firstName')} *
                   </label>
                   <input
                     type="text"
@@ -97,7 +99,7 @@ export default function CheckoutPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Прізвище *
+                    {t('checkout.lastName')} *
                   </label>
                   <input
                     type="text"
@@ -111,7 +113,7 @@ export default function CheckoutPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Телефон *
+                    {t('checkout.phone')} *
                   </label>
                   <input
                     type="tel"
@@ -126,7 +128,7 @@ export default function CheckoutPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email *
+                    {t('checkout.email')} *
                   </label>
                   <input
                     type="email"
@@ -143,7 +145,7 @@ export default function CheckoutPage() {
             {/* Delivery */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h2 className="text-xl font-heading font-semibold mb-6">
-                2. Доставка
+                {t('checkout.delivery')}
               </h2>
 
               <div className="space-y-4 mb-6">
@@ -157,8 +159,8 @@ export default function CheckoutPage() {
                     className="mr-3"
                   />
                   <div>
-                    <div className="font-medium">Укрпошта</div>
-                    <div className="text-sm text-gray-600">Доставка 3-7 днів</div>
+                    <div className="font-medium">{t('checkout.deliveryUkrposhta')}</div>
+                    <div className="text-sm text-gray-600">{t('checkout.deliveryUkrposhtaTime')}</div>
                   </div>
                 </label>
 
@@ -172,8 +174,8 @@ export default function CheckoutPage() {
                     className="mr-3"
                   />
                   <div>
-                    <div className="font-medium">Нова Пошта</div>
-                    <div className="text-sm text-gray-600">Доставка 1-3 дні</div>
+                    <div className="font-medium">{t('checkout.deliveryNovaposhta')}</div>
+                    <div className="text-sm text-gray-600">{t('checkout.deliveryNovaposhtaTime')}</div>
                   </div>
                 </label>
               </div>
@@ -181,7 +183,7 @@ export default function CheckoutPage() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Місто *
+                    {t('checkout.city')} *
                   </label>
                   <input
                     type="text"
@@ -195,7 +197,7 @@ export default function CheckoutPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Відділення / Адреса *
+                    {t('checkout.address')} *
                   </label>
                   <input
                     type="text"
@@ -212,7 +214,7 @@ export default function CheckoutPage() {
             {/* Payment */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h2 className="text-xl font-heading font-semibold mb-6">
-                3. Оплата
+                {t('checkout.payment')}
               </h2>
 
               <div className="space-y-4">
@@ -226,8 +228,8 @@ export default function CheckoutPage() {
                     className="mr-3"
                   />
                   <div>
-                    <div className="font-medium">Оплата при отриманні</div>
-                    <div className="text-sm text-gray-600">Накладений платіж</div>
+                    <div className="font-medium">{t('checkout.paymentCash')}</div>
+                    <div className="text-sm text-gray-600">{t('checkout.paymentCashDescription')}</div>
                   </div>
                 </label>
 
@@ -241,8 +243,8 @@ export default function CheckoutPage() {
                     className="mr-3"
                   />
                   <div>
-                    <div className="font-medium">Оплата карткою онлайн</div>
-                    <div className="text-sm text-gray-600">LiqPay (Visa, Mastercard)</div>
+                    <div className="font-medium">{t('checkout.paymentCard')}</div>
+                    <div className="text-sm text-gray-600">{t('checkout.paymentCardDescription')}</div>
                   </div>
                 </label>
               </div>
@@ -251,7 +253,7 @@ export default function CheckoutPage() {
             {/* Comment */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h2 className="text-xl font-heading font-semibold mb-6">
-                4. Коментар
+                {t('checkout.comment')}
               </h2>
 
               <textarea
@@ -259,7 +261,7 @@ export default function CheckoutPage() {
                 value={formData.comment}
                 onChange={handleInputChange}
                 rows={4}
-                placeholder="Додаткові побажання до замовлення (опціонально)"
+                placeholder={t('checkout.commentPlaceholder')}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
@@ -269,7 +271,7 @@ export default function CheckoutPage() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg p-6 shadow-sm sticky top-24">
               <h2 className="text-xl font-heading font-semibold mb-6">
-                Ваше замовлення
+                {t('checkout.yourOrder')}
               </h2>
 
               <div className="space-y-4 mb-6">
@@ -284,7 +286,7 @@ export default function CheckoutPage() {
                         {item.name}
                       </p>
                       <p className="text-sm text-gray-600">
-                        {item.quantity} × {item.price} грн
+                        {item.quantity} × {item.price} {t('common.currency')}
                       </p>
                     </div>
                   </div>
@@ -293,20 +295,20 @@ export default function CheckoutPage() {
 
               <div className="space-y-3 mb-6 border-t pt-4">
                 <div className="flex justify-between text-gray-700">
-                  <span>Сума товарів:</span>
-                  <span className="font-medium">{getTotalPrice()} грн</span>
+                  <span>{t('cart.subtotal')}</span>
+                  <span className="font-medium">{getTotalPrice()} {t('common.currency')}</span>
                 </div>
                 <div className="flex justify-between text-gray-700">
-                  <span>Доставка:</span>
-                  <span className="text-sm">Від 50 грн</span>
+                  <span>{t('cart.delivery')}</span>
+                  <span className="text-sm">{t('checkout.deliveryFrom')}</span>
                 </div>
               </div>
 
               <div className="border-t pt-4 mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold">Всього:</span>
+                  <span className="text-lg font-semibold">{t('checkout.total')}</span>
                   <span className="text-2xl font-bold text-primary">
-                    {getTotalPrice()} грн
+                    {getTotalPrice()} {t('common.currency')}
                   </span>
                 </div>
               </div>
@@ -316,7 +318,7 @@ export default function CheckoutPage() {
                 disabled={isSubmitting}
                 className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'Оформлення...' : 'Підтвердити замовлення'}
+                {isSubmitting ? t('checkout.submitting') : t('checkout.submit')}
               </button>
             </div>
           </div>

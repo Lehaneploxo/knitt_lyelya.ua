@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import { Mail, Phone, Instagram, Send, MapPin } from 'lucide-react'
 import { toast } from 'sonner'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ContactsPage() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,12 +17,12 @@ export default function ContactsPage() {
     e.preventDefault()
 
     if (!formData.name || !formData.email || !formData.message) {
-      toast.error('Заповніть всі поля')
+      toast.error(t('contacts.errorFillAll'))
       return
     }
 
     // Simulate sending
-    toast.success('Повідомлення надіслано! Ми зв\'яжемось з вами найближчим часом.')
+    toast.success(t('contacts.success'))
     setFormData({ name: '', email: '', message: '' })
   }
 
@@ -35,23 +37,23 @@ export default function ContactsPage() {
     <div className="max-w-7xl mx-auto px-4 py-16">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-4 text-center">
-          Контакти
+          {t('contacts.title')}
         </h1>
         <p className="text-lg text-gray-600 mb-12 text-center">
-          Зв'яжіться з нами будь-яким зручним способом
+          {t('contacts.subtitle')}
         </p>
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div>
             <h2 className="text-2xl font-heading font-semibold mb-6">
-              Напишіть нам
+              {t('contacts.writeUs')}
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Ім'я *
+                  {t('contacts.name')} *
                 </label>
                 <input
                   type="text"
@@ -60,13 +62,13 @@ export default function ContactsPage() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="Ваше ім'я"
+                  placeholder={t('contacts.namePlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email *
+                  {t('contacts.email')} *
                 </label>
                 <input
                   type="email"
@@ -75,13 +77,13 @@ export default function ContactsPage() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="your@email.com"
+                  placeholder={t('contacts.emailPlaceholder')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Повідомлення *
+                  {t('contacts.message')} *
                 </label>
                 <textarea
                   name="message"
@@ -90,7 +92,7 @@ export default function ContactsPage() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="Ваше повідомлення..."
+                  placeholder={t('contacts.messagePlaceholder')}
                 />
               </div>
 
@@ -98,7 +100,7 @@ export default function ContactsPage() {
                 type="submit"
                 className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
               >
-                Надіслати повідомлення
+                {t('contacts.send')}
               </button>
             </form>
           </div>
@@ -106,7 +108,7 @@ export default function ContactsPage() {
           {/* Contact Info */}
           <div>
             <h2 className="text-2xl font-heading font-semibold mb-6">
-              Контактна інформація
+              {t('contacts.info')}
             </h2>
 
             <div className="space-y-6">
@@ -115,11 +117,11 @@ export default function ContactsPage() {
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Телефон</h3>
+                  <h3 className="font-semibold mb-1">{t('contacts.phone')}</h3>
                   <a href="tel:+380954440531" className="text-gray-600 hover:text-primary">
                     +38095 444 0531
                   </a>
-                  <p className="text-sm text-gray-500">Також Telegram та WhatsApp</p>
+                  <p className="text-sm text-gray-500">{t('contacts.phoneAlso')}</p>
                 </div>
               </div>
 
@@ -128,11 +130,11 @@ export default function ContactsPage() {
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
+                  <h3 className="font-semibold mb-1">{t('contacts.emailTitle')}</h3>
                   <a href="mailto:knitt.lyelya@gmail.com" className="text-gray-600 hover:text-primary">
                     knitt.lyelya@gmail.com
                   </a>
-                  <p className="text-sm text-gray-500">Відповімо протягом 24 годин</p>
+                  <p className="text-sm text-gray-500">{t('contacts.emailResponse')}</p>
                 </div>
               </div>
 
@@ -141,14 +143,14 @@ export default function ContactsPage() {
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Адреса</h3>
-                  <p className="text-gray-600">м. Київ, Україна</p>
-                  <p className="text-sm text-gray-500">Доставка по всій Україні</p>
+                  <h3 className="font-semibold mb-1">{t('contacts.address')}</h3>
+                  <p className="text-gray-600">{t('contacts.addressCity')}</p>
+                  <p className="text-sm text-gray-500">{t('contacts.addressDelivery')}</p>
                 </div>
               </div>
 
               <div className="pt-6 border-t">
-                <h3 className="font-semibold mb-4">Соціальні мережі</h3>
+                <h3 className="font-semibold mb-4">{t('contacts.social')}</h3>
                 <div className="flex gap-4">
                   <a
                     href="https://www.instagram.com/knitt_lyelya.ua?igsh=YXNxYmFycHNoam9k"
@@ -171,10 +173,10 @@ export default function ContactsPage() {
             </div>
 
             <div className="mt-8 p-6 bg-cream rounded-lg">
-              <h3 className="font-semibold mb-2">Графік роботи</h3>
+              <h3 className="font-semibold mb-2">{t('contacts.schedule')}</h3>
               <div className="space-y-1 text-sm text-gray-600">
-                <p>Понеділок - П'ятниця: 10:00 - 18:00</p>
-                <p>Субота - Неділя: Вихідний</p>
+                <p>{t('contacts.scheduleWeekdays')}</p>
+                <p>{t('contacts.scheduleWeekend')}</p>
               </div>
             </div>
           </div>

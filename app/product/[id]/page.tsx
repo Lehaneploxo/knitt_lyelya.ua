@@ -15,7 +15,7 @@ export default function ProductPage() {
   const params = useParams()
   const id = params.id as string
   const product = getProductById(id)
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
 
   const [quantity, setQuantity] = useState(1)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -27,9 +27,9 @@ export default function ProductPage() {
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-heading font-semibold mb-4">Товар не знайдено</h1>
+        <h1 className="text-2xl font-heading font-semibold mb-4">{t('product.notFound')}</h1>
         <Link href="/catalog/home" className="text-primary hover:underline">
-          Повернутися до каталогу
+          {t('product.returnToCatalog')}
         </Link>
       </div>
     )
@@ -48,7 +48,7 @@ export default function ProductPage() {
       image: images[0] || '',
     })
 
-    toast.success(`${quantity} товар(ів) додано в кошик`)
+    toast.success(`${quantity} ${t('product.addedToCart')}`)
   }
 
   const decrementQuantity = () => {
@@ -75,10 +75,10 @@ export default function ProductPage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Breadcrumbs */}
       <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-8">
-        <Link href="/" className="hover:text-primary">Головна</Link>
+        <Link href="/" className="hover:text-primary">{t('common.home')}</Link>
         <ChevronRight className="h-4 w-4" />
         <Link href={`/catalog/${product.category}`} className="hover:text-primary">
-          Каталог
+          {t('common.catalog')}
         </Link>
         <ChevronRight className="h-4 w-4" />
         <span className="text-gray-900 font-medium">{productName}</span>
@@ -159,15 +159,15 @@ export default function ProductPage() {
           </h1>
 
           <p className="text-sm text-gray-600 mb-6">
-            Артикул: {product.sku || product.id.toUpperCase()}
+            {t('product.sku')}: {product.sku || product.id.toUpperCase()}
           </p>
 
           <div className="text-4xl font-semibold text-primary mb-6">
-            {product.price} грн
+            {product.price} {t('common.currency')}
           </div>
 
           <div className="mb-8">
-            <h3 className="text-lg font-medium text-gray-900 mb-3">Опис товару</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-3">{t('product.description')}</h3>
             <p className="text-gray-700 text-base leading-relaxed">
               {productDescription}
             </p>
@@ -176,7 +176,7 @@ export default function ProductPage() {
           {/* Color Selection - only if colors exist */}
           {colors.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-sm font-medium text-gray-900 mb-3">Колір</h3>
+              <h3 className="text-sm font-medium text-gray-900 mb-3">{t('product.color')}</h3>
               <div className="flex flex-wrap gap-2">
                 {colors.map((color: string) => (
                   <span
@@ -192,7 +192,7 @@ export default function ProductPage() {
 
           {/* Quantity */}
           <div className="mb-8">
-            <h3 className="text-sm font-medium text-gray-900 mb-3">Кількість</h3>
+            <h3 className="text-sm font-medium text-gray-900 mb-3">{t('product.quantity')}</h3>
             <div className="flex items-center space-x-4">
               <div className="flex items-center border-2 border-gray-300 rounded-lg">
                 <button
@@ -217,14 +217,14 @@ export default function ProductPage() {
             onClick={handleAddToCart}
             className="w-full py-4 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium text-lg mb-4"
           >
-            Додати в кошик
+            {t('common.addToCart')}
           </button>
 
           {/* Stock Status */}
           {product.inStock ? (
-            <p className="text-sm text-green-600 mb-8">✓ В наявності</p>
+            <p className="text-sm text-green-600 mb-8">✓ {t('product.inStock')}</p>
           ) : (
-            <p className="text-sm text-red-600 mb-8">Немає в наявності</p>
+            <p className="text-sm text-red-600 mb-8">{t('product.outOfStock')}</p>
           )}
 
           {/* Tabs */}
@@ -238,7 +238,7 @@ export default function ProductPage() {
                     : 'text-gray-600 hover:text-primary'
                 }`}
               >
-                Опис
+                {t('product.tab.description')}
               </button>
               <button
                 onClick={() => setActiveTab('specs')}
@@ -248,7 +248,7 @@ export default function ProductPage() {
                     : 'text-gray-600 hover:text-primary'
                 }`}
               >
-                Характеристики
+                {t('product.tab.specifications')}
               </button>
               <button
                 onClick={() => setActiveTab('delivery')}
@@ -258,7 +258,7 @@ export default function ProductPage() {
                     : 'text-gray-600 hover:text-primary'
                 }`}
               >
-                Доставка
+                {t('product.tab.delivery')}
               </button>
             </div>
 
@@ -266,8 +266,7 @@ export default function ProductPage() {
               <div className="text-gray-700">
                 <p>{productDescription}</p>
                 <p className="mt-4">
-                  Кожен виріб виконаний вручну з дотриманням традиційних технологій
-                  та з використанням сучасних матеріалів високої якості.
+                  {t('product.handmade.text')}
                 </p>
               </div>
             )}
@@ -276,13 +275,13 @@ export default function ProductPage() {
               <div className="space-y-3">
                 {product.materials && (
                   <div className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600">Матеріали:</span>
+                    <span className="text-gray-600">{t('product.materials.label')}:</span>
                     <span className="font-medium">{product.materials.join(', ')}</span>
                   </div>
                 )}
                 {product.dimensions && (
                   <div className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600">Розміри:</span>
+                    <span className="text-gray-600">{t('product.dimensions.label')}:</span>
                     <span className="font-medium">
                       {product.dimensions.diameter
                         ? `Ø ${product.dimensions.diameter} ${product.dimensions.unit}`
@@ -292,8 +291,8 @@ export default function ProductPage() {
                 )}
                 {product.quantity && (
                   <div className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600">Кількість в наборі:</span>
-                    <span className="font-medium">{product.quantity} шт</span>
+                    <span className="text-gray-600">{t('product.quantity.set')}:</span>
+                    <span className="font-medium">{product.quantity} {t('product.quantity.pcs')}</span>
                   </div>
                 )}
               </div>
@@ -302,17 +301,17 @@ export default function ProductPage() {
             {activeTab === 'delivery' && (
               <div className="space-y-4 text-gray-700">
                 <div>
-                  <h4 className="font-medium mb-2">Укрпошта</h4>
-                  <p className="text-sm">Доставка по Україні 3-7 днів. Вартість: від 50 грн</p>
+                  <h4 className="font-medium mb-2">{t('product.delivery.ukrposhta.title')}</h4>
+                  <p className="text-sm">{t('product.delivery.ukrposhta.text')}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium mb-2">Нова Пошта</h4>
-                  <p className="text-sm">Доставка 1-3 дні. Вартість: за тарифами перевізника</p>
+                  <h4 className="font-medium mb-2">{t('product.delivery.novaposhta.title')}</h4>
+                  <p className="text-sm">{t('product.delivery.novaposhta.text')}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium mb-2">Оплата</h4>
+                  <h4 className="font-medium mb-2">{t('product.delivery.payment.title')}</h4>
                   <p className="text-sm">
-                    Оплата при отриманні (накладений платіж) або онлайн карткою
+                    {t('product.delivery.payment.text')}
                   </p>
                 </div>
               </div>

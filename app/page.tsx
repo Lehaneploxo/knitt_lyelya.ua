@@ -55,10 +55,10 @@ export default function HomePage() {
         <div className="relative h-64 md:h-96 bg-gradient-to-br from-secondary to-cream rounded-2xl overflow-hidden flex items-center justify-center">
           <div className="text-center px-4">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-semibold text-gray-900 mb-4">
-              Баннер
+              {t('home.banner.banner')}
             </h2>
             <p className="text-lg md:text-xl text-gray-700">
-              Місце для вашого оголошення
+              {t('home.banner.text')}
             </p>
           </div>
         </div>
@@ -88,11 +88,11 @@ export default function HomePage() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white">
                 <h3 className="text-4xl font-heading font-semibold mb-4">
-                  Home
+                  {t('home.collection.home.title')}
                 </h3>
-                <p className="text-lg mb-4">Вироби для дому з натуральних матеріалів</p>
+                <p className="text-lg mb-4">{t('home.collection.home.description')}</p>
                 <span className="inline-flex items-center text-white group-hover:translate-x-2 transition-transform">
-                  Переглянути колекцію
+                  {t('home.collection.viewCollection')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </span>
               </div>
@@ -104,9 +104,9 @@ export default function HomePage() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white">
                 <h3 className="text-4xl font-heading font-semibold mb-4">
-                  Скоро
+                  {t('home.collection.comingSoon.title')}
                 </h3>
-                <p className="text-lg mb-4">Нові колекції незабаром</p>
+                <p className="text-lg mb-4">{t('home.collection.comingSoon.text')}</p>
               </div>
             </div>
           </div>
@@ -119,22 +119,19 @@ export default function HomePage() {
           <div className="h-96 rounded-2xl bg-secondary"></div>
           <div>
             <h2 className="text-3xl md:text-4xl font-heading font-semibold mb-6">
-              Про дизайнера
+              {t('home.about.title')}
             </h2>
             <p className="text-gray-700 mb-4">
-              Кожна сумка — це історія, створена вручну з любов'ю до деталей.
-              Ми поєднуємо традиційні українські орнаменти з сучасними трендами,
-              щоб ви могли виразити свою індивідуальність та підтримати вітчизняного виробника.
+              {t('home.about.text')}
             </p>
             <p className="text-gray-700 mb-8">
-              Наші вироби створюються з якісних матеріалів, які забезпечують довговічність
-              та зручність у використанні. Кожна деталь продумана до дрібниць.
+              {t('home.about.text2')}
             </p>
             <Link
               href="/about"
               className="inline-flex items-center text-primary hover:text-primary-dark font-medium"
             >
-              Дізнатись більше
+              {t('home.about.button')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
