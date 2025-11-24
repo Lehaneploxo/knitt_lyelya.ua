@@ -217,6 +217,26 @@ const translations: Record<Language, Record<string, string>> = {
     // Header toast
     'header.languageChanged.ua': 'Мова змінена на українську',
     'header.languageChanged.en': 'Language changed to English',
+
+    // Colors
+    'color.натуральний': 'натуральний',
+    'color.чорний': 'чорний',
+    'color.голубий': 'голубий',
+    'color.молочний': 'молочний',
+    'color.червоний': 'червоний',
+    'color.зелений': 'зелений',
+    'color.синій': 'синій',
+    'color.коричневий': 'коричневий',
+    'color.білий': 'білий',
+    'color.жовтий': 'жовтий',
+    'color.помаранчевий': 'помаранчевий',
+    'color.рожевий': 'рожевий',
+    'color.фіолетовий': 'фіолетовий',
+    'color.сірий': 'сірий',
+    'color.бежевий': 'бежевий',
+    'color.пастельно-коричневий': 'пастельно-коричневий',
+    'color.мокко': 'мокко',
+    'color.капучіно': 'капучіно',
   },
   en: {
     // Header
@@ -422,6 +442,26 @@ const translations: Record<Language, Record<string, string>> = {
     // Header toast
     'header.languageChanged.ua': 'Мова змінена на українську',
     'header.languageChanged.en': 'Language changed to English',
+
+    // Colors
+    'color.натуральний': 'Natural',
+    'color.чорний': 'Black',
+    'color.голубий': 'Light Blue',
+    'color.молочний': 'Cream',
+    'color.червоний': 'Red',
+    'color.зелений': 'Green',
+    'color.синій': 'Blue',
+    'color.коричневий': 'Brown',
+    'color.білий': 'White',
+    'color.жовтий': 'Yellow',
+    'color.помаранчевий': 'Orange',
+    'color.рожевий': 'Pink',
+    'color.фіолетовий': 'Purple',
+    'color.сірий': 'Gray',
+    'color.бежевий': 'Beige',
+    'color.пастельно-коричневий': 'Pastel Brown',
+    'color.мокко': 'Mocha',
+    'color.капучіно': 'Cappuccino',
   },
 }
 

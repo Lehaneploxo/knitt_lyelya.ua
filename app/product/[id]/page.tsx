@@ -190,7 +190,7 @@ export default function ProductPage() {
                     key={color}
                     className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
                   >
-                    {color}
+                    {t(`color.${color}`)}
                   </span>
                 ))}
               </div>

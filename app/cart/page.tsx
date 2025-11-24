@@ -57,7 +57,7 @@ export default function CartPage() {
                     </h3>
                     {item.color && (
                       <p className="text-sm text-gray-600 mb-2">
-                        {t('cart.color')}: {item.color}
+                        {t('cart.color')}: {t(`color.${item.color}`)}
                       </p>
                     )}
                     <p className="text-primary font-semibold">
