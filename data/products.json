@@ -916,5 +916,513 @@
     "featured": false,
     "new": true,
     "sku": "HOME-026"
+  },
+  {
+    "id": "ethno_001",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Стефанія",
+      "en": "Stephania bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - натурального джуту, чорний, червоний, 39/41-44 см, ручка 50 см, тип - шопер, наплічна, деталі - без відділень, без застібки",
+      "en": "material - jute, colour - natural, black, red, 39/41-44 cm, handle 50 cm, type - shopper, shoulder bag, details - no pockets, an open-top bag"
+    },
+    "price": 2400,
+    "currency": "UAH",
+    "priceEUR": 50,
+    "images": [
+      "/images/products/1ethno.stephania1.JPG",
+      "/images/products/1ethno.stephania2.JPG",
+      "/images/products/1ethno.stephania3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "чорний",
+      "червоний"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": 39,
+      "height": "41-44",
+      "handle": 50,
+      "unit": "cm"
+    },
+    "type": "шопер, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-001"
+  },
+  {
+    "id": "ethno_002",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Маїна",
+      "en": "Maina bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - натурального джуту, зелений, 41/29-36 см, ручка 53 см, тип - шопер, наплічна, деталі - без відділень, без застібки",
+      "en": "material - jute, colour - natural, green, 41/29-36 cm, handle 53 cm, type - shopper, shoulder bag, details - no pockets, an open-top bag"
+    },
+    "price": 2300,
+    "currency": "UAH",
+    "priceEUR": 47,
+    "images": [
+      "/images/products/2ethno.maina1.JPG",
+      "/images/products/2ethno.maina2.JPG",
+      "/images/products/2ethno.maina3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "зелений"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": 41,
+      "height": "29-36",
+      "handle": 53,
+      "unit": "cm"
+    },
+    "type": "шопер, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-002"
+  },
+  {
+    "id": "ethno_003",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Орися",
+      "en": "Orysia bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - чорний, зелений, коричневий, 45/34-32 см, ручка - дерево, тип - тоут, деталі - без застібки",
+      "en": "material - jute, wood, colour - black, green, brown, 45/34-32 cm, handle - wood, type - tote, handbag, details - no pockets, an open-top bag"
+    },
+    "price": 2200,
+    "currency": "UAH",
+    "priceEUR": 45,
+    "images": [
+      "/images/products/3ethno.orysia1.JPG",
+      "/images/products/3ethno.orysia2.JPG",
+      "/images/products/3ethno.orysia3.JPG"
+    ],
+    "colors": [
+      "чорний",
+      "зелений",
+      "коричневий"
+    ],
+    "materials": [
+      "джут",
+      "дерево"
+    ],
+    "dimensions": {
+      "width": 45,
+      "height": "34-32",
+      "unit": "cm"
+    },
+    "type": "тоут",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-003"
+  },
+  {
+    "id": "ethno_004",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Меланія",
+      "en": "Melania bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, дерево, колір - натурального джуту, синій, коричневий, 43/36-31 см, ручка - дерево, тип - тоут, деталі - карман для дрібниць, без застібки",
+      "en": "material - jute, wood, colour - natural, dark blue, brown, 43/36-31 cm, handle - wood, type - tote, handbag, details - small items pocket, an open-top bag"
+    },
+    "price": 2300,
+    "currency": "UAH",
+    "priceEUR": 47,
+    "images": [
+      "/images/products/4ethno.melania1.JPG",
+      "/images/products/4ethno.melania2.JPG",
+      "/images/products/4ethno.melania3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "синій",
+      "коричневий"
+    ],
+    "materials": [
+      "джут",
+      "дерево"
+    ],
+    "dimensions": {
+      "width": 43,
+      "height": "36-31",
+      "unit": "cm"
+    },
+    "type": "тоут",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-004"
+  },
+  {
+    "id": "ethno_005",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Лілі",
+      "en": "Lili bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіряний шнур, колір - натурального джуту, червоний, чорний, 37/36-41 см, ручка 55 см, тип - шопер, деталі - без відділень, наплічна, ручка-стяжка з шкіряного шнура",
+      "en": "material - jute, leather cord, colour - natural, red, black, 37/36-41 cm, handle - 55 cm, type - shopper, details - no pockets, leather drawcord handle"
+    },
+    "price": 2000,
+    "currency": "UAH",
+    "priceEUR": 41,
+    "images": [
+      "/images/products/5ethno.lili1.JPG",
+      "/images/products/5ethno.lili2.JPG",
+      "/images/products/5ethno.lili3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "червоний",
+      "чорний"
+    ],
+    "materials": [
+      "джут",
+      "шкіряний шнур"
+    ],
+    "dimensions": {
+      "width": 37,
+      "height": "36-41",
+      "handle": 55,
+      "unit": "cm"
+    },
+    "type": "шопер, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-005"
+  },
+  {
+    "id": "ethno_006",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Мила",
+      "en": "Myla bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - натурального джуту, 27/37/11 см, ручка 67 см, тип - вузлик, наплічна, деталі - без відділень",
+      "en": "material - jute, colour - natural, 27/37/11 cm, handle - 67 cm, type - knot bag, shoulder bag, details - no pockets"
+    },
+    "price": 1225,
+    "currency": "UAH",
+    "priceEUR": 25,
+    "images": [
+      "/images/products/6ethno.myla1.JPG",
+      "/images/products/6ethno.myla2.JPG",
+      "/images/products/6ethno.myla3.JPG"
+    ],
+    "colors": [
+      "натуральний"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": 27,
+      "height": 37,
+      "depth": 11,
+      "handle": 67,
+      "unit": "cm"
+    },
+    "type": "вузлик, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-006"
+  },
+  {
+    "id": "ethno_007",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Єва",
+      "en": "Eva bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - чорний, червоний, 24-9/27-37 см, ручка 47 см, тип - на руку, хобо, деталі - карман для дрібничок, застібка - магнітна кнопка",
+      "en": "material - jute, colour - black, red, 24-9/27-37 cm, handle - 47 cm, type - handbag, hobo, details - small items pocket, magnetic snap closure"
+    },
+    "price": 1960,
+    "currency": "UAH",
+    "priceEUR": 40,
+    "images": [
+      "/images/products/7ethno.eva1.JPG",
+      "/images/products/7ethno.eva2.JPG",
+      "/images/products/7ethno.eva3.JPG"
+    ],
+    "colors": [
+      "чорний",
+      "червоний"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": "24-9",
+      "height": "27-37",
+      "handle": 47,
+      "unit": "cm"
+    },
+    "type": "на руку, хобо",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-007"
+  },
+  {
+    "id": "ethno_008",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Рута",
+      "en": "Ruta bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіряний шнур, колір - натурального джуту, зелений, 25-45/36 см, ручка 55 см, тип - шопер, наплічна, деталі - без відділень, ручка-стяжка з шкіряного шнура",
+      "en": "material - jute, leather cord, colour - natural, green, 25-45/36 cm, handle - 55 cm, type - shopper, shoulder bag, details - no pockets, leather drawcord handle"
+    },
+    "price": 2300,
+    "currency": "UAH",
+    "priceEUR": 47,
+    "images": [
+      "/images/products/8ethono.ruta1.JPG",
+      "/images/products/8ethono.ruta2.JPG",
+      "/images/products/8ethono.ruta3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "зелений"
+    ],
+    "materials": [
+      "джут",
+      "шкіряний шнур"
+    ],
+    "dimensions": {
+      "width": "25-45",
+      "height": 36,
+      "handle": 55,
+      "unit": "cm"
+    },
+    "type": "шопер, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-008"
+  },
+  {
+    "id": "ethno_009",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Маріка",
+      "en": "Marica bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіряний шнур, колір - натурального джуту, голубий, 26-43/34 см, ручка 55 см, тип - шопер, наплічна, деталі - без відділень, ручка-стяжка з шкіряного шнура",
+      "en": "material - jute, leather cord, colour - natural, blue, 26-43/34 cm, handle - 55 cm, type - shopper, shoulder bag, details - no pockets, leather drawcord handle"
+    },
+    "price": 2300,
+    "currency": "UAH",
+    "priceEUR": 47,
+    "images": [
+      "/images/products/9ethno.marica1.JPG",
+      "/images/products/9ethno.marica2.JPG",
+      "/images/products/9ethno.marica3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "голубий"
+    ],
+    "materials": [
+      "джут",
+      "шкіряний шнур"
+    ],
+    "dimensions": {
+      "width": "26-43",
+      "height": 34,
+      "handle": 55,
+      "unit": "cm"
+    },
+    "type": "шопер, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-009"
+  },
+  {
+    "id": "ethno_010",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Соломія",
+      "en": "Solomia bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіряний шнур, колір - натурального джуту, червоний, чорний, 30/13/31 см, ручка 50 см, тип - тоут, на руку, деталі - без відділень, ручка-стяжка з шкіряного шнура",
+      "en": "material - jute, leather cord, colour - natural, red, black, 30/13/31 cm, handle - 50 cm, type - tote, handbag, details - no pockets, leather drawcord handle"
+    },
+    "price": 2400,
+    "currency": "UAH",
+    "priceEUR": 50,
+    "images": [
+      "/images/products/10ethno.solomia1.JPG",
+      "/images/products/10ethno.solomia2JPG.jpg",
+      "/images/products/10ethno.solomia3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "червоний",
+      "чорний"
+    ],
+    "materials": [
+      "джут",
+      "шкіряний шнур"
+    ],
+    "dimensions": {
+      "width": 30,
+      "depth": 13,
+      "height": 31,
+      "handle": 50,
+      "unit": "cm"
+    },
+    "type": "тоут, на руку",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-010"
+  },
+  {
+    "id": "ethno_011",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Ярина",
+      "en": "Yaryna bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіра, колір - чорний, червоний, коричневий, 24/34 см, ручка 62 см, тип - наплічна, деталі - без відділень, шкіряний плечовий ремінь, застібка - магнітна кнопка",
+      "en": "material - jute, leather, colour - black, red, brown, 24/34 cm, handle - 62 cm, type - shoulder bag, details - no pockets, leather shoulder strap, magnetic snap closure"
+    },
+    "price": 2160,
+    "currency": "UAH",
+    "priceEUR": 44,
+    "images": [
+      "/images/products/11ethno.yaryna1.JPG",
+      "/images/products/11ethno.yaryna2.JPG",
+      "/images/products/11ethno.yaryna3.JPG"
+    ],
+    "colors": [
+      "чорний",
+      "червоний",
+      "коричневий"
+    ],
+    "materials": [
+      "джут",
+      "шкіра"
+    ],
+    "dimensions": {
+      "width": 24,
+      "height": 34,
+      "handle": 62,
+      "unit": "cm"
+    },
+    "type": "наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-011"
+  },
+  {
+    "id": "ethno_012",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Дана",
+      "en": "Dana bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - натурального джуту, червоний, 10-29/33/54 см, ручка 66 см, тип - наплічна, хобо, деталі - карман для дрібничок",
+      "en": "material - jute, colour - natural, red, 10-29/33/54 cm, handle - 66 cm, type - shoulder bag, hobo, details - small items pocket"
+    },
+    "price": 2940,
+    "currency": "UAH",
+    "priceEUR": 60,
+    "images": [
+      "/images/products/12ethno.dana1.JPG",
+      "/images/products/12ethno.dana2.JPG",
+      "/images/products/12ethno.dana3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "червоний"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": "10-29",
+      "height": 33,
+      "depth": 54,
+      "handle": 66,
+      "unit": "cm"
+    },
+    "type": "наплічна, хобо",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-012"
+  },
+  {
+    "id": "ethno_013",
+    "category": "ethno",
+    "name": {
+      "ua": "Сумка Ліна",
+      "en": "Lina bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - натурального джуту, синій, 10-30/35/51 см, ручка 64 см, тип - наплічна, хобо, деталі - карман для дрібничок",
+      "en": "material - jute, colour - natural, dark blue, 10-30/35/51 cm, handle - 64 cm, type - shoulder bag, hobo, details - small items pocket"
+    },
+    "price": 2940,
+    "currency": "UAH",
+    "priceEUR": 60,
+    "images": [
+      "/images/products/13ethno.lina1.JPG",
+      "/images/products/13ethno.lina2.JPG",
+      "/images/products/13ethno.lina3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "синій"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": "10-30",
+      "height": 35,
+      "depth": 51,
+      "handle": 64,
+      "unit": "cm"
+    },
+    "type": "наплічна, хобо",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "ETHNO-013"
   }
 ]

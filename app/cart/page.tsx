@@ -7,7 +7,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, getTotalPrice } = useCartStore()
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   if (items.length === 0) {
     return (
@@ -53,7 +53,7 @@ export default function CartPage() {
                   {/* Info */}
                   <div className="flex-1">
                     <h3 className="font-heading text-lg font-semibold mb-1">
-                      {item.name}
+                      {language === 'ua' ? item.name.ua : item.name.en}
                     </h3>
                     {item.color && (
                       <p className="text-sm text-gray-600 mb-2">

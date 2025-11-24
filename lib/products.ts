@@ -13,6 +13,7 @@ export interface Product {
   }
   price: number
   currency: string
+  priceEUR?: number
   images: string[]
   colors?: string[]
   sizes?: string[]

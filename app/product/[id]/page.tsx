@@ -43,7 +43,7 @@ export default function ProductPage() {
   const handleAddToCart = () => {
     addItem({
       id: product.id,
-      name: productName,
+      name: product.name,
       price: product.price,
       image: images[0] || '',
     })
@@ -162,8 +162,15 @@ export default function ProductPage() {
             {t('product.sku')}: {product.sku || product.id.toUpperCase()}
           </p>
 
-          <div className="text-4xl font-semibold text-primary mb-6">
-            {product.price} {t('common.currency')}
+          <div className="mb-6">
+            <div className="text-4xl font-semibold text-primary">
+              {product.price} {t('common.currency')}
+            </div>
+            {product.priceEUR && (
+              <div className="text-2xl text-gray-600 mt-2">
+                {product.priceEUR} €
+              </div>
+            )}
           </div>
 
           <div className="mb-8">

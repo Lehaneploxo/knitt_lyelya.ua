@@ -30,7 +30,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
     addItem({
       id: product.id,
-      name: productName,
+      name: product.name,
       price: product.price,
       image: images[0] || '',
     })
@@ -118,9 +118,16 @@ export function ProductCard({ product }: ProductCardProps) {
           <p className="text-sm text-gray-600 mb-3 line-clamp-2">
             {productDescription}
           </p>
-          <p className="text-xl font-semibold text-primary mb-4">
-            {product.price} {t('common.currency')}
-          </p>
+          <div className="mb-4">
+            <p className="text-xl font-semibold text-primary">
+              {product.price} {t('common.currency')}
+            </p>
+            {product.priceEUR && (
+              <p className="text-sm text-gray-600">
+                {product.priceEUR} €
+              </p>
+            )}
+          </div>
 
           {/* Add to Cart Button */}
           <button

@@ -9,7 +9,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 export default function CheckoutPage() {
   const router = useRouter()
   const { items, getTotalPrice, clearCart } = useCartStore()
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [formData, setFormData] = useState({
@@ -283,7 +283,7 @@ export default function CheckoutPage() {
                     <div className="w-16 h-16 bg-secondary rounded-lg flex-shrink-0"></div>
                     <div className="flex-1">
                       <p className="font-medium text-sm line-clamp-2">
-                        {item.name}
+                        {language === 'ua' ? item.name.ua : item.name.en}
                       </p>
                       <p className="text-sm text-gray-600">
                         {item.quantity} × {item.price} {t('common.currency')}
