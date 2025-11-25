@@ -283,7 +283,9 @@ export default function ProductPage() {
                 {product.materials && (
                   <div className="flex justify-between py-2 border-b">
                     <span className="text-gray-600">{t('product.materials.label')}:</span>
-                    <span className="font-medium">{product.materials.join(', ')}</span>
+                    <span className="font-medium">
+                      {product.materials.map((material: string) => t(`material.${material}`)).join(', ')}
+                    </span>
                   </div>
                 )}
                 {product.dimensions && (

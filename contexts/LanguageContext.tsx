@@ -226,6 +226,7 @@ const translations: Record<Language, Record<string, string>> = {
     'color.червоний': 'червоний',
     'color.зелений': 'зелений',
     'color.синій': 'синій',
+    'color.темно-синій': 'темно-синій',
     'color.коричневий': 'коричневий',
     'color.білий': 'білий',
     'color.жовтий': 'жовтий',
@@ -237,6 +238,13 @@ const translations: Record<Language, Record<string, string>> = {
     'color.пастельно-коричневий': 'пастельно-коричневий',
     'color.мокко': 'мокко',
     'color.капучіно': 'капучіно',
+
+    // Materials
+    'material.джут': 'джут',
+    'material.шкіряний шнур': 'шкіряний шнур',
+    'material.дерево': 'дерево',
+    'material.бавовняний шнур': 'бавовняний шнур',
+    'material.шкіра': 'шкіра',
   },
   en: {
     // Header
@@ -451,6 +459,7 @@ const translations: Record<Language, Record<string, string>> = {
     'color.червоний': 'Red',
     'color.зелений': 'Green',
     'color.синій': 'Blue',
+    'color.темно-синій': 'Dark Blue',
     'color.коричневий': 'Brown',
     'color.білий': 'White',
     'color.жовтий': 'Yellow',
@@ -462,6 +471,13 @@ const translations: Record<Language, Record<string, string>> = {
     'color.пастельно-коричневий': 'Pastel Brown',
     'color.мокко': 'Mocha',
     'color.капучіно': 'Cappuccino',
+
+    // Materials
+    'material.джут': 'jute',
+    'material.шкіряний шнур': 'leather cord',
+    'material.дерево': 'wood',
+    'material.бавовняний шнур': 'cotton cord',
+    'material.шкіра': 'leather',
   },
 }
 
