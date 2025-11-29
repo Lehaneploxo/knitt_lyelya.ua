@@ -238,6 +238,13 @@ const translations: Record<Language, Record<string, string>> = {
     'color.пастельно-коричневий': 'пастельно-коричневий',
     'color.мокко': 'мокко',
     'color.капучіно': 'капучіно',
+    'color.антрацит': 'антрацит',
+    'color.графіт': 'графіт',
+    'color.льон': 'льон',
+    'color.айворі': 'айворі',
+    'color.теракот': 'теракот',
+    'color.тополя': 'тополя',
+    'color.синя лагуна': 'синя лагуна',
 
     // Materials
     'material.джут': 'джут',
@@ -471,6 +478,13 @@ const translations: Record<Language, Record<string, string>> = {
     'color.пастельно-коричневий': 'Pastel Brown',
     'color.мокко': 'Mocha',
     'color.капучіно': 'Cappuccino',
+    'color.антрацит': 'Anthracite',
+    'color.графіт': 'Graphite',
+    'color.льон': 'Linen',
+    'color.айворі': 'Ivory',
+    'color.теракот': 'Terracotta',
+    'color.тополя': 'Poplar',
+    'color.синя лагуна': 'Blue Lagoon',
 
     // Materials
     'material.джут': 'jute',

@@ -1424,5 +1424,621 @@
     "featured": false,
     "new": true,
     "sku": "ETHNO-013"
+  },
+  {
+    "id": "basic_001",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Адора",
+      "en": "Adora bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіра, колір - натурального джуту, чорний, 30/34/17 см, ручка 45 см, тип - тоут, на руку, деталі - карман для дрібничок, застібка - магнітна кнопка",
+      "en": "material - jute, leather, colour - natural, black ,  30/34/17 cm, handle - 45 cm, type - tote, hand bag, details - small items pocket, magnetic snap closure"
+    },
+    "price": 3185,
+    "currency": "UAH",
+    "priceEUR": 65,
+    "images": [
+      "/images/products/1basic.adora1.JPG",
+      "/images/products/1basic.adora2.JPG",
+      "/images/products/1basic.adora3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "чорний"
+    ],
+    "materials": [
+      "джут",
+      "шкіра"
+    ],
+    "dimensions": {
+      "width": 30,
+      "height": 34,
+      "depth": 17,
+      "handle": 45,
+      "unit": "cm"
+    },
+    "type": "тоут, на руку",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-001"
+  },
+  {
+    "id": "basic_002",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Ніла Б",
+      "en": "Nyla B bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіра, колір - чорний, коричневий, 43/37/11 см, ручка 66 см, тип - шопер, наплічна, деталі - карман для дрібничок, застібка - шкіряний клапан з кнопкою, шкіряний плечовий ремінь",
+      "en": "material - jute, leather, colour - black ,  brown, 43/37/11 cm, handle - 66 cm, type - shopper, shoulder bag, details - small items pocket, leather flap with a snap button, leather shoulder strap"
+    },
+    "price": 2400,
+    "currency": "UAH",
+    "priceEUR": 50,
+    "images": [
+      "/images/products/2basic.nylab1.JPG",
+      "/images/products/2basic.nylab2.JPG",
+      "/images/products/2basic.nylab3.JPG"
+    ],
+    "colors": [
+      "чорний",
+      "коричневий"
+    ],
+    "materials": [
+      "джут",
+      "шкіра"
+    ],
+    "dimensions": {
+      "width": 43,
+      "height": 37,
+      "depth": 11,
+      "handle": 66,
+      "unit": "cm"
+    },
+    "type": "шопер, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-002"
+  },
+  {
+    "id": "basic_003",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Ніла Н",
+      "en": "Nyla N bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіра, колір - натурального джуту, коричневий, 38/38/9 см, ручка 62 см, тип - шопер, наплічна, деталі - карман для дрібничок, застібка - шкіряний клапан з кнопкою, шкіряний плечовий ремінь",
+      "en": "material - jute, leather, colour - natural , brown,  38/38/9 cm, handle - 62 cm, type - shopper, shoulder bag, details - small items pocket, leather flap with a snap button, leather shoulder strap"
+    },
+    "price": 2400,
+    "currency": "UAH",
+    "priceEUR": 50,
+    "images": [
+      "/images/products/3basic.nylan1.JPG",
+      "/images/products/3basic.nylan2.JPG",
+      "/images/products/3basic.nylan3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "коричневий"
+    ],
+    "materials": [
+      "джут",
+      "шкіра"
+    ],
+    "dimensions": {
+      "width": 38,
+      "height": 38,
+      "depth": 9,
+      "handle": 62,
+      "unit": "cm"
+    },
+    "type": "шопер, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-003"
+  },
+  {
+    "id": "basic_004",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Лілі",
+      "en": "Lyli bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіра, колір - зелений, коричневий, 34/39/10 см, ручка 66 см, тип - шопер, наплічна, деталі - карман для дрібничок, застібка - шкіряний клапан з кнопкою, шкіряний плечовий ремінь",
+      "en": "material - jute, leather, colour - green, brown,  34/39/10 cm, handle - 66 cm, type - shopper, shoulder bag, details - small items pocket, leather flap with a snap button, leather shoulder strap"
+    },
+    "price": 2400,
+    "currency": "UAH",
+    "priceEUR": 50,
+    "images": [
+      "/images/products/4basic.lyli1.JPG",
+      "/images/products/4basic.lyli2.JPG",
+      "/images/products/4basic.lyli3.JPG"
+    ],
+    "colors": [
+      "зелений",
+      "коричневий"
+    ],
+    "materials": [
+      "джут",
+      "шкіра"
+    ],
+    "dimensions": {
+      "width": 34,
+      "height": 39,
+      "depth": 10,
+      "handle": 66,
+      "unit": "cm"
+    },
+    "type": "шопер, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-004"
+  },
+  {
+    "id": "basic_005",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Соня",
+      "en": "Sonia bag"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - антрацит, 37/35/10 см, ручка 46 см, тип - шопер, зручний для планшету, ноутбука, деталі - без відділеннь, застібка - немає",
+      "en": "material - cotton cord, colour - antracite,  37/35/10 cm, handle - 46 cm, type - shopper, fits for a laptop/ tablet, details - no pocket, an open-top bag"
+    },
+    "price": 2300,
+    "currency": "UAH",
+    "priceEUR": 47,
+    "images": [
+      "/images/products/5basic.sonia1.JPG",
+      "/images/products/5basic.sonia2.JPG",
+      "/images/products/5basic.sonia3.JPG"
+    ],
+    "colors": [
+      "антрацит"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 37,
+      "height": 35,
+      "depth": 10,
+      "handle": 46,
+      "unit": "cm"
+    },
+    "type": "шопер",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-005"
+  },
+  {
+    "id": "basic_006",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Орі",
+      "en": "Ori bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - помаранчевий, 28/36/7 см, ручка 60 см, тип - тоут, зручний для планшету, ноутбука, деталі - без відділеннь, застібка - магнітна кнопка",
+      "en": "material - jute, colour - orange,  28/36/7 cm, handle - 60 cm, type - tote, fits for a laptop/ tablet, details - no pocket, magnetic snap closure"
+    },
+    "price": 1960,
+    "currency": "UAH",
+    "priceEUR": 40,
+    "images": [
+      "/images/products/6basic.ori1.JPG",
+      "/images/products/6basic.ori2.JPG",
+      "/images/products/6basic.ori3.JPG"
+    ],
+    "colors": [
+      "помаранчевий"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": 28,
+      "height": 36,
+      "depth": 7,
+      "handle": 60,
+      "unit": "cm"
+    },
+    "type": "тоут",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-006"
+  },
+  {
+    "id": "basic_007",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Ніка",
+      "en": "Nyka bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - чорний, 31/25 - 43/13 см, ручка 87, 17 см, тип - вузлик, наплічна, деталі - карман для дрібничок",
+      "en": "material - jute, colour - black,  31/25 - 43/13 cm, handle - 87, 17 cm, type - knotbag, shoulder bag, details - small items pocket"
+    },
+    "price": 2160,
+    "currency": "UAH",
+    "priceEUR": 45,
+    "images": [
+      "/images/products/7basic.nyka1.JPG",
+      "/images/products/7basic.nyka2.JPG",
+      "/images/products/7basic.nyka3.JPG"
+    ],
+    "colors": [
+      "чорний"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": "31/25-43",
+      "depth": 13,
+      "handle": "87, 17",
+      "unit": "cm"
+    },
+    "type": "вузлик, наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-007"
+  },
+  {
+    "id": "basic_008",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Лея",
+      "en": "Leya bag"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - льон, 32/32 см, ручка 55 см, тип - наплічна, деталі - без відділеннь, застібка- магнітна кнопка",
+      "en": "material - cotton cord, colour - linen,  32/32 cm, handle - 55 cm, type - shoulder bag, details - no pocket, magnetic snap closure"
+    },
+    "price": 2060,
+    "currency": "UAH",
+    "priceEUR": 42,
+    "images": [
+      "/images/products/8basic.leya1.JPG",
+      "/images/products/8basic.leya2.JPG",
+      "/images/products/8basic.leya3.JPG"
+    ],
+    "colors": [
+      "льон"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 32,
+      "height": 32,
+      "handle": 55,
+      "unit": "cm"
+    },
+    "type": "наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-008"
+  },
+  {
+    "id": "basic_009",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Арі",
+      "en": "Ari bag"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, шкіра, колір - айворі, коричневий, 40/42 см, ручка 60 см, тип - наплічна, деталі - без відділеннь, застібка - кнопка",
+      "en": "material - cotton cord, leather, colour -ivory ,  40/42 cm, handle - 60 cm, type - shoulder bag, details - no pocket, snap closure"
+    },
+    "price": 2160,
+    "currency": "UAH",
+    "priceEUR": 45,
+    "images": [
+      "/images/products/9basic.ari1.JPG",
+      "/images/products/9basic.ari2.JPG",
+      "/images/products/9basic.ari3.JPG"
+    ],
+    "colors": [
+      "айворі",
+      "коричневий"
+    ],
+    "materials": [
+      "бавовняний шнур",
+      "шкіра"
+    ],
+    "dimensions": {
+      "width": 40,
+      "height": 42,
+      "handle": 60,
+      "unit": "cm"
+    },
+    "type": "наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-009"
+  },
+  {
+    "id": "basic_010",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Ліка",
+      "en": "Lyka bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіра, колір - натурального джуту, коричневий, 34/36 см, ручка - 60 см, тип - наплічна, деталі - карман для дрібничок, застібка - кнопка",
+      "en": "material - jute, leather, colour - natural,  brown, 34/36 cm, handle - 60 cm, type - shoulder bag, details - small items pocket, magnetic snap closure"
+    },
+    "price": 2110,
+    "currency": "UAH",
+    "priceEUR": 43,
+    "images": [
+      "/images/products/10basic.lyka1.JPG",
+      "/images/products/10basic.lyka2.JPG",
+      "/images/products/10basic.lyka3.JPG"
+    ],
+    "colors": [
+      "натуральний",
+      "коричневий"
+    ],
+    "materials": [
+      "джут",
+      "шкіра"
+    ],
+    "dimensions": {
+      "width": 34,
+      "height": 36,
+      "handle": 60,
+      "unit": "cm"
+    },
+    "type": "наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-010"
+  },
+  {
+    "id": "basic_011",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Дора",
+      "en": "Dora bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, шкіряний шнур, колір - графіт, d - 37 см, ручка - 67 см, тип - наплічна, деталі - карман для дрібничок, застібка - магнітна кнопка",
+      "en": "material - jute, leather cord, colour - graphite,  d - 37 cm, handle - 67 cm, type - shoulder bag, details - small items pocket, magnetic snap closure"
+    },
+    "price": 2060,
+    "currency": "UAH",
+    "priceEUR": 42,
+    "images": [
+      "/images/products/11basic.dora1.JPG",
+      "/images/products/11basic.dora2.JPG",
+      "/images/products/11basic.dora3.JPG"
+    ],
+    "colors": [
+      "графіт"
+    ],
+    "materials": [
+      "джут",
+      "шкіряний шнур"
+    ],
+    "dimensions": {
+      "diameter": 37,
+      "handle": 67,
+      "unit": "cm"
+    },
+    "type": "наплічна",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-011"
+  },
+  {
+    "id": "basic_012",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Люсі",
+      "en": "Lucy bag"
+    },
+    "description": {
+      "ua": "матеріал - джут, колір - чорний, графіт, 41/31/10 см, ручка - 45 см, тип - тоут,на руку, деталі - без відділеннь, без застібки",
+      "en": "material - jute, colour - black, graphite,  41/31/10 cm, handle - 45 cm, type - handbag, details - no pockets, an open-top bag"
+    },
+    "price": 1865,
+    "currency": "UAH",
+    "priceEUR": 38,
+    "images": [
+      "/images/products/13basic.lucy1.JPG",
+      "/images/products/13basic.lucy2.JPG",
+      "/images/products/13basic.lucy3.JPG"
+    ],
+    "colors": [
+      "чорний",
+      "графіт"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "width": 41,
+      "height": 31,
+      "depth": 10,
+      "handle": 45,
+      "unit": "cm"
+    },
+    "type": "тоут, на руку",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-012"
+  },
+  {
+    "id": "basic_013",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Ема",
+      "en": "Ema bag"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - антрацит, 21/37/8 см, ручка 56 см, тип - на руку, хобо, деталі - карман для дрібничок, застібка - магнітна кнопка",
+      "en": "material - cotton cord, colour - antracite,  21/37/8 cm, handle - 56 cm, type - handbag, hobo, details - small items pocket, magnetic snap closure"
+    },
+    "price": 2060,
+    "currency": "UAH",
+    "priceEUR": 42,
+    "images": [
+      "/images/products/13basic.ema1.JPG",
+      "/images/products/13basic.ema2.JPG",
+      "/images/products/13basic.ema3.JPG"
+    ],
+    "colors": [
+      "антрацит"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 21,
+      "height": 37,
+      "depth": 8,
+      "handle": 56,
+      "unit": "cm"
+    },
+    "type": "на руку, хобо",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-013"
+  },
+  {
+    "id": "basic_014",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Кеті",
+      "en": "Cathy bag"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - теракот, 26/13/6 см, ручка 41 см, тип - на руку, деталі - карман для дрібничок, застібка - блискавка",
+      "en": "material - cotton cord, colour - terracotta,  26/13/6 cm, handle - 41 cm, type - handbag, details - small items pocket, zipper closure"
+    },
+    "price": 1720,
+    "currency": "UAH",
+    "priceEUR": 35,
+    "images": [
+      "/images/products/14basic.cathyt1.jpeg",
+      "/images/products/14basic.cathyt2.jpeg",
+      "/images/products/14basic.cathyt3.jpeg"
+    ],
+    "colors": [
+      "теракот"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 26,
+      "height": 13,
+      "depth": 6,
+      "handle": 41,
+      "unit": "cm"
+    },
+    "type": "на руку",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-014"
+  },
+  {
+    "id": "basic_015",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Кеті",
+      "en": "Cathy bag"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - тополя, 23/13/6 см, ручка 43 см, тип - на руку, деталі - без відділеннь, застібка - блискавка",
+      "en": "material - cotton cord, colour - poplar,  26/13/6 cm, handle - 43 cm, type - handbag, details - no pockets, zipper closure"
+    },
+    "price": 1720,
+    "currency": "UAH",
+    "priceEUR": 35,
+    "images": [
+      "/images/products/15basic.cathyp1.JPG",
+      "/images/products/15basic.cathyp2.JPG",
+      "/images/products/15basic.cathyp3.JPG"
+    ],
+    "colors": [
+      "тополя"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 23,
+      "height": 13,
+      "depth": 6,
+      "handle": 43,
+      "unit": "cm"
+    },
+    "type": "на руку",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-015"
+  },
+  {
+    "id": "basic_016",
+    "category": "basic",
+    "name": {
+      "ua": "Сумка Кеті",
+      "en": "Cathy bag"
+    },
+    "description": {
+      "ua": "матеріал - бавовняний шнур, колір - синя лагуна, 26/13/6 см, ручка 46 см, тип - на руку, деталі - карман для дрібничок, застібка - блискавка",
+      "en": "material - cotton cord, colour - blue lagoon,  26/13/6 cm, handle - 46 cm, type - handbag, details - small items pocket, zipper closure"
+    },
+    "price": 1720,
+    "currency": "UAH",
+    "priceEUR": 35,
+    "images": [
+      "/images/products/16basic.cathyl1.JPG",
+      "/images/products/16basic.cathyl2.JPG",
+      "/images/products/16basic.cathyl3.JPG"
+    ],
+    "colors": [
+      "синя лагуна"
+    ],
+    "materials": [
+      "бавовняний шнур"
+    ],
+    "dimensions": {
+      "width": 26,
+      "height": 13,
+      "depth": 6,
+      "handle": 46,
+      "unit": "cm"
+    },
+    "type": "на руку",
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "BASIC-016"
   }
 ]
