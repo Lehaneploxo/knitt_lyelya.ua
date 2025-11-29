@@ -294,6 +294,8 @@ export default function ProductPage() {
                     <span className="font-medium">
                       {product.dimensions.diameter
                         ? `Ø ${product.dimensions.diameter} ${product.dimensions.unit}`
+                        : product.dimensions.depth
+                        ? `${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} ${product.dimensions.unit}`
                         : `${product.dimensions.width} x ${product.dimensions.height} ${product.dimensions.unit}`}
                     </span>
                   </div>
