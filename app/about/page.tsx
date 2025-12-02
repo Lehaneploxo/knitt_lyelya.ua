@@ -29,6 +29,9 @@ export default function AboutPage() {
             <p className="text-gray-700 mb-4">
               {t('about.story2')}
             </p>
+            <p className="text-gray-700 mb-4">
+              {t('about.story3')}
+            </p>
           </div>
         </div>
 
@@ -38,7 +41,7 @@ export default function AboutPage() {
             {t('about.values')}
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-semibold">
                 1
@@ -74,64 +77,29 @@ export default function AboutPage() {
                 {t('about.value3.text')}
               </p>
             </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-semibold">
+                4
+              </div>
+              <h3 className="text-xl font-heading font-semibold mb-2">
+                {t('about.value4.title')}
+              </h3>
+              <p className="text-gray-600">
+                {t('about.value4.text')}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Process */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-heading font-semibold mb-8 text-center">
-            {t('about.process')}
+        {/* Mission */}
+        <div className="mb-16 bg-cream rounded-2xl p-12">
+          <h2 className="text-3xl font-heading font-semibold mb-6 text-center">
+            {t('about.mission')}
           </h2>
-
-          <div className="space-y-6">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-semibold">
-                1
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-1">{t('about.process1.title')}</h3>
-                <p className="text-gray-600">
-                  {t('about.process1.text')}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-semibold">
-                2
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-1">{t('about.process2.title')}</h3>
-                <p className="text-gray-600">
-                  {t('about.process2.text')}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-semibold">
-                3
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-1">{t('about.process3.title')}</h3>
-                <p className="text-gray-600">
-                  {t('about.process3.text')}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-semibold">
-                4
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-1">{t('about.process4.title')}</h3>
-                <p className="text-gray-600">
-                  {t('about.process4.text')}
-                </p>
-              </div>
-            </div>
-          </div>
+          <p className="text-gray-700 text-lg text-center max-w-3xl mx-auto">
+            {t('about.missionText')}
+          </p>
         </div>
 
         {/* CTA */}
