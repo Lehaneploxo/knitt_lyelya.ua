@@ -56,6 +56,8 @@ const translations: Record<Language, Record<string, string>> = {
     'home.collection.viewCollection': 'Переглянути колекцію',
     'home.collection.comingSoon.title': 'Скоро',
     'home.collection.comingSoon.text': 'Нові колекції незабаром',
+    'home.instagram.title': 'Слідкуйте за нами в Instagram',
+    'home.instagram.subtitle': 'Дивіться наші останні роботи та закулісся створення виробів',
 
     // Product page
     'product.notFound': 'Товар не знайдено',
@@ -292,6 +294,8 @@ const translations: Record<Language, Record<string, string>> = {
     'home.collection.viewCollection': 'View collection',
     'home.collection.comingSoon.title': 'Coming Soon',
     'home.collection.comingSoon.text': 'New collections coming soon',
+    'home.instagram.title': 'Follow us on Instagram',
+    'home.instagram.subtitle': 'See our latest works and behind-the-scenes of product creation',
 
     // Product page
     'product.notFound': 'Product not found',

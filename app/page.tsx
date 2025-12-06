@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import { ProductGrid } from '@/components/product/ProductGrid'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getAllProducts, getNewProducts, getFeaturedProducts } from '@/lib/products'
+import { useEffect } from 'react'
 
 const allProducts = getAllProducts()
 const newProducts = getNewProducts()
@@ -12,24 +13,95 @@ const featuredProducts = getFeaturedProducts()
 
 export default function HomePage() {
   const { t } = useLanguage()
+
+  useEffect(() => {
+    // Load Instagram embed script
+    const script = document.createElement('script')
+    script.src = 'https://www.instagram.com/embed.js'
+    script.async = true
+    document.body.appendChild(script)
+
+    return () => {
+      // Cleanup
+      if (document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
+    }
+  }, [])
+
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-[600px] bg-gradient-to-br from-secondary to-cream flex items-center justify-center">
-        <div className="text-center px-4 max-w-3xl">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-gray-900 mb-6">
-            {t('home.hero.title')}
-          </h1>
-          <p className="text-lg md:text-xl text-gray-700 mb-8">
-            {t('home.hero.subtitle')}
-          </p>
-          <Link
-            href="/catalog/home"
-            className="inline-flex items-center px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
+      <section className="relative w-full overflow-hidden bg-cream">
+        {/* Background Image - Full Width */}
+        <div className="relative w-full">
+          <img
+            src="/images/hero-banner.jpg"
+            alt="Hero Banner"
+            className="w-full h-auto object-contain"
+          />
+          {/* Overlay with gradient for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30"></div>
+        </div>
+
+        {/* Content Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4 max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-white mb-6 drop-shadow-2xl">
+              {t('home.hero.title')}
+            </h1>
+            <p className="text-lg md:text-xl text-white mb-8 drop-shadow-2xl">
+              {t('home.hero.subtitle')}
+            </p>
+            <Link
+              href="/catalog/home"
+              className="inline-flex items-center px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium shadow-xl hover:shadow-2xl transform hover:scale-105 transition-transform"
+            >
+              {t('common.viewCatalog')}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram Feed */}
+      <section className="py-16 px-4 max-w-7xl mx-auto">
+        {/* Instagram Post Embed */}
+        <div className="max-w-xl mx-auto">
+          <blockquote
+            className="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/DR4VRdDDCo6/?utm_source=ig_embed&amp;utm_campaign=loading"
+            data-instgrm-version="14"
+            style={{
+              background: '#FFF',
+              border: '0',
+              borderRadius: '3px',
+              boxShadow: '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)',
+              margin: '1px',
+              maxWidth: '540px',
+              minWidth: '326px',
+              padding: '0',
+              width: 'calc(100% - 2px)'
+            }}
           >
-            {t('common.viewCatalog')}
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
+            <div style={{ padding: '16px' }}>
+              <a
+                href="https://www.instagram.com/p/DR4VRdDDCo6/?utm_source=ig_embed&amp;utm_campaign=loading"
+                style={{
+                  background: '#FFFFFF',
+                  lineHeight: '0',
+                  padding: '0 0',
+                  textAlign: 'center',
+                  textDecoration: 'none',
+                  width: '100%'
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View this post on Instagram
+              </a>
+            </div>
+          </blockquote>
         </div>
       </section>
 
@@ -52,14 +124,28 @@ export default function HomePage() {
 
       {/* Banner */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
-        <div className="relative h-64 md:h-96 bg-gradient-to-br from-secondary to-cream rounded-2xl overflow-hidden flex items-center justify-center">
-          <div className="text-center px-4">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-semibold text-gray-900 mb-4">
-              {t('home.banner.banner')}
-            </h2>
-            <p className="text-lg md:text-xl text-gray-700">
-              {t('home.banner.text')}
-            </p>
+        <div className="relative w-full overflow-hidden rounded-2xl bg-cream">
+          {/* Background Image */}
+          <div className="relative w-full">
+            <img
+              src="/images/hero-banner2.jpg"
+              alt="Collection Banner"
+              className="w-full h-auto object-contain"
+            />
+            {/* Overlay with gradient for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20"></div>
+          </div>
+
+          {/* Content Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center px-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-semibold text-white mb-4 drop-shadow-2xl">
+                {t('home.banner.banner')}
+              </h2>
+              <p className="text-lg md:text-xl text-white drop-shadow-2xl">
+                {t('home.banner.text')}
+              </p>
+            </div>
           </div>
         </div>
       </section>
