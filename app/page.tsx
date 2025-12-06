@@ -7,6 +7,17 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { getAllProducts, getNewProducts, getFeaturedProducts } from '@/lib/products'
 import { useEffect } from 'react'
 
+// Declare Instagram embed type
+declare global {
+  interface Window {
+    instgrm?: {
+      Embeds: {
+        process: () => void
+      }
+    }
+  }
+}
+
 const allProducts = getAllProducts()
 const newProducts = getNewProducts()
 const featuredProducts = getFeaturedProducts()
@@ -15,17 +26,32 @@ export default function HomePage() {
   const { t } = useLanguage()
 
   useEffect(() => {
-    // Load Instagram embed script
-    const script = document.createElement('script')
-    script.src = 'https://www.instagram.com/embed.js'
-    script.async = true
-    document.body.appendChild(script)
+    // Load and process Instagram embeds
+    const loadInstagramEmbed = () => {
+      // Check if Instagram embed script is already loaded
+      if (window.instgrm) {
+        // Script already loaded, just process the embeds
+        window.instgrm.Embeds.process()
+      } else {
+        // Load the script for the first time
+        const script = document.createElement('script')
+        script.src = 'https://www.instagram.com/embed.js'
+        script.async = true
+        script.onload = () => {
+          // Process embeds after script loads
+          if (window.instgrm) {
+            window.instgrm.Embeds.process()
+          }
+        }
+        document.body.appendChild(script)
+      }
+    }
+
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(loadInstagramEmbed, 100)
 
     return () => {
-      // Cleanup
-      if (document.body.contains(script)) {
-        document.body.removeChild(script)
-      }
+      clearTimeout(timer)
     }
   }, [])
 
