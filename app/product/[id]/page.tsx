@@ -21,6 +21,8 @@ export default function ProductPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isZoomOpen, setIsZoomOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<'description' | 'specs' | 'delivery'>('description')
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
   const addItem = useCartStore((state) => state.addItem)
 
@@ -71,6 +73,32 @@ export default function ProductPage() {
     setIsZoomOpen(true)
   }
 
+  // Minimum swipe distance (in px) to trigger image change
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+
+    if (isLeftSwipe) {
+      handleNextImage()
+    } else if (isRightSwipe) {
+      handlePrevImage()
+    }
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Breadcrumbs */}
@@ -91,6 +119,9 @@ export default function ProductPage() {
           <div
             className="aspect-[3/4] bg-secondary rounded-2xl mb-4 relative overflow-hidden cursor-zoom-in group"
             onClick={handleImageClick}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
           >
             {images.length > 0 && (
               <Image

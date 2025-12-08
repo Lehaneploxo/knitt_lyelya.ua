@@ -13,6 +13,8 @@ interface ImageZoomProps {
 
 export function ImageZoom({ images, currentIndex, onClose, alt }: ImageZoomProps) {
   const [activeIndex, setActiveIndex] = useState(currentIndex)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
@@ -25,6 +27,32 @@ export function ImageZoom({ images, currentIndex, onClose, alt }: ImageZoomProps
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       onClose()
+    }
+  }
+
+  // Minimum swipe distance (in px) to trigger image change
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+
+    if (isLeftSwipe) {
+      handleNext()
+    } else if (isRightSwipe) {
+      handlePrev()
     }
   }
 
@@ -42,7 +70,12 @@ export function ImageZoom({ images, currentIndex, onClose, alt }: ImageZoomProps
       </button>
 
       {/* Image */}
-      <div className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center">
+      <div
+        className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="relative w-full h-full">
           <Image
             src={images[activeIndex]}

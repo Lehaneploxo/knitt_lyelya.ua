@@ -191,37 +191,75 @@ export default function HomePage() {
         <h2 className="text-3xl md:text-4xl font-heading font-semibold text-center mb-12">
           {t('home.collections')}
         </h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Home Collection */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Ethno Collection */}
           <Link
-            href="/catalog/home"
-            className="group relative h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-accent to-primary"
+            href="/catalog/ethno"
+            className="group relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
           >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center text-white">
-                <h3 className="text-4xl font-heading font-semibold mb-4">
-                  {t('home.collection.home.title')}
-                </h3>
-                <p className="text-lg mb-4">{t('home.collection.home.description')}</p>
-                <span className="inline-flex items-center text-white group-hover:translate-x-2 transition-transform">
-                  {t('home.collection.viewCollection')}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </span>
-              </div>
+            <img
+              src="/images/products/10ethno.solomia1.JPG"
+              alt={t('home.collection.ethno.title')}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h3 className="text-3xl font-heading font-semibold mb-2">
+                {t('home.collection.ethno.title')}
+              </h3>
+              <p className="text-sm mb-4 opacity-90">{t('home.collection.ethno.description')}</p>
+              <span className="inline-flex items-center text-white group-hover:translate-x-2 transition-transform">
+                {t('home.collection.viewMore')}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </span>
             </div>
           </Link>
 
-          {/* Coming Soon Collection */}
-          <div className="group relative h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-700 to-gray-900 opacity-50 cursor-not-allowed">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center text-white">
-                <h3 className="text-4xl font-heading font-semibold mb-4">
-                  {t('home.collection.comingSoon.title')}
-                </h3>
-                <p className="text-lg mb-4">{t('home.collection.comingSoon.text')}</p>
-              </div>
+          {/* Basic Collection */}
+          <Link
+            href="/catalog/basic"
+            className="group relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
+          >
+            <img
+              src="/images/products/10basic.lyka1.JPG"
+              alt={t('home.collection.basic.title')}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h3 className="text-3xl font-heading font-semibold mb-2">
+                {t('home.collection.basic.title')}
+              </h3>
+              <p className="text-sm mb-4 opacity-90">{t('home.collection.basic.description')}</p>
+              <span className="inline-flex items-center text-white group-hover:translate-x-2 transition-transform">
+                {t('home.collection.viewMore')}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </span>
             </div>
-          </div>
+          </Link>
+
+          {/* Home Collection */}
+          <Link
+            href="/catalog/home"
+            className="group relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
+          >
+            <img
+              src="/images/products/10home.placemat1.JPG"
+              alt={t('home.collection.home.title')}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h3 className="text-3xl font-heading font-semibold mb-2">
+                {t('home.collection.home.title')}
+              </h3>
+              <p className="text-sm mb-4 opacity-90">{t('home.collection.home.description')}</p>
+              <span className="inline-flex items-center text-white group-hover:translate-x-2 transition-transform">
+                {t('home.collection.viewMore')}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
 
