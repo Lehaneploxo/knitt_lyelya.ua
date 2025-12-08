@@ -9,6 +9,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { toast } from 'sonner'
 import { Product } from '@/lib/products'
 import { ImageZoom } from '@/components/ui/ImageZoom'
+import { useSwipe } from '@/hooks/useSwipe'
 
 interface ProductCardProps {
   product: Product
@@ -24,6 +25,19 @@ export function ProductCard({ product }: ProductCardProps) {
   const productDescription = language === 'ua' ? product.description.ua : product.description.en
   const images = product.images || []
 
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+  }
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  }
+
+  const swipeHandlers = useSwipe({
+    onSwipeLeft: handleNextImage,
+    onSwipeRight: handlePrevImage,
+  })
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -38,20 +52,16 @@ export function ProductCard({ product }: ProductCardProps) {
     toast.success(t('common.addedToCart'))
   }
 
-  const handlePrevImage = (e: React.MouseEvent) => {
+  const handlePrevImageClick = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    )
+    handlePrevImage()
   }
 
-  const handleNextImage = (e: React.MouseEvent) => {
+  const handleNextImageClick = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    setCurrentImageIndex((prev) =>
-      prev === images.length - 1 ? 0 : prev + 1
-    )
+    handleNextImage()
   }
 
   const handleImageClick = (e: React.MouseEvent) => {
@@ -68,6 +78,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <div
             className="aspect-[3/4] bg-secondary relative overflow-hidden cursor-zoom-in"
             onClick={handleImageClick}
+            {...swipeHandlers}
           >
             {images.length > 0 && (
               <Image
@@ -83,13 +94,13 @@ export function ProductCard({ product }: ProductCardProps) {
           {images.length > 1 && (
             <>
               <button
-                onClick={handlePrevImage}
+                onClick={handlePrevImageClick}
                 className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <ChevronLeft className="h-5 w-5 text-gray-900" />
               </button>
               <button
-                onClick={handleNextImage}
+                onClick={handleNextImageClick}
                 className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <ChevronRight className="h-5 w-5 text-gray-900" />

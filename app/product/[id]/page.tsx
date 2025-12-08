@@ -10,6 +10,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { toast } from 'sonner'
 import { getProductById } from '@/lib/products'
 import { ImageZoom } from '@/components/ui/ImageZoom'
+import { useSwipe } from '@/hooks/useSwipe'
 
 export default function ProductPage() {
   const params = useParams()
@@ -21,8 +22,6 @@ export default function ProductPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isZoomOpen, setIsZoomOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<'description' | 'specs' | 'delivery'>('description')
-  const [touchStart, setTouchStart] = useState<number | null>(null)
-  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
   const addItem = useCartStore((state) => state.addItem)
 
@@ -69,34 +68,13 @@ export default function ProductPage() {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
   }
 
+  const swipeHandlers = useSwipe({
+    onSwipeLeft: handleNextImage,
+    onSwipeRight: handlePrevImage,
+  })
+
   const handleImageClick = () => {
     setIsZoomOpen(true)
-  }
-
-  // Minimum swipe distance (in px) to trigger image change
-  const minSwipeDistance = 50
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
-  }
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
-
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
-
-    if (isLeftSwipe) {
-      handleNextImage()
-    } else if (isRightSwipe) {
-      handlePrevImage()
-    }
   }
 
   return (
@@ -119,9 +97,7 @@ export default function ProductPage() {
           <div
             className="aspect-[3/4] bg-secondary rounded-2xl mb-4 relative overflow-hidden cursor-zoom-in group"
             onClick={handleImageClick}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
+            {...swipeHandlers}
           >
             {images.length > 0 && (
               <Image
