@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ProductGrid } from '@/components/product/ProductGrid'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { getAllProducts, getNewProducts, getFeaturedProducts } from '@/lib/products'
+import { getAllProducts, getFeaturedProducts } from '@/lib/products'
 import { useEffect } from 'react'
 
 // Declare Instagram embed type
@@ -19,7 +19,6 @@ declare global {
 }
 
 const allProducts = getAllProducts()
-const newProducts = getNewProducts()
 const featuredProducts = getFeaturedProducts()
 
 export default function HomePage() {
@@ -129,23 +128,6 @@ export default function HomePage() {
             </div>
           </blockquote>
         </div>
-      </section>
-
-      {/* New Arrivals */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-heading font-semibold">
-            {t('home.newArrivals')}
-          </h2>
-          <Link
-            href="/catalog/home"
-            className="text-primary hover:text-primary-dark font-medium flex items-center"
-          >
-            {t('common.viewAll')}
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
-        </div>
-        <ProductGrid products={newProducts} />
       </section>
 
       {/* Banner */}
