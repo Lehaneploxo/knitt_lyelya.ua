@@ -1,0 +1,276 @@
+'use client'
+
+import { useState, useRef } from 'react'
+import Image from 'next/image'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+
+interface SwipeableImageCarouselProps {
+  images: string[]
+  alt: string
+  aspectRatio?: string
+  className?: string
+  showArrows?: boolean
+  showIndicators?: boolean
+  onImageClick?: () => void
+  priority?: boolean
+  sizes?: string
+  currentIndex?: number
+  onIndexChange?: (index: number) => void
+}
+
+export function SwipeableImageCarousel({
+  images,
+  alt,
+  aspectRatio = 'aspect-[3/4]',
+  className = '',
+  showArrows = true,
+  showIndicators = true,
+  onImageClick,
+  priority = false,
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw',
+  currentIndex: externalIndex,
+  onIndexChange
+}: SwipeableImageCarouselProps) {
+  const [internalIndex, setInternalIndex] = useState(0)
+
+  // Используем внешний индекс если предоставлен, иначе внутренний
+  const currentIndex = externalIndex !== undefined ? externalIndex : internalIndex
+
+  const setCurrentIndex = (index: number | ((prev: number) => number)) => {
+    const newIndex = typeof index === 'function' ? index(currentIndex) : index
+    if (onIndexChange) {
+      onIndexChange(newIndex)
+    } else {
+      setInternalIndex(newIndex)
+    }
+  }
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchStartTime, setTouchStartTime] = useState(0)
+  const [touchOffset, setTouchOffset] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+  }
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX)
+    setTouchStartTime(Date.now())
+    setIsDragging(true)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return
+    const currentTouch = e.touches[0].clientX
+    const diff = currentTouch - touchStart
+    setTouchOffset(diff)
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+
+    // Динамічний threshold - 30% від ширини контейнера
+    const containerWidth = containerRef.current?.offsetWidth || 0
+    const threshold = containerWidth * 0.3
+
+    // Velocity detection - швидкість свайпу (пікселі/мс)
+    const timeDiff = Date.now() - touchStartTime
+    const velocity = Math.abs(touchOffset) / timeDiff
+
+    // Мінімальна дистанція для velocity-based switch - 50px
+    const minSwipeDistance = 50
+
+    // Швидкий свайп: velocity > 0.5 AND дистанція > 50px
+    const isFastSwipe = velocity > 0.5 && Math.abs(touchOffset) > minSwipeDistance
+
+    // Звичайний свайп: дистанція > threshold
+    const isNormalSwipe = Math.abs(touchOffset) > threshold
+
+    if (isFastSwipe || isNormalSwipe) {
+      if (touchOffset > 0) {
+        handlePrev()
+      } else {
+        handleNext()
+      }
+    }
+
+    setTouchOffset(0)
+  }
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setTouchStart(e.clientX)
+    setTouchStartTime(Date.now())
+    setIsDragging(true)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return
+    const diff = e.clientX - touchStart
+    setTouchOffset(diff)
+  }
+
+  const handleMouseUp = () => {
+    if (!isDragging) return
+    setIsDragging(false)
+
+    // Динамічний threshold - 30% від ширини контейнера
+    const containerWidth = containerRef.current?.offsetWidth || 0
+    const threshold = containerWidth * 0.3
+
+    // Velocity detection - швидкість свайпу (пікселі/мс)
+    const timeDiff = Date.now() - touchStartTime
+    const velocity = Math.abs(touchOffset) / timeDiff
+
+    // Мінімальна дистанція для velocity-based switch - 50px
+    const minSwipeDistance = 50
+
+    // Швидкий свайп: velocity > 0.5 AND дистанція > 50px
+    const isFastSwipe = velocity > 0.5 && Math.abs(touchOffset) > minSwipeDistance
+
+    // Звичайний свайп: дистанція > threshold
+    const isNormalSwipe = Math.abs(touchOffset) > threshold
+
+    if (isFastSwipe || isNormalSwipe) {
+      if (touchOffset > 0) {
+        handlePrev()
+      } else {
+        handleNext()
+      }
+    }
+
+    setTouchOffset(0)
+  }
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      handleMouseUp()
+    }
+  }
+
+  // Вычисляем индексы соседних изображений
+  const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1
+  const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1
+
+  return (
+    <div
+      ref={containerRef}
+      className={`${aspectRatio} relative overflow-hidden ${className} select-none`}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+      onClick={onImageClick}
+    >
+      {/* Контейнер для изображений */}
+      <div
+        className="absolute inset-0 flex transition-transform"
+        style={{
+          transform: `translateX(${touchOffset}px)`,
+          transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        }}
+      >
+        {/* Текущее изображение */}
+        <div className="w-full h-full flex-shrink-0 relative">
+          {images.length > 0 && (
+            <Image
+              src={images[currentIndex]}
+              alt={`${alt} - ${currentIndex + 1}`}
+              fill
+              className="object-cover"
+              sizes={sizes}
+              priority={priority}
+              draggable={false}
+            />
+          )}
+        </div>
+      </div>
+
+      {/* Предпросмотр предыдущего изображения (слева) */}
+      {touchOffset > 0 && images.length > 1 && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            transform: `translateX(${touchOffset - containerRef.current?.offsetWidth!}px)`,
+            transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          }}
+        >
+          <Image
+            src={images[prevIndex]}
+            alt={`${alt} - ${prevIndex + 1}`}
+            fill
+            className="object-cover"
+            sizes={sizes}
+            draggable={false}
+          />
+        </div>
+      )}
+
+      {/* Предпросмотр следующего изображения (справа) */}
+      {touchOffset < 0 && images.length > 1 && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            transform: `translateX(${touchOffset + containerRef.current?.offsetWidth!}px)`,
+            transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          }}
+        >
+          <Image
+            src={images[nextIndex]}
+            alt={`${alt} - ${nextIndex + 1}`}
+            fill
+            className="object-cover"
+            sizes={sizes}
+            draggable={false}
+          />
+        </div>
+      )}
+
+      {/* Стрелки навигации */}
+      {showArrows && images.length > 1 && (
+        <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              handlePrev()
+            }}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+          >
+            <ChevronLeft className="h-5 w-5 text-gray-900" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              handleNext()
+            }}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+          >
+            <ChevronRight className="h-5 w-5 text-gray-900" />
+          </button>
+        </>
+      )}
+
+      {/* Индикаторы */}
+      {showIndicators && images.length > 1 && (
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
+          {images.map((_, index) => (
+            <div
+              key={index}
+              className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                index === currentIndex ? 'bg-white' : 'bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}

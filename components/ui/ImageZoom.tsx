@@ -1,9 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
-import { X, ChevronLeft, ChevronRight } from 'lucide-react'
-import { useSwipe } from '@/hooks/useSwipe'
+import { X } from 'lucide-react'
+import { SwipeableImageCarousel } from './SwipeableImageCarousel'
 
 interface ImageZoomProps {
   images: string[]
@@ -14,19 +13,6 @@ interface ImageZoomProps {
 
 export function ImageZoom({ images, currentIndex, onClose, alt }: ImageZoomProps) {
   const [activeIndex, setActiveIndex] = useState(currentIndex)
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-  }
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-  }
-
-  const swipeHandlers = useSwipe({
-    onSwipeLeft: handleNext,
-    onSwipeRight: handlePrev,
-  })
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -47,44 +33,28 @@ export function ImageZoom({ images, currentIndex, onClose, alt }: ImageZoomProps
         <X className="h-6 w-6" />
       </button>
 
-      {/* Image */}
-      <div
-        className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center"
-        {...swipeHandlers}
-      >
-        <div className="relative w-full h-full">
-          <Image
-            src={images[activeIndex]}
-            alt={`${alt} - ${activeIndex + 1}`}
-            fill
-            className="object-contain"
-            sizes="100vw"
+      {/* Swipeable Image Carousel */}
+      <div className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center">
+        <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
+          <SwipeableImageCarousel
+            images={images}
+            alt={alt}
+            aspectRatio="w-full h-full"
+            className=""
+            currentIndex={activeIndex}
+            onIndexChange={setActiveIndex}
             priority
+            sizes="100vw"
+            showIndicators={false}
           />
         </div>
       </div>
 
-      {/* Navigation arrows - only show if multiple images */}
+      {/* Image counter */}
       {images.length > 1 && (
-        <>
-          <button
-            onClick={handlePrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-          <button
-            onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
-
-          {/* Image counter */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 text-white rounded-full text-sm">
-            {activeIndex + 1} / {images.length}
-          </div>
-        </>
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 text-white rounded-full text-sm z-10">
+          {activeIndex + 1} / {images.length}
+        </div>
       )}
     </div>
   )

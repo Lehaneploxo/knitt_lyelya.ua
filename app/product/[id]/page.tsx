@@ -10,7 +10,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { toast } from 'sonner'
 import { getProductById } from '@/lib/products'
 import { ImageZoom } from '@/components/ui/ImageZoom'
-import { useSwipe } from '@/hooks/useSwipe'
+import { SwipeableImageCarousel } from '@/components/ui/SwipeableImageCarousel'
 
 export default function ProductPage() {
   const params = useParams()
@@ -60,19 +60,6 @@ export default function ProductPage() {
     setQuantity(quantity + 1)
   }
 
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-  }
-
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-  }
-
-  const swipeHandlers = useSwipe({
-    onSwipeLeft: handleNextImage,
-    onSwipeRight: handlePrevImage,
-  })
-
   const handleImageClick = () => {
     setIsZoomOpen(true)
   }
@@ -93,46 +80,20 @@ export default function ProductPage() {
       <div className="grid md:grid-cols-2 gap-12">
         {/* Left: Images */}
         <div>
-          {/* Main Image */}
-          <div
-            className="aspect-[3/4] bg-secondary rounded-2xl mb-4 relative overflow-hidden cursor-zoom-in group"
-            onClick={handleImageClick}
-            {...swipeHandlers}
-          >
-            {images.length > 0 && (
-              <Image
-                src={images[currentImageIndex]}
-                alt={productName}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            )}
-
-            {/* Navigation arrows */}
-            {images.length > 1 && (
-              <>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handlePrevImage()
-                  }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <ChevronLeft className="h-6 w-6 text-gray-900" />
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handleNextImage()
-                  }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <ChevronRightIcon className="h-6 w-6 text-gray-900" />
-                </button>
-              </>
-            )}
+          {/* Main Image Carousel */}
+          <div className="group mb-4">
+            <SwipeableImageCarousel
+              images={images}
+              alt={productName}
+              aspectRatio="aspect-[3/4]"
+              className="bg-secondary rounded-2xl cursor-zoom-in"
+              onImageClick={handleImageClick}
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+              currentIndex={currentImageIndex}
+              onIndexChange={setCurrentImageIndex}
+              showIndicators={false}
+            />
           </div>
 
           {/* Thumbnails */}

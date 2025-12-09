@@ -2,41 +2,27 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ShoppingCart } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { toast } from 'sonner'
 import { Product } from '@/lib/products'
 import { ImageZoom } from '@/components/ui/ImageZoom'
-import { useSwipe } from '@/hooks/useSwipe'
+import { SwipeableImageCarousel } from '@/components/ui/SwipeableImageCarousel'
 
 interface ProductCardProps {
   product: Product
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isZoomOpen, setIsZoomOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const addItem = useCartStore((state) => state.addItem)
   const { language, t } = useLanguage()
 
   const productName = language === 'ua' ? product.name.ua : product.name.en
   const productDescription = language === 'ua' ? product.description.ua : product.description.en
   const images = product.images || []
-
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-  }
-
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-  }
-
-  const swipeHandlers = useSwipe({
-    onSwipeLeft: handleNextImage,
-    onSwipeRight: handlePrevImage,
-  })
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -52,21 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
     toast.success(t('common.addedToCart'))
   }
 
-  const handlePrevImageClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    handlePrevImage()
-  }
-
-  const handleNextImageClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    handleNextImage()
-  }
-
-  const handleImageClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const handleImageClick = () => {
     setIsZoomOpen(true)
   }
 
@@ -74,52 +46,17 @@ export function ProductCard({ product }: ProductCardProps) {
     <>
       <Link href={`/product/${product.id}`}>
         <div className="group relative bg-white rounded-card overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300">
-          {/* Image */}
-          <div
-            className="aspect-[3/4] bg-secondary relative overflow-hidden cursor-zoom-in"
-            onClick={handleImageClick}
-            {...swipeHandlers}
-          >
-            {images.length > 0 && (
-              <Image
-                src={images[currentImageIndex]}
-                alt={productName}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              />
-            )}
-
-          {/* Image Navigation */}
-          {images.length > 1 && (
-            <>
-              <button
-                onClick={handlePrevImageClick}
-                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <ChevronLeft className="h-5 w-5 text-gray-900" />
-              </button>
-              <button
-                onClick={handleNextImageClick}
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <ChevronRight className="h-5 w-5 text-gray-900" />
-              </button>
-
-              {/* Image indicators */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-                {images.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                      index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                    }`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-        </div>
+          {/* Image Carousel */}
+          <SwipeableImageCarousel
+            images={images}
+            alt={productName}
+            aspectRatio="aspect-[3/4]"
+            className="bg-secondary cursor-zoom-in"
+            onImageClick={handleImageClick}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            currentIndex={currentImageIndex}
+            onIndexChange={setCurrentImageIndex}
+          />
 
         {/* Info */}
         <div className="p-4">

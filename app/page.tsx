@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useEffect } from 'react'
+import HeroBannerCarousel from '@/components/ui/HeroBannerCarousel'
 
 // Declare Instagram embed type
 declare global {
@@ -53,13 +54,9 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section className="relative w-full overflow-hidden bg-cream">
-        {/* Background Image - Full Width */}
+        {/* Background Image Carousel - Full Width */}
         <div className="relative w-full">
-          <img
-            src="/images/hero-banner.jpg"
-            alt="Hero Banner"
-            className="w-full h-auto object-contain"
-          />
+          <HeroBannerCarousel />
           {/* Overlay with gradient for text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30"></div>
         </div>
