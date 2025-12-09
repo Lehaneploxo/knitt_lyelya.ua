@@ -58,56 +58,89 @@ export function SwipeableImageCarousel({
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
   }
 
-  // Native touch event handlers with scroll prevention
+  // State for tracking swipe direction
+  const [touchStartY, setTouchStartY] = useState(0)
+  const [swipeDirection, setSwipeDirection] = useState<'horizontal' | 'vertical' | null>(null)
+
+  // Native touch event handlers with smart scroll prevention
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
 
     const handleTouchStartNative = (e: TouchEvent) => {
-      e.preventDefault() // Prevent page scroll
       setTouchStart(e.touches[0].clientX)
+      setTouchStartY(e.touches[0].clientY)
       setTouchStartTime(Date.now())
+      setSwipeDirection(null)
       setIsDragging(true)
     }
 
     const handleTouchMoveNative = (e: TouchEvent) => {
-      e.preventDefault() // Prevent page scroll
       if (!isDragging && touchStart === 0) return
-      const currentTouch = e.touches[0].clientX
-      const diff = currentTouch - touchStart
-      setTouchOffset(diff)
+
+      const currentTouchX = e.touches[0].clientX
+      const currentTouchY = e.touches[0].clientY
+      const diffX = Math.abs(currentTouchX - touchStart)
+      const diffY = Math.abs(currentTouchY - touchStartY)
+
+      // Determine swipe direction on first significant movement
+      if (swipeDirection === null && (diffX > 10 || diffY > 10)) {
+        if (diffX > diffY) {
+          // Horizontal swipe detected
+          setSwipeDirection('horizontal')
+        } else {
+          // Vertical swipe detected
+          setSwipeDirection('vertical')
+        }
+      }
+
+      // If horizontal swipe - prevent page scroll and change images
+      if (swipeDirection === 'horizontal') {
+        e.preventDefault()
+        const diff = currentTouchX - touchStart
+        setTouchOffset(diff)
+      }
+      // If vertical swipe - allow page scroll, don't change images
+      else if (swipeDirection === 'vertical') {
+        // Don't prevent default - allow page scroll
+        setTouchOffset(0)
+      }
     }
 
     const handleTouchEndNative = () => {
       if (!isDragging && touchStart === 0) return
       setIsDragging(false)
 
-      // Динамічний threshold - 30% від ширини контейнера
-      const containerWidth = container?.offsetWidth || 0
-      const threshold = containerWidth * 0.3
+      // Only change images if it was a horizontal swipe
+      if (swipeDirection === 'horizontal') {
+        // Динамічний threshold - 30% від ширини контейнера
+        const containerWidth = container?.offsetWidth || 0
+        const threshold = containerWidth * 0.3
 
-      // Velocity detection - швидкість свайпу (пікселі/мс)
-      const timeDiff = Date.now() - touchStartTime
-      const velocity = Math.abs(touchOffset) / timeDiff
+        // Velocity detection - швидкість свайпу (пікселі/мс)
+        const timeDiff = Date.now() - touchStartTime
+        const velocity = Math.abs(touchOffset) / timeDiff
 
-      // Мінімальна дистанція для velocity-based switch - 50px
-      const minSwipeDistance = 50
+        // Мінімальна дистанція для velocity-based switch - 50px
+        const minSwipeDistance = 50
 
-      // Швидкий свайп: velocity > 0.5 AND дистанція > 50px
-      const isFastSwipe = velocity > 0.5 && Math.abs(touchOffset) > minSwipeDistance
+        // Швидкий свайп: velocity > 0.5 AND дистанція > 50px
+        const isFastSwipe = velocity > 0.5 && Math.abs(touchOffset) > minSwipeDistance
 
-      // Звичайний свайп: дистанція > threshold
-      const isNormalSwipe = Math.abs(touchOffset) > threshold
+        // Звичайний свайп: дистанція > threshold
+        const isNormalSwipe = Math.abs(touchOffset) > threshold
 
-      if (isFastSwipe || isNormalSwipe) {
-        if (touchOffset > 0) {
-          handlePrev()
-        } else {
-          handleNext()
+        if (isFastSwipe || isNormalSwipe) {
+          if (touchOffset > 0) {
+            handlePrev()
+          } else {
+            handleNext()
+          }
         }
       }
 
       setTouchOffset(0)
+      setSwipeDirection(null)
     }
 
     // Add event listeners with passive: false to allow preventDefault
@@ -120,7 +153,7 @@ export function SwipeableImageCarousel({
       container.removeEventListener('touchmove', handleTouchMoveNative)
       container.removeEventListener('touchend', handleTouchEndNative)
     }
-  }, [isDragging, touchStart, touchOffset, touchStartTime])
+  }, [isDragging, touchStart, touchStartY, touchOffset, touchStartTime, swipeDirection])
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -180,8 +213,7 @@ export function SwipeableImageCarousel({
   return (
     <div
       ref={containerRef}
-      className={`${aspectRatio} relative overflow-hidden ${className} select-none touch-none`}
-      style={{ touchAction: 'none' }}
+      className={`${aspectRatio} relative overflow-hidden ${className} select-none`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
