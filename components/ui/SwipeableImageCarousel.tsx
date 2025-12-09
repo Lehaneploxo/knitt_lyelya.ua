@@ -48,14 +48,21 @@ export function SwipeableImageCarousel({
   const [touchStartTime, setTouchStartTime] = useState(0)
   const [touchOffset, setTouchOffset] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handlePrev = () => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+    setTimeout(() => setIsTransitioning(false), 350)
   }
 
   const handleNext = () => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+    setTimeout(() => setIsTransitioning(false), 350)
   }
 
   // State for tracking swipe direction
@@ -113,19 +120,19 @@ export function SwipeableImageCarousel({
 
       // Only change images if it was a horizontal swipe
       if (swipeDirection === 'horizontal') {
-        // Динамічний threshold - 30% від ширини контейнера
+        // Динамічний threshold - 25% від ширини контейнера (більш чутливий)
         const containerWidth = container?.offsetWidth || 0
-        const threshold = containerWidth * 0.3
+        const threshold = containerWidth * 0.25
 
         // Velocity detection - швидкість свайпу (пікселі/мс)
         const timeDiff = Date.now() - touchStartTime
         const velocity = Math.abs(touchOffset) / timeDiff
 
-        // Мінімальна дистанція для velocity-based switch - 50px
-        const minSwipeDistance = 50
+        // Мінімальна дистанція для velocity-based switch - 40px (більш чутливий)
+        const minSwipeDistance = 40
 
-        // Швидкий свайп: velocity > 0.5 AND дистанція > 50px
-        const isFastSwipe = velocity > 0.5 && Math.abs(touchOffset) > minSwipeDistance
+        // Швидкий свайп: velocity > 0.4 AND дистанція > 40px (більш чутливий)
+        const isFastSwipe = velocity > 0.4 && Math.abs(touchOffset) > minSwipeDistance
 
         // Звичайний свайп: дистанція > threshold
         const isNormalSwipe = Math.abs(touchOffset) > threshold
@@ -172,19 +179,19 @@ export function SwipeableImageCarousel({
     if (!isDragging) return
     setIsDragging(false)
 
-    // Динамічний threshold - 30% від ширини контейнера
+    // Динамічний threshold - 25% від ширини контейнера (більш чутливий)
     const containerWidth = containerRef.current?.offsetWidth || 0
-    const threshold = containerWidth * 0.3
+    const threshold = containerWidth * 0.25
 
     // Velocity detection - швидкість свайпу (пікселі/мс)
     const timeDiff = Date.now() - touchStartTime
     const velocity = Math.abs(touchOffset) / timeDiff
 
-    // Мінімальна дистанція для velocity-based switch - 50px
-    const minSwipeDistance = 50
+    // Мінімальна дистанція для velocity-based switch - 40px (більш чутливий)
+    const minSwipeDistance = 40
 
-    // Швидкий свайп: velocity > 0.5 AND дистанція > 50px
-    const isFastSwipe = velocity > 0.5 && Math.abs(touchOffset) > minSwipeDistance
+    // Швидкий свайп: velocity > 0.4 AND дистанція > 40px (більш чутливий)
+    const isFastSwipe = velocity > 0.4 && Math.abs(touchOffset) > minSwipeDistance
 
     // Звичайний свайп: дистанція > threshold
     const isNormalSwipe = Math.abs(touchOffset) > threshold
@@ -226,10 +233,12 @@ export function SwipeableImageCarousel({
     >
       {/* Контейнер для изображений - всегда 3 изображения в ряд */}
       <div
-        className="absolute inset-0 flex"
+        className="absolute inset-0 flex will-change-transform"
         style={{
           transform: `translateX(${baseOffset + touchOffset}px)`,
-          transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          transition: isDragging
+            ? 'none'
+            : 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
           width: '300%',
         }}
       >
@@ -243,6 +252,7 @@ export function SwipeableImageCarousel({
               className="object-cover"
               sizes={sizes}
               draggable={false}
+              loading="eager"
             />
           )}
         </div>
@@ -258,6 +268,7 @@ export function SwipeableImageCarousel({
               sizes={sizes}
               priority={priority}
               draggable={false}
+              loading="eager"
             />
           )}
         </div>
@@ -272,6 +283,7 @@ export function SwipeableImageCarousel({
               className="object-cover"
               sizes={sizes}
               draggable={false}
+              loading="eager"
             />
           )}
         </div>
