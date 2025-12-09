@@ -34,8 +34,8 @@ const translations: Record<Language, Record<string, string>> = {
     'common.catalog': 'Каталог',
 
     // Home page
-    'home.hero.title': 'Авторські сумки ручної роботи',
-    'home.hero.subtitle': 'Поєднання етнічних мотивів та сучасного дизайну',
+    'home.hero.title': 'Авторські сумки та домашній декор ручної роботи',
+    'home.hero.subtitle': 'ПОЄДНАННЯ ЕТНІЧНИХ МОТИВІВ ТА СУЧАСНОГО ДИЗАЙНУ',
     'home.newArrivals': 'Нові надходження',
     'home.bestsellers': 'Хіти продажів',
     'home.collections': 'Наші колекції',
@@ -274,8 +274,8 @@ const translations: Record<Language, Record<string, string>> = {
     'common.catalog': 'Catalog',
 
     // Home page
-    'home.hero.title': 'Handmade Designer Bags',
-    'home.hero.subtitle': 'Merging ethnic motifs with modern design',
+    'home.hero.title': 'Handmade Bags and Home Decor',
+    'home.hero.subtitle': 'MERGING ETHNIC MOTIFS WITH MODERN DESIGN',
     'home.newArrivals': 'New Arrivals',
     'home.bestsellers': 'Bestsellers',
     'home.collections': 'Our Collections',
