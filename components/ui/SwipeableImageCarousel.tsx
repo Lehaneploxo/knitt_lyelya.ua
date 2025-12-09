@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -58,49 +58,69 @@ export function SwipeableImageCarousel({
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
   }
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.touches[0].clientX)
-    setTouchStartTime(Date.now())
-    setIsDragging(true)
-  }
+  // Native touch event handlers with scroll prevention
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return
-    const currentTouch = e.touches[0].clientX
-    const diff = currentTouch - touchStart
-    setTouchOffset(diff)
-  }
-
-  const handleTouchEnd = () => {
-    setIsDragging(false)
-
-    // Динамічний threshold - 30% від ширини контейнера
-    const containerWidth = containerRef.current?.offsetWidth || 0
-    const threshold = containerWidth * 0.3
-
-    // Velocity detection - швидкість свайпу (пікселі/мс)
-    const timeDiff = Date.now() - touchStartTime
-    const velocity = Math.abs(touchOffset) / timeDiff
-
-    // Мінімальна дистанція для velocity-based switch - 50px
-    const minSwipeDistance = 50
-
-    // Швидкий свайп: velocity > 0.5 AND дистанція > 50px
-    const isFastSwipe = velocity > 0.5 && Math.abs(touchOffset) > minSwipeDistance
-
-    // Звичайний свайп: дистанція > threshold
-    const isNormalSwipe = Math.abs(touchOffset) > threshold
-
-    if (isFastSwipe || isNormalSwipe) {
-      if (touchOffset > 0) {
-        handlePrev()
-      } else {
-        handleNext()
-      }
+    const handleTouchStartNative = (e: TouchEvent) => {
+      e.preventDefault() // Prevent page scroll
+      setTouchStart(e.touches[0].clientX)
+      setTouchStartTime(Date.now())
+      setIsDragging(true)
     }
 
-    setTouchOffset(0)
-  }
+    const handleTouchMoveNative = (e: TouchEvent) => {
+      e.preventDefault() // Prevent page scroll
+      if (!isDragging && touchStart === 0) return
+      const currentTouch = e.touches[0].clientX
+      const diff = currentTouch - touchStart
+      setTouchOffset(diff)
+    }
+
+    const handleTouchEndNative = () => {
+      if (!isDragging && touchStart === 0) return
+      setIsDragging(false)
+
+      // Динамічний threshold - 30% від ширини контейнера
+      const containerWidth = container?.offsetWidth || 0
+      const threshold = containerWidth * 0.3
+
+      // Velocity detection - швидкість свайпу (пікселі/мс)
+      const timeDiff = Date.now() - touchStartTime
+      const velocity = Math.abs(touchOffset) / timeDiff
+
+      // Мінімальна дистанція для velocity-based switch - 50px
+      const minSwipeDistance = 50
+
+      // Швидкий свайп: velocity > 0.5 AND дистанція > 50px
+      const isFastSwipe = velocity > 0.5 && Math.abs(touchOffset) > minSwipeDistance
+
+      // Звичайний свайп: дистанція > threshold
+      const isNormalSwipe = Math.abs(touchOffset) > threshold
+
+      if (isFastSwipe || isNormalSwipe) {
+        if (touchOffset > 0) {
+          handlePrev()
+        } else {
+          handleNext()
+        }
+      }
+
+      setTouchOffset(0)
+    }
+
+    // Add event listeners with passive: false to allow preventDefault
+    container.addEventListener('touchstart', handleTouchStartNative, { passive: false })
+    container.addEventListener('touchmove', handleTouchMoveNative, { passive: false })
+    container.addEventListener('touchend', handleTouchEndNative)
+
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStartNative)
+      container.removeEventListener('touchmove', handleTouchMoveNative)
+      container.removeEventListener('touchend', handleTouchEndNative)
+    }
+  }, [isDragging, touchStart, touchOffset, touchStartTime])
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -160,10 +180,8 @@ export function SwipeableImageCarousel({
   return (
     <div
       ref={containerRef}
-      className={`${aspectRatio} relative overflow-hidden ${className} select-none`}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      className={`${aspectRatio} relative overflow-hidden ${className} select-none touch-none`}
+      style={{ touchAction: 'none' }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
