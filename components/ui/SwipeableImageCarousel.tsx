@@ -55,14 +55,14 @@ export function SwipeableImageCarousel({
     if (isTransitioning) return
     setIsTransitioning(true)
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-    setTimeout(() => setIsTransitioning(false), 350)
+    setTimeout(() => setIsTransitioning(false), 500)
   }
 
   const handleNext = () => {
     if (isTransitioning) return
     setIsTransitioning(true)
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-    setTimeout(() => setIsTransitioning(false), 350)
+    setTimeout(() => setIsTransitioning(false), 500)
   }
 
   // State for tracking swipe direction
@@ -235,15 +235,23 @@ export function SwipeableImageCarousel({
       <div
         className="absolute inset-0 flex will-change-transform"
         style={{
-          transform: `translateX(${baseOffset + touchOffset}px)`,
+          transform: `translate3d(${baseOffset + touchOffset}px, 0, 0)`,
           transition: isDragging
             ? 'none'
-            : 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
+            : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           width: '300%',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
         }}
       >
         {/* Предыдущее изображение */}
-        <div className="w-1/3 h-full flex-shrink-0 relative">
+        <div
+          className="w-1/3 h-full flex-shrink-0 relative"
+          style={{
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+          }}
+        >
           {images.length > 1 && (
             <Image
               src={images[prevIndex]}
@@ -253,12 +261,19 @@ export function SwipeableImageCarousel({
               sizes={sizes}
               draggable={false}
               loading="eager"
+              quality={95}
             />
           )}
         </div>
 
         {/* Текущее изображение */}
-        <div className="w-1/3 h-full flex-shrink-0 relative">
+        <div
+          className="w-1/3 h-full flex-shrink-0 relative"
+          style={{
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+          }}
+        >
           {images.length > 0 && (
             <Image
               src={images[currentIndex]}
@@ -269,12 +284,19 @@ export function SwipeableImageCarousel({
               priority={priority}
               draggable={false}
               loading="eager"
+              quality={95}
             />
           )}
         </div>
 
         {/* Следующее изображение */}
-        <div className="w-1/3 h-full flex-shrink-0 relative">
+        <div
+          className="w-1/3 h-full flex-shrink-0 relative"
+          style={{
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+          }}
+        >
           {images.length > 1 && (
             <Image
               src={images[nextIndex]}
@@ -284,6 +306,7 @@ export function SwipeableImageCarousel({
               sizes={sizes}
               draggable={false}
               loading="eager"
+              quality={95}
             />
           )}
         </div>
