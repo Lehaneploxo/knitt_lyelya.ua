@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, TouchEvent } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const banners = [
   '/images/hero-banner.jpg',
@@ -11,8 +11,8 @@ export default function HeroBannerCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
-  const [isSwiping, setIsSwiping] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   // Minimum swipe distance (in px) to trigger a slide change
   const minSwipeDistance = 50
@@ -33,60 +33,63 @@ export default function HeroBannerCarousel() {
     }
   }, [])
 
-  const onTouchStart = (e: TouchEvent) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
-    setIsSwiping(true)
+  // Use native event listeners with passive: false to properly prevent scrolling
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
 
-    // Prevent any scroll when touching banner area
-    e.preventDefault()
+    const handleTouchStart = (e: TouchEvent) => {
+      e.preventDefault()
+      setTouchEnd(null)
+      setTouchStart(e.touches[0].clientX)
 
-    // Pause auto-rotation during swipe
-    if (intervalRef.current) clearInterval(intervalRef.current)
-  }
-
-  const onTouchMove = (e: TouchEvent) => {
-    // Always prevent default to block page scroll completely
-    e.preventDefault()
-
-    if (!touchStart) return
-
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) {
-      setIsSwiping(false)
-      startAutoRotate() // Resume auto-rotation
-      return
+      // Pause auto-rotation during swipe
+      if (intervalRef.current) clearInterval(intervalRef.current)
     }
 
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
-
-    if (isLeftSwipe) {
-      // Swipe left - next image
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length)
-    } else if (isRightSwipe) {
-      // Swipe right - previous image
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + banners.length) % banners.length)
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault()
+      if (!touchStart) return
+      setTouchEnd(e.touches[0].clientX)
     }
 
-    setIsSwiping(false)
-    setTouchStart(null)
-    setTouchEnd(null)
+    const handleTouchEnd = () => {
+      if (!touchStart || !touchEnd) {
+        startAutoRotate()
+        return
+      }
 
-    // Resume auto-rotation after swipe
-    startAutoRotate()
-  }
+      const distance = touchStart - touchEnd
+      const isLeftSwipe = distance > minSwipeDistance
+      const isRightSwipe = distance < -minSwipeDistance
+
+      if (isLeftSwipe) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length)
+      } else if (isRightSwipe) {
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + banners.length) % banners.length)
+      }
+
+      setTouchStart(null)
+      setTouchEnd(null)
+      startAutoRotate()
+    }
+
+    // Add event listeners with passive: false
+    container.addEventListener('touchstart', handleTouchStart as any, { passive: false })
+    container.addEventListener('touchmove', handleTouchMove as any, { passive: false })
+    container.addEventListener('touchend', handleTouchEnd)
+
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart as any)
+      container.removeEventListener('touchmove', handleTouchMove as any)
+      container.removeEventListener('touchend', handleTouchEnd)
+    }
+  }, [touchStart, touchEnd])
 
   return (
     <div
+      ref={containerRef}
       className="relative w-full overflow-hidden touch-none"
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
       style={{ touchAction: 'none' }}
     >
       {banners.map((banner, index) => (
