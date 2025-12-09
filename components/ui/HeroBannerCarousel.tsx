@@ -25,13 +25,15 @@ export default function HeroBannerCarousel() {
   }, [])
 
   return (
-    <div className="relative w-full h-full overflow-hidden">
+    <div className="relative w-full overflow-hidden">
       {banners.map((banner, index) => (
         <img
           key={banner}
           src={banner}
           alt={`Hero Banner ${index + 1}`}
-          className={`absolute inset-0 w-full h-auto object-contain transition-opacity duration-1000 ${
+          className={`w-full h-auto object-contain transition-opacity duration-1000 ${
+            index === 0 ? 'relative' : 'absolute inset-0'
+          } ${
             index === currentIndex ? 'opacity-100' : 'opacity-0'
           }`}
         />
