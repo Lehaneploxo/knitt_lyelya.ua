@@ -38,20 +38,20 @@ export default function HeroBannerCarousel() {
     setTouchStart(e.targetTouches[0].clientX)
     setIsSwiping(true)
 
+    // Prevent any scroll when touching banner area
+    e.preventDefault()
+
     // Pause auto-rotation during swipe
     if (intervalRef.current) clearInterval(intervalRef.current)
   }
 
   const onTouchMove = (e: TouchEvent) => {
+    // Always prevent default to block page scroll completely
+    e.preventDefault()
+
     if (!touchStart) return
 
     setTouchEnd(e.targetTouches[0].clientX)
-
-    // Prevent page scroll during horizontal swipe
-    const touchDiff = touchStart - e.targetTouches[0].clientX
-    if (Math.abs(touchDiff) > 10) {
-      e.preventDefault()
-    }
   }
 
   const onTouchEnd = () => {
@@ -83,11 +83,11 @@ export default function HeroBannerCarousel() {
 
   return (
     <div
-      className="relative w-full overflow-hidden touch-pan-y"
+      className="relative w-full overflow-hidden touch-none"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      style={{ touchAction: 'pan-y' }}
+      style={{ touchAction: 'none' }}
     >
       {banners.map((banner, index) => (
         <img
