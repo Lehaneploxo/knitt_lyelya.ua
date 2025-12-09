@@ -49,20 +49,39 @@ export function SwipeableImageCarousel({
   const [touchOffset, setTouchOffset] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [animationOffset, setAnimationOffset] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handlePrev = () => {
     if (isTransitioning) return
     setIsTransitioning(true)
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-    setTimeout(() => setIsTransitioning(false), 500)
+    const containerWidth = containerRef.current?.offsetWidth || 0
+
+    // Animate to the left (show previous image)
+    setAnimationOffset(containerWidth)
+
+    // After animation completes, update index and reset offset
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+      setAnimationOffset(0)
+      setIsTransitioning(false)
+    }, 500)
   }
 
   const handleNext = () => {
     if (isTransitioning) return
     setIsTransitioning(true)
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-    setTimeout(() => setIsTransitioning(false), 500)
+    const containerWidth = containerRef.current?.offsetWidth || 0
+
+    // Animate to the right (show next image)
+    setAnimationOffset(-containerWidth)
+
+    // After animation completes, update index and reset offset
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+      setAnimationOffset(0)
+      setIsTransitioning(false)
+    }, 500)
   }
 
   // State for tracking swipe direction
@@ -220,6 +239,7 @@ export function SwipeableImageCarousel({
   // Calculate base offset - always show 3 images in a row (prev, current, next)
   const containerWidth = containerRef.current?.offsetWidth || 0
   const baseOffset = -containerWidth // Start at -100% to show current image
+  const totalOffset = baseOffset + touchOffset + animationOffset
 
   return (
     <div
@@ -235,8 +255,8 @@ export function SwipeableImageCarousel({
       <div
         className="absolute inset-0 flex will-change-transform"
         style={{
-          transform: `translate3d(${baseOffset + touchOffset}px, 0, 0)`,
-          transition: isDragging
+          transform: `translate3d(${totalOffset}px, 0, 0)`,
+          transition: isDragging || animationOffset === 0
             ? 'none'
             : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           width: '300%',
