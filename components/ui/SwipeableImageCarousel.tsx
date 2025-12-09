@@ -210,6 +210,10 @@ export function SwipeableImageCarousel({
   const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1
   const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1
 
+  // Calculate base offset - always show 3 images in a row (prev, current, next)
+  const containerWidth = containerRef.current?.offsetWidth || 0
+  const baseOffset = -containerWidth // Start at -100% to show current image
+
   return (
     <div
       ref={containerRef}
@@ -220,16 +224,31 @@ export function SwipeableImageCarousel({
       onMouseLeave={handleMouseLeave}
       onClick={onImageClick}
     >
-      {/* Контейнер для изображений */}
+      {/* Контейнер для изображений - всегда 3 изображения в ряд */}
       <div
-        className="absolute inset-0 flex transition-transform"
+        className="absolute inset-0 flex"
         style={{
-          transform: `translateX(${touchOffset}px)`,
-          transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          transform: `translateX(${baseOffset + touchOffset}px)`,
+          transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          width: '300%',
         }}
       >
+        {/* Предыдущее изображение */}
+        <div className="w-1/3 h-full flex-shrink-0 relative">
+          {images.length > 1 && (
+            <Image
+              src={images[prevIndex]}
+              alt={`${alt} - ${prevIndex + 1}`}
+              fill
+              className="object-cover"
+              sizes={sizes}
+              draggable={false}
+            />
+          )}
+        </div>
+
         {/* Текущее изображение */}
-        <div className="w-full h-full flex-shrink-0 relative">
+        <div className="w-1/3 h-full flex-shrink-0 relative">
           {images.length > 0 && (
             <Image
               src={images[currentIndex]}
@@ -242,47 +261,21 @@ export function SwipeableImageCarousel({
             />
           )}
         </div>
+
+        {/* Следующее изображение */}
+        <div className="w-1/3 h-full flex-shrink-0 relative">
+          {images.length > 1 && (
+            <Image
+              src={images[nextIndex]}
+              alt={`${alt} - ${nextIndex + 1}`}
+              fill
+              className="object-cover"
+              sizes={sizes}
+              draggable={false}
+            />
+          )}
+        </div>
       </div>
-
-      {/* Предпросмотр предыдущего изображения (слева) */}
-      {touchOffset > 0 && images.length > 1 && (
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            transform: `translateX(${touchOffset - containerRef.current?.offsetWidth!}px)`,
-            transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-          }}
-        >
-          <Image
-            src={images[prevIndex]}
-            alt={`${alt} - ${prevIndex + 1}`}
-            fill
-            className="object-cover"
-            sizes={sizes}
-            draggable={false}
-          />
-        </div>
-      )}
-
-      {/* Предпросмотр следующего изображения (справа) */}
-      {touchOffset < 0 && images.length > 1 && (
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            transform: `translateX(${touchOffset + containerRef.current?.offsetWidth!}px)`,
-            transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-          }}
-        >
-          <Image
-            src={images[nextIndex]}
-            alt={`${alt} - ${nextIndex + 1}`}
-            fill
-            className="object-cover"
-            sizes={sizes}
-            draggable={false}
-          />
-        </div>
-      )}
 
       {/* Стрелки навигации */}
       {showArrows && images.length > 1 && (
