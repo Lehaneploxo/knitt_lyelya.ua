@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -14,9 +15,30 @@ export default function AboutPage() {
           {t('about.title')}
         </h1>
 
+        {/* Hero Banner */}
+        <div className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-16 shadow-xl">
+          <Image
+            src="/images/about-banner.jpg"
+            alt="Knitt Lyelya Brand"
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, 896px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        </div>
+
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Image */}
-          <div className="h-96 rounded-2xl bg-secondary"></div>
+          <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
+            <Image
+              src="/images/about-banner.jpg"
+              alt="About Knitt Lyelya"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 400px"
+            />
+          </div>
 
           {/* Text */}
           <div className="flex flex-col justify-center">
