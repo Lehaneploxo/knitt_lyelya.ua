@@ -45,14 +45,14 @@ export default function CatalogPage({
   const categoryDescription = getCategoryDescription(category)
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-4 sm:py-8">
       {/* Breadcrumbs */}
-      <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-8">
-        <Link href="/" className="hover:text-primary">
+      <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6 sm:mb-8">
+        <Link href="/" className="hover:text-primary touch-manipulation">
           {t('common.home')}
         </Link>
         <ChevronRight className="h-4 w-4" />
-        <Link href="/catalog/ethno" className="hover:text-primary">
+        <Link href="/catalog/ethno" className="hover:text-primary touch-manipulation">
           {t('common.catalog')}
         </Link>
         <ChevronRight className="h-4 w-4" />

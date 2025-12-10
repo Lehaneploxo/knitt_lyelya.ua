@@ -43,7 +43,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+                className="text-sm font-medium text-gray-700 hover:text-primary transition-colors touch-manipulation"
               >
                 {item.name}
               </Link>
@@ -87,13 +87,13 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden pb-4">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden pb-4 pt-2 border-t border-gray-200 bg-white">
+            <nav className="flex flex-col space-y-2">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-base font-medium text-gray-700 hover:text-primary"
+                  className="text-base font-medium text-gray-700 hover:text-primary transition-colors py-3 px-3 hover:bg-gray-50 rounded-lg touch-manipulation min-h-[48px] flex items-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}

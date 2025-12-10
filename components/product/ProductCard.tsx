@@ -48,13 +48,10 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <>
-      <Link href={`/product/${product.id}`} className="block">
+      <Link href={`/product/${product.id}`} className="block touch-manipulation">
         <div className="group relative bg-white rounded-card overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300">
           {/* Image Carousel */}
-          <div onClick={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-          }}>
+          <div className="relative">
             <SwipeableImageCarousel
               images={images}
               alt={productName}
