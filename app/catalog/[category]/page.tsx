@@ -15,7 +15,7 @@ export default function CatalogPage({
   const { category } = use(params)
   const { t } = useLanguage()
 
-  let products;
+  let products: ReturnType<typeof getProductsByCategory> = []
   try {
     products = getProductsByCategory(category)
   } catch (error) {

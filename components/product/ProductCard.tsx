@@ -38,9 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
     toast.success(t('common.addedToCart'))
   }
 
-  const handleImageClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const handleImageClick = () => {
     setIsZoomOpen(true)
   }
 
