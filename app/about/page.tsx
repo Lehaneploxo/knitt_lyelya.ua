@@ -11,22 +11,9 @@ export default function AboutPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-8 text-center">
+        <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-12 text-center">
           {t('about.title')}
         </h1>
-
-        {/* Hero Banner */}
-        <div className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-16 shadow-xl">
-          <Image
-            src="/images/about-banner.jpg"
-            alt="Knitt Lyelya Brand"
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 896px"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        </div>
 
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Image */}

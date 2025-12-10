@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useEffect } from 'react'
@@ -154,7 +155,15 @@ export default function HomePage() {
       {/* About Brand */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="h-96 rounded-2xl bg-secondary"></div>
+          <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
+            <Image
+              src="/images/about-banner.jpg"
+              alt="About Knitt Lyelya"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
           <div>
             <h2 className="text-3xl md:text-4xl font-heading font-semibold mb-6">
               {t('home.about.title')}
