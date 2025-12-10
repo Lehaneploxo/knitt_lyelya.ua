@@ -36,6 +36,23 @@ export function SwipeableImageCarousel({
   // Используем внешний индекс если предоставлен, иначе внутренний
   const currentIndex = externalIndex !== undefined ? externalIndex : internalIndex
 
+  // Preload adjacent images
+  useEffect(() => {
+    if (images.length <= 1) return
+
+    const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1
+    const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1
+
+    // Preload prev and next images
+    const preloadImage = (src: string) => {
+      const img = new window.Image()
+      img.src = src
+    }
+
+    preloadImage(images[prevIndex])
+    preloadImage(images[nextIndex])
+  }, [currentIndex, images])
+
   const setCurrentIndex = (index: number | ((prev: number) => number)) => {
     const newIndex = typeof index === 'function' ? index(currentIndex) : index
     if (onIndexChange) {
@@ -49,39 +66,32 @@ export function SwipeableImageCarousel({
   const [touchOffset, setTouchOffset] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [animationOffset, setAnimationOffset] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handlePrev = () => {
     if (isTransitioning) return
     setIsTransitioning(true)
-    const containerWidth = containerRef.current?.offsetWidth || 0
 
-    // Animate to the left (show previous image)
-    setAnimationOffset(containerWidth)
+    // First update the index
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
 
-    // After animation completes, update index and reset offset
+    // Then allow transitions again after animation completes
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
-      setAnimationOffset(0)
       setIsTransitioning(false)
-    }, 500)
+    }, 400)
   }
 
   const handleNext = () => {
     if (isTransitioning) return
     setIsTransitioning(true)
-    const containerWidth = containerRef.current?.offsetWidth || 0
 
-    // Animate to the right (show next image)
-    setAnimationOffset(-containerWidth)
+    // First update the index
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
 
-    // After animation completes, update index and reset offset
+    // Then allow transitions again after animation completes
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-      setAnimationOffset(0)
       setIsTransitioning(false)
-    }, 500)
+    }, 400)
   }
 
   // State for tracking swipe direction
@@ -232,14 +242,13 @@ export function SwipeableImageCarousel({
     }
   }
 
-  // Вычисляем индексы соседних изображений
+  // Calculate swipe progress as percentage (-1 to 1)
+  const containerWidth = containerRef.current?.offsetWidth || 0
+  const swipeProgress = containerWidth > 0 ? touchOffset / containerWidth : 0
+
+  // Determine which images to show during swipe
   const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1
   const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1
-
-  // Calculate base offset - always show 3 images in a row (prev, current, next)
-  const containerWidth = containerRef.current?.offsetWidth || 0
-  const baseOffset = -containerWidth // Start at -100% to show current image
-  const totalOffset = baseOffset + touchOffset + animationOffset
 
   return (
     <div
@@ -250,87 +259,59 @@ export function SwipeableImageCarousel({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
       onClick={onImageClick}
+      style={{
+        WebkitTapHighlightColor: 'transparent',
+      }}
     >
-      {/* Контейнер для изображений - всегда 3 изображения в ряд */}
-      <div
-        className="absolute inset-0 flex will-change-transform"
-        style={{
-          transform: `translate3d(${totalOffset}px, 0, 0)`,
-          transition: isDragging || animationOffset === 0
-            ? 'none'
-            : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-          width: '300%',
-          backfaceVisibility: 'hidden',
-          WebkitBackfaceVisibility: 'hidden',
-        }}
-      >
-        {/* Предыдущее изображение */}
-        <div
-          className="w-1/3 h-full flex-shrink-0 relative"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-          }}
-        >
-          {images.length > 1 && (
-            <Image
-              src={images[prevIndex]}
-              alt={`${alt} - ${prevIndex + 1}`}
-              fill
-              className="object-cover"
-              sizes={sizes}
-              draggable={false}
-              loading="eager"
-              quality={95}
-            />
-          )}
-        </div>
+      {/* All images stacked with opacity transitions */}
+      {images.map((image, index) => {
+        // Calculate opacity based on whether this is the current, prev, or next image
+        let opacity = 0
 
-        {/* Текущее изображение */}
-        <div
-          className="w-1/3 h-full flex-shrink-0 relative"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-          }}
-        >
-          {images.length > 0 && (
-            <Image
-              src={images[currentIndex]}
-              alt={`${alt} - ${currentIndex + 1}`}
-              fill
-              className="object-cover"
-              sizes={sizes}
-              priority={priority}
-              draggable={false}
-              loading="eager"
-              quality={95}
-            />
-          )}
-        </div>
+        if (index === currentIndex) {
+          // Current image - fade out when swiping
+          opacity = 1 - Math.abs(swipeProgress)
+        } else if (swipeProgress > 0.05 && index === prevIndex) {
+          // Previous image - fade in when swiping left
+          opacity = swipeProgress
+        } else if (swipeProgress < -0.05 && index === nextIndex) {
+          // Next image - fade in when swiping right
+          opacity = Math.abs(swipeProgress)
+        }
 
-        {/* Следующее изображение */}
-        <div
-          className="w-1/3 h-full flex-shrink-0 relative"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-          }}
-        >
-          {images.length > 1 && (
+        // Clamp opacity between 0 and 1
+        opacity = Math.max(0, Math.min(1, opacity))
+
+        // Determine if this image should be eagerly loaded
+        const isAdjacent = index === prevIndex || index === nextIndex || index === currentIndex
+
+        return (
+          <div
+            key={`${image}-${index}`}
+            className="absolute inset-0"
+            style={{
+              opacity: isDragging ? opacity : (index === currentIndex ? 1 : 0),
+              transition: isDragging ? 'none' : 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              pointerEvents: index === currentIndex ? 'auto' : 'none',
+              willChange: 'opacity',
+              zIndex: index === currentIndex ? 2 : 1,
+            }}
+          >
             <Image
-              src={images[nextIndex]}
-              alt={`${alt} - ${nextIndex + 1}`}
+              src={image}
+              alt={`${alt} - ${index + 1}`}
               fill
               className="object-cover"
               sizes={sizes}
+              priority={priority && index === currentIndex}
               draggable={false}
-              loading="eager"
+              loading={isAdjacent ? 'eager' : 'lazy'}
               quality={95}
+              unoptimized={false}
             />
-          )}
-        </div>
-      </div>
+          </div>
+        )
+      })}
 
       {/* Стрелки навигации */}
       {showArrows && images.length > 1 && (
@@ -340,18 +321,20 @@ export function SwipeableImageCarousel({
               e.stopPropagation()
               handlePrev()
             }}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+            disabled={isTransitioning}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg opacity-80 sm:opacity-0 group-hover:opacity-100 transition-all duration-200 z-10 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 active:scale-95"
           >
-            <ChevronLeft className="h-5 w-5 text-gray-900" />
+            <ChevronLeft className="h-6 w-6 sm:h-7 sm:w-7 text-gray-900" />
           </button>
           <button
             onClick={(e) => {
               e.stopPropagation()
               handleNext()
             }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+            disabled={isTransitioning}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg opacity-80 sm:opacity-0 group-hover:opacity-100 transition-all duration-200 z-10 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 active:scale-95"
           >
-            <ChevronRight className="h-5 w-5 text-gray-900" />
+            <ChevronRight className="h-6 w-6 sm:h-7 sm:w-7 text-gray-900" />
           </button>
         </>
       )}

@@ -35,16 +35,16 @@ export function ImageZoom({ images, currentIndex, onClose, alt }: ImageZoomProps
 
       {/* Swipeable Image Carousel */}
       <div className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center">
-        <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
+        <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
           <SwipeableImageCarousel
             images={images}
             alt={alt}
-            aspectRatio="w-full h-full"
-            className=""
+            aspectRatio="aspect-[3/4]"
+            className="shadow-2xl"
             currentIndex={activeIndex}
             onIndexChange={setActiveIndex}
             priority
-            sizes="100vw"
+            sizes="(max-width: 1024px) 100vw, 80vw"
             showIndicators={false}
           />
         </div>

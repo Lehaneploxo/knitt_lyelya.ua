@@ -24,12 +24,46 @@ body {
   background-color: #FAF8F6;
   color: #1F2937;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-cormorant);
   font-weight: 500;
   line-height: 1.2;
+}
+
+/* Optimize image rendering and prevent flickering */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Smooth transitions globally */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hardware acceleration for transforms and opacity */
+[style*="transform"],
+[style*="opacity"] {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+}
+
+/* Prevent image dragging on mobile */
+img,
+picture {
+  pointer-events: auto;
+  touch-action: pan-y;
 }
 
 @layer utilities {
