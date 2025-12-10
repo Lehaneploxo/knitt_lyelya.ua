@@ -36,23 +36,6 @@ export function SwipeableImageCarousel({
   // Используем внешний индекс если предоставлен, иначе внутренний
   const currentIndex = externalIndex !== undefined ? externalIndex : internalIndex
 
-  // Preload adjacent images
-  useEffect(() => {
-    if (images.length <= 1) return
-
-    const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1
-    const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1
-
-    // Preload prev and next images
-    const preloadImage = (src: string) => {
-      const img = new window.Image()
-      img.src = src
-    }
-
-    preloadImage(images[prevIndex])
-    preloadImage(images[nextIndex])
-  }, [currentIndex, images])
-
   const setCurrentIndex = (index: number | ((prev: number) => number)) => {
     const newIndex = typeof index === 'function' ? index(currentIndex) : index
     if (onIndexChange) {
@@ -282,8 +265,8 @@ export function SwipeableImageCarousel({
         // Clamp opacity between 0 and 1
         opacity = Math.max(0, Math.min(1, opacity))
 
-        // Determine if this image should be eagerly loaded
-        const isAdjacent = index === prevIndex || index === nextIndex || index === currentIndex
+        // Only load current image, others are lazy
+        const shouldLoad = index === currentIndex
 
         return (
           <div
@@ -303,14 +286,13 @@ export function SwipeableImageCarousel({
               fill
               className="object-cover"
               sizes={sizes}
-              priority={priority && index === currentIndex}
+              priority={priority && index === 0}
               draggable={false}
-              loading={isAdjacent ? 'eager' : 'lazy'}
-              quality={95}
+              loading={shouldLoad || (priority && index === 0) ? 'eager' : 'lazy'}
+              quality={85}
               unoptimized={false}
               onError={(e) => {
                 console.error('Image failed to load:', image)
-                // Fallback to placeholder or hide broken image
                 e.currentTarget.style.display = 'none'
               }}
             />

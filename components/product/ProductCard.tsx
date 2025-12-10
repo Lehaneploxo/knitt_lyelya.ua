@@ -12,9 +12,10 @@ import { SwipeableImageCarousel } from '@/components/ui/SwipeableImageCarousel'
 
 interface ProductCardProps {
   product: Product
+  priority?: boolean
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, priority = false }: ProductCardProps) {
   const [isZoomOpen, setIsZoomOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const addItem = useCartStore((state) => state.addItem)
@@ -61,6 +62,7 @@ export function ProductCard({ product }: ProductCardProps) {
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               currentIndex={currentImageIndex}
               onIndexChange={setCurrentImageIndex}
+              priority={priority}
             />
           </div>
 
