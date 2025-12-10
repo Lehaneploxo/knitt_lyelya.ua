@@ -308,6 +308,11 @@ export function SwipeableImageCarousel({
               loading={isAdjacent ? 'eager' : 'lazy'}
               quality={95}
               unoptimized={false}
+              onError={(e) => {
+                console.error('Image failed to load:', image)
+                // Fallback to placeholder or hide broken image
+                e.currentTarget.style.display = 'none'
+              }}
             />
           </div>
         )

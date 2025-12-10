@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   keywords: 'сумки, ручна робота, в\'язані сумки, етно, базові, аксесуари, knitt lyelya',
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#D4A574',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -18,6 +26,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="uk">
+      <head>
+        <meta name="format-detection" content="telephone=no" />
+      </head>
       <body>
         <LanguageProvider>
           <Header />

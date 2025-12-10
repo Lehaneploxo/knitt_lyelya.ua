@@ -497,19 +497,29 @@ const translations: Record<Language, Record<string, string>> = {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('ua')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     // Load language from localStorage on client side
-    const saved = localStorage.getItem('language') as Language
-    if (saved && (saved === 'ua' || saved === 'en')) {
-      setLanguageState(saved)
+    try {
+      const saved = localStorage.getItem('language') as Language
+      if (saved && (saved === 'ua' || saved === 'en')) {
+        setLanguageState(saved)
+      }
+    } catch (error) {
+      console.error('Error loading language from localStorage:', error)
     }
   }, [])
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
     if (typeof window !== 'undefined') {
-      localStorage.setItem('language', lang)
+      try {
+        localStorage.setItem('language', lang)
+      } catch (error) {
+        console.error('Error saving language to localStorage:', error)
+      }
     }
   }
 

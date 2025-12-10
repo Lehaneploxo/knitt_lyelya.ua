@@ -26,6 +26,19 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {

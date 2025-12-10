@@ -1,6 +1,6 @@
 'use client'
 
-import { use } from 'react'
+import { use, Suspense } from 'react'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { ProductGrid } from '@/components/product/ProductGrid'
@@ -14,7 +14,14 @@ export default function CatalogPage({
 }) {
   const { category } = use(params)
   const { t } = useLanguage()
-  const products = getProductsByCategory(category)
+
+  let products;
+  try {
+    products = getProductsByCategory(category)
+  } catch (error) {
+    console.error('Error loading products:', error)
+    products = []
+  }
 
   const getCategoryTitle = (cat: string) => {
     switch(cat) {

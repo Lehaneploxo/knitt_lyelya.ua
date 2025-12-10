@@ -38,25 +38,36 @@ export function ProductCard({ product }: ProductCardProps) {
     toast.success(t('common.addedToCart'))
   }
 
-  const handleImageClick = () => {
+  const handleImageClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
     setIsZoomOpen(true)
+  }
+
+  if (!product || !images || images.length === 0) {
+    return null
   }
 
   return (
     <>
-      <Link href={`/product/${product.id}`}>
+      <Link href={`/product/${product.id}`} className="block">
         <div className="group relative bg-white rounded-card overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300">
           {/* Image Carousel */}
-          <SwipeableImageCarousel
-            images={images}
-            alt={productName}
-            aspectRatio="aspect-[3/4]"
-            className="bg-secondary cursor-zoom-in"
-            onImageClick={handleImageClick}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            currentIndex={currentImageIndex}
-            onIndexChange={setCurrentImageIndex}
-          />
+          <div onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+          }}>
+            <SwipeableImageCarousel
+              images={images}
+              alt={productName}
+              aspectRatio="aspect-[3/4]"
+              className="bg-secondary"
+              onImageClick={handleImageClick}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              currentIndex={currentImageIndex}
+              onIndexChange={setCurrentImageIndex}
+            />
+          </div>
 
         {/* Info */}
         <div className="p-4">
