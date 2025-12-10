@@ -120,7 +120,7 @@ export default function AboutPage() {
             {t('about.cta.subtitle')}
           </p>
           <Link
-            href="/catalog/ethno"
+            href="/"
             className="inline-flex items-center px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium"
           >
             {t('about.cta.button')}

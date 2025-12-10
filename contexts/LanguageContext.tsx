@@ -173,9 +173,9 @@ const translations: Record<Language, Record<string, string>> = {
     'about.value4.text': 'Кожен наш аксесуар - авторська робота з унікальним дизайном та етнічними мотивами. Жоден виріб не повторюється на 100%.',
     'about.mission': 'Місія бренду',
     'about.missionText': 'Наша місія — зберігати та популяризувати українську культуру через сучасні аксесуари, які можна носити щодня.',
-    'about.cta.title': 'Готові обрати свою сумку?',
-    'about.cta.subtitle': 'Перегляньте нашу колекцію авторських сумок ручної роботи',
-    'about.cta.button': 'Переглянути колекції',
+    'about.cta.title': 'Відкрийте світ Knitt Lyelya',
+    'about.cta.subtitle': 'Перегляньте наші колекції та новинки на головній сторінці',
+    'about.cta.button': 'На головну',
 
     // Contacts page
     'contacts.title': 'Контакти',
@@ -413,9 +413,9 @@ const translations: Record<Language, Record<string, string>> = {
     'about.value4.text': 'Each of our accessories is an author\'s work with unique design and ethnic motifs. No product is 100% identical.',
     'about.mission': 'Brand Mission',
     'about.missionText': 'Our mission is to preserve and popularize Ukrainian culture through modern accessories that can be worn every day.',
-    'about.cta.title': 'Ready to choose your bag?',
-    'about.cta.subtitle': 'Browse our collection of handmade designer bags',
-    'about.cta.button': 'View Collections',
+    'about.cta.title': 'Discover the World of Knitt Lyelya',
+    'about.cta.subtitle': 'Browse our collections and new arrivals on the home page',
+    'about.cta.button': 'Go to Home',
 
     // Contacts page
     'contacts.title': 'Contacts',
