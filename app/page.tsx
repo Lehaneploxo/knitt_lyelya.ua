@@ -87,7 +87,7 @@ export default function HomePage() {
             className="group relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
           >
             <img
-              src="/images/products/10ethno.solomia1.JPG"
+              src="/images/products/ethno-newyear.JPG"
               alt={t('home.collection.ethno.title')}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
@@ -110,7 +110,7 @@ export default function HomePage() {
             className="group relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
           >
             <img
-              src="/images/products/10basic.lyka1.JPG"
+              src="/images/products/basic-newyear.JPG"
               alt={t('home.collection.basic.title')}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
@@ -133,7 +133,7 @@ export default function HomePage() {
             className="group relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
           >
             <img
-              src="/images/products/10home.placemat1.JPG"
+              src="/images/products/home-newyear.JPG"
               alt={t('home.collection.home.title')}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
