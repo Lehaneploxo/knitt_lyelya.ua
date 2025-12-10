@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 const banners = [
-  '/images/hero-banner.jpg',
+  '/images/hero-banner-newyear.jpg',
   '/images/hero-banner2.jpg'
 ]
 
