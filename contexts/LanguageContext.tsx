@@ -158,6 +158,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // About page
     'about.title': 'Про бренд knitt_lyelya.ua',
+    'about.titleLine1': 'Про бренд',
     'about.ourStory': 'Про нас',
     'about.story1': 'knitt_lyelya.ua — це поєднання природної елегантності, ручної майстерності та етнічної автентичності.',
     'about.story2': 'Ми створюємо сумки та предмети домашнього декору з екологічних матеріалів: якісного міцного джуту, бавовняного шнура з додаванням шкіряних деталей. Кожен виріб, виготовлений вручну, є унікальним та наповненим характером. У своїх дизайнах ми поєднуємо сучасну лаконічність із традиційними етнічними мотивами. Це додає виробам душевності та індивідуальності, робить їх не лише функціональними, а й естетично виразними.',
@@ -398,6 +399,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // About page
     'about.title': 'About knitt_lyelya.ua Brand',
+    'about.titleLine1': 'About Brand',
     'about.ourStory': 'About Us',
     'about.story1': 'knitt_lyelya.ua is a blend of natural elegance, handcrafted artistry, and ethnic authenticity.',
     'about.story2': 'We create bags and home décor items from eco-friendly materials: high-quality sturdy jute, cotton cord with leather accents. Each product, handmade, is unique and filled with character. In our designs, we combine modern minimalism with traditional ethnic motifs. This adds warmth and individuality to our products, making them not only functional but also aesthetically expressive.',
