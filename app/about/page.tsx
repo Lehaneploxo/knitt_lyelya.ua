@@ -103,7 +103,7 @@ export default function AboutPage() {
         </div>
 
         {/* Mission */}
-        <div className="mb-16 bg-cream rounded-2xl p-12">
+        <div className="mb-16">
           <h2 className="text-4xl font-heading font-semibold mb-6 text-center uppercase break-words">
             {t('about.mission')}
           </h2>
