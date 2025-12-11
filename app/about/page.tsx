@@ -107,7 +107,7 @@ export default function AboutPage() {
           <h2 className="text-4xl font-heading font-semibold mb-6 text-center uppercase break-words">
             {t('about.mission')}
           </h2>
-          <p className="text-gray-700 text-xl text-center text-justify max-w-3xl mx-auto">
+          <p className="text-gray-700 text-xl text-center max-w-3xl mx-auto">
             {t('about.missionText')}
           </p>
         </div>
@@ -117,7 +117,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-heading font-semibold mb-4">
             {t('about.cta.title')}
           </h2>
-          <p className="text-gray-700 text-lg mb-8 text-justify">
+          <p className="text-gray-700 text-lg mb-8 text-center">
             {t('about.cta.subtitle')}
           </p>
           <Link
