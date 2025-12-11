@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-cormorant: 'Libre Baskerville', serif;
-  --font-inter: 'Inter', sans-serif;
+  --font-cormorant: Didot, "Didot LT STD", "Hoefler Text", Garamond, Baskerville, serif;
+  --font-inter: Didot, "Didot LT STD", "Hoefler Text", Garamond, Baskerville, serif;
 }
 
 * {
