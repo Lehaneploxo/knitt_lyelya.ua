@@ -46,7 +46,7 @@ const translations: Record<Language, Record<string, string>> = {
     'home.comingSoon': 'Скоро',
     'home.comingSoon.text': 'Незабаром тут з\'являться нові унікальні вироби',
     'home.about.title': 'Про бренд',
-    'home.about.text': 'Knitt.lyelya.ua — це поєднання природної елегантності, ручної майстерності та етнічної автентичності. Ми створюємо сумки та предмети домашнього декору з екологічних матеріалів: якісного міцного джуту, бавовняного шнура з додаванням шкіряних деталей. Кожен виріб, виготовлений вручну, є унікальним та наповненим характером. У своїх дизайнах ми поєднуємо сучасну лаконічність із традиційними етнічними мотивами. Це додає виробам душевності та індивідуальності, робить їх не лише функціональними, а й естетично виразними.',
+    'home.about.text': 'knitt_lyelya.ua — це поєднання природної елегантності, ручної майстерності та етнічної автентичності. Ми створюємо сумки та предмети домашнього декору з екологічних матеріалів: якісного міцного джуту, бавовняного шнура з додаванням шкіряних деталей. Кожен виріб, виготовлений вручну, є унікальним та наповненим характером. У своїх дизайнах ми поєднуємо сучасну лаконічність із традиційними етнічними мотивами. Це додає виробам душевності та індивідуальності, робить їх не лише функціональними, а й естетично виразними.',
     'home.about.text2': 'Наші вироби гармонійно поєднують стиль, екологічність і майстерність. Наші сумки та елементи декору — це більше, ніж аксесуари та предмети інтер\'єру, це історія, яку ви можете носити з собою або створювати у своєму домі.',
     'home.about.button': 'Дізнатись більше',
     'home.banner.banner': 'Баннер',
@@ -157,9 +157,9 @@ const translations: Record<Language, Record<string, string>> = {
     'orderSuccess.contactUs': 'Якщо у вас виникли питання, зв\'яжіться з нами:',
 
     // About page
-    'about.title': 'Про бренд Knitt.lyelya.ua',
+    'about.title': 'Про бренд knitt_lyelya.ua',
     'about.ourStory': 'Про нас',
-    'about.story1': 'Knitt.lyelya.ua — це поєднання природної елегантності, ручної майстерності та етнічної автентичності.',
+    'about.story1': 'knitt_lyelya.ua — це поєднання природної елегантності, ручної майстерності та етнічної автентичності.',
     'about.story2': 'Ми створюємо сумки та предмети домашнього декору з екологічних матеріалів: якісного міцного джуту, бавовняного шнура з додаванням шкіряних деталей. Кожен виріб, виготовлений вручну, є унікальним та наповненим характером. У своїх дизайнах ми поєднуємо сучасну лаконічність із традиційними етнічними мотивами. Це додає виробам душевності та індивідуальності, робить їх не лише функціональними, а й естетично виразними.',
     'about.story3': 'Наші вироби гармонійно поєднують стиль, екологічність і майстерність. Наші сумки та елементи декору — це більше, ніж аксесуари та предмети інтер\'єру, це історія, яку ви можете носити з собою або створювати у своєму домі.',
     'about.values': 'Наші цінності',
@@ -173,7 +173,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.value4.text': 'Кожен наш аксесуар - авторська робота з унікальним дизайном та етнічними мотивами. Жоден виріб не повторюється на 100%.',
     'about.mission': 'Місія бренду',
     'about.missionText': 'Наша місія — зберігати та популяризувати українську культуру через сучасні аксесуари, які можна носити щодня.',
-    'about.cta.title': 'Відкрийте світ Knitt Lyelya',
+    'about.cta.title': 'Відкрийте світ knitt_lyelya.ua',
     'about.cta.subtitle': 'Перегляньте наші колекції та новинки на головній сторінці',
     'about.cta.button': 'На головну',
 
@@ -286,7 +286,7 @@ const translations: Record<Language, Record<string, string>> = {
     'home.comingSoon': 'Coming Soon',
     'home.comingSoon.text': 'New unique products will appear here soon',
     'home.about.title': 'About the Brand',
-    'home.about.text': 'Knitt.lyelya.ua is a blend of natural elegance, handcrafted artistry, and ethnic authenticity. We create bags and home décor items from eco-friendly materials: high-quality sturdy jute, cotton cord with leather accents. Each product, handmade, is unique and filled with character. In our designs, we combine modern minimalism with traditional ethnic motifs. This adds warmth and individuality to our products, making them not only functional but also aesthetically expressive.',
+    'home.about.text': 'knitt_lyelya.ua is a blend of natural elegance, handcrafted artistry, and ethnic authenticity. We create bags and home décor items from eco-friendly materials: high-quality sturdy jute, cotton cord with leather accents. Each product, handmade, is unique and filled with character. In our designs, we combine modern minimalism with traditional ethnic motifs. This adds warmth and individuality to our products, making them not only functional but also aesthetically expressive.',
     'home.about.text2': 'Our products harmoniously combine style, eco-friendliness, and craftsmanship. Our bags and décor elements are more than just accessories and interior items; they are a story you can carry with you or create in your home.',
     'home.about.button': 'Learn More',
     'home.banner.banner': 'Banner',
@@ -397,9 +397,9 @@ const translations: Record<Language, Record<string, string>> = {
     'orderSuccess.contactUs': 'If you have any questions, contact us:',
 
     // About page
-    'about.title': 'About Knitt.lyelya.ua Brand',
+    'about.title': 'About knitt_lyelya.ua Brand',
     'about.ourStory': 'About Us',
-    'about.story1': 'Knitt.lyelya.ua is a blend of natural elegance, handcrafted artistry, and ethnic authenticity.',
+    'about.story1': 'knitt_lyelya.ua is a blend of natural elegance, handcrafted artistry, and ethnic authenticity.',
     'about.story2': 'We create bags and home décor items from eco-friendly materials: high-quality sturdy jute, cotton cord with leather accents. Each product, handmade, is unique and filled with character. In our designs, we combine modern minimalism with traditional ethnic motifs. This adds warmth and individuality to our products, making them not only functional but also aesthetically expressive.',
     'about.story3': 'Our products harmoniously combine style, eco-friendliness, and craftsmanship. Our bags and décor elements are more than just accessories and interior items; they are a story you can carry with you or create in your home.',
     'about.values': 'Our Values',
@@ -413,7 +413,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.value4.text': 'Each of our accessories is an author\'s work with unique design and ethnic motifs. No product is 100% identical.',
     'about.mission': 'Brand Mission',
     'about.missionText': 'Our mission is to preserve and popularize Ukrainian culture through modern accessories that can be worn every day.',
-    'about.cta.title': 'Discover the World of Knitt Lyelya',
+    'about.cta.title': 'Discover the World of knitt_lyelya.ua',
     'about.cta.subtitle': 'Browse our collections and new arrivals on the home page',
     'about.cta.button': 'Go to Home',
 

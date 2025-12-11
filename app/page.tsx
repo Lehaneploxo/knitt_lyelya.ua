@@ -77,7 +77,7 @@ export default function HomePage() {
 
       {/* Collections Preview */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-heading font-semibold text-center mb-12 uppercase">
+        <h2 className="text-3xl md:text-4xl font-heading font-semibold text-center mb-12 uppercase break-words">
           {t('home.collections')}
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -93,7 +93,7 @@ export default function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h3 className="text-3xl font-heading font-semibold mb-2 uppercase">
+              <h3 className="text-3xl font-heading font-semibold mb-2 uppercase break-words">
                 {t('home.collection.ethno.title')}
               </h3>
               <p className="text-base mb-4 opacity-90">{t('home.collection.ethno.description')}</p>
@@ -116,7 +116,7 @@ export default function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h3 className="text-3xl font-heading font-semibold mb-2 uppercase">
+              <h3 className="text-3xl font-heading font-semibold mb-2 uppercase break-words">
                 {t('home.collection.basic.title')}
               </h3>
               <p className="text-base mb-4 opacity-90">{t('home.collection.basic.description')}</p>
@@ -139,7 +139,7 @@ export default function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h3 className="text-3xl font-heading font-semibold mb-2 uppercase">
+              <h3 className="text-3xl font-heading font-semibold mb-2 uppercase break-words">
                 {t('home.collection.home.title')}
               </h3>
               <p className="text-base mb-4 opacity-90">{t('home.collection.home.description')}</p>
@@ -158,14 +158,14 @@ export default function HomePage() {
           <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg">
             <Image
               src="/images/about-banner.jpg"
-              alt="About Knitt Lyelya"
+              alt="About knitt_lyelya.ua"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
           <div>
-            <h2 className="text-3xl md:text-4xl font-heading font-semibold mb-6 uppercase">
+            <h2 className="text-3xl md:text-4xl font-heading font-semibold mb-6 uppercase break-words">
               {t('home.about.title')}
             </h2>
             <p className="text-gray-700 text-lg mb-4">
