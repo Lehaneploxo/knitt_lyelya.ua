@@ -59,7 +59,7 @@ export default function AboutPage() {
               <h3 className="text-2xl font-heading font-semibold mb-2 uppercase break-words">
                 {t('about.value1.title')}
               </h3>
-              <p className="text-gray-600 text-lg text-justify">
+              <p className="text-gray-600 text-lg text-center">
                 {t('about.value1.text')}
               </p>
             </div>
@@ -71,7 +71,7 @@ export default function AboutPage() {
               <h3 className="text-2xl font-heading font-semibold mb-2 uppercase break-words">
                 {t('about.value2.title')}
               </h3>
-              <p className="text-gray-600 text-lg text-justify">
+              <p className="text-gray-600 text-lg text-center">
                 {t('about.value2.text')}
               </p>
             </div>
@@ -83,7 +83,7 @@ export default function AboutPage() {
               <h3 className="text-2xl font-heading font-semibold mb-2 uppercase break-words">
                 {t('about.value3.title')}
               </h3>
-              <p className="text-gray-600 text-lg text-justify">
+              <p className="text-gray-600 text-lg text-center">
                 {t('about.value3.text')}
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function AboutPage() {
               <h3 className="text-2xl font-heading font-semibold mb-2 uppercase break-words">
                 {t('about.value4.title')}
               </h3>
-              <p className="text-gray-600 text-lg text-justify">
+              <p className="text-gray-600 text-lg text-center">
                 {t('about.value4.text')}
               </p>
             </div>
