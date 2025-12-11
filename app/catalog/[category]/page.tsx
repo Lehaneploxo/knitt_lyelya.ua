@@ -64,7 +64,7 @@ export default function CatalogPage({
         <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-4">
           {categoryTitle}
         </h1>
-        <p className="text-lg text-gray-700 max-w-2xl">
+        <p className="text-lg text-gray-700 max-w-2xl text-justify">
           {categoryDescription}
         </p>
       </div>
@@ -90,7 +90,7 @@ export default function CatalogPage({
         <ProductGrid products={products} />
       ) : (
         <div className="text-center py-16">
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-lg text-justify">
             {t('catalog.noProducts')}
           </p>
         </div>

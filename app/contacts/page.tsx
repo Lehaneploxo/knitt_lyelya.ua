@@ -39,7 +39,7 @@ export default function ContactsPage() {
         <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-4 text-center">
           {t('contacts.title')}
         </h1>
-        <p className="text-lg text-gray-600 mb-12 text-center">
+        <p className="text-lg text-gray-600 mb-12 text-center text-justify">
           {t('contacts.subtitle')}
         </p>
 
@@ -121,7 +121,7 @@ export default function ContactsPage() {
                   <a href="tel:+380954440531" className="text-gray-600 hover:text-primary">
                     +38095 444 0531
                   </a>
-                  <p className="text-sm text-gray-500">{t('contacts.phoneAlso')}</p>
+                  <p className="text-sm text-gray-500 text-justify">{t('contacts.phoneAlso')}</p>
                 </div>
               </div>
 
@@ -134,7 +134,7 @@ export default function ContactsPage() {
                   <a href="mailto:knitt.lyelya@gmail.com" className="text-gray-600 hover:text-primary">
                     knitt.lyelya@gmail.com
                   </a>
-                  <p className="text-sm text-gray-500">{t('contacts.emailResponse')}</p>
+                  <p className="text-sm text-gray-500 text-justify">{t('contacts.emailResponse')}</p>
                 </div>
               </div>
 
@@ -144,8 +144,8 @@ export default function ContactsPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">{t('contacts.address')}</h3>
-                  <p className="text-gray-600">{t('contacts.addressCity')}</p>
-                  <p className="text-sm text-gray-500">{t('contacts.addressDelivery')}</p>
+                  <p className="text-gray-600 text-justify">{t('contacts.addressCity')}</p>
+                  <p className="text-sm text-gray-500 text-justify">{t('contacts.addressDelivery')}</p>
                 </div>
               </div>
 

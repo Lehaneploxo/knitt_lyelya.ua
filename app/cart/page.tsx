@@ -17,7 +17,7 @@ export default function CartPage() {
           <h1 className="text-3xl font-heading font-semibold mb-4">
             {t('cart.empty.title')}
           </h1>
-          <p className="text-gray-600 mb-8">
+          <p className="text-gray-600 mb-8 text-justify">
             {t('cart.empty.description')}
           </p>
           <Link

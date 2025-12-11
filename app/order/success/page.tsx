@@ -19,11 +19,11 @@ export default function OrderSuccessPage() {
           {t('orderSuccess.title')}
         </h1>
 
-        <p className="text-lg text-gray-700 mb-2">
+        <p className="text-lg text-gray-700 mb-2 text-justify">
           {t('orderSuccess.orderNumber')} <span className="font-semibold">#{orderId}</span> {t('orderSuccess.success')}
         </p>
 
-        <p className="text-gray-600 mb-8">
+        <p className="text-gray-600 mb-8 text-justify">
           {t('orderSuccess.emailSent')}
         </p>
 
@@ -80,10 +80,10 @@ export default function OrderSuccessPage() {
         </div>
 
         <div className="mt-12 pt-8 border-t">
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-justify">
             {t('orderSuccess.contactUs')}
           </p>
-          <p className="text-gray-900 font-medium mt-2">
+          <p className="text-gray-900 font-medium mt-2 text-justify">
             📞 +380 XX XXX XX XX | ✉️ info@knitt-lyelya.ua
           </p>
         </div>

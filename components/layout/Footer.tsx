@@ -16,7 +16,7 @@ export function Footer() {
             <h3 className="text-lg font-heading font-semibold text-white mb-4">
               knitt_lyelya.ua
             </h3>
-            <p className="text-sm">
+            <p className="text-sm text-justify">
               {t('footer.description')}
             </p>
           </div>

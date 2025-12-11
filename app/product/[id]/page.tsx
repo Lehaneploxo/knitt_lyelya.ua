@@ -143,7 +143,7 @@ export default function ProductPage() {
 
           <div className="mb-8">
             <h3 className="text-lg font-medium text-gray-900 mb-3">{t('product.description')}</h3>
-            <p className="text-gray-700 text-base leading-relaxed">
+            <p className="text-gray-700 text-base leading-relaxed text-justify">
               {productDescription}
             </p>
           </div>
@@ -239,8 +239,8 @@ export default function ProductPage() {
 
             {activeTab === 'description' && (
               <div className="text-gray-700">
-                <p>{productDescription}</p>
-                <p className="mt-4">
+                <p className="text-justify">{productDescription}</p>
+                <p className="mt-4 text-justify">
                   {t('product.handmade.text')}
                 </p>
               </div>
@@ -281,15 +281,15 @@ export default function ProductPage() {
               <div className="space-y-4 text-gray-700">
                 <div>
                   <h4 className="font-medium mb-2">{t('product.delivery.ukrposhta.title')}</h4>
-                  <p className="text-sm">{t('product.delivery.ukrposhta.text')}</p>
+                  <p className="text-sm text-justify">{t('product.delivery.ukrposhta.text')}</p>
                 </div>
                 <div>
                   <h4 className="font-medium mb-2">{t('product.delivery.novaposhta.title')}</h4>
-                  <p className="text-sm">{t('product.delivery.novaposhta.text')}</p>
+                  <p className="text-sm text-justify">{t('product.delivery.novaposhta.text')}</p>
                 </div>
                 <div>
                   <h4 className="font-medium mb-2">{t('product.delivery.payment.title')}</h4>
-                  <p className="text-sm">
+                  <p className="text-sm text-justify">
                     {t('product.delivery.payment.text')}
                   </p>
                 </div>
