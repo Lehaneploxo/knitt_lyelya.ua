@@ -280,8 +280,8 @@ export default function ProductPage() {
             {activeTab === 'delivery' && (
               <div className="space-y-4 text-gray-700">
                 <div>
-                  <h4 className="font-medium mb-2">{t('product.delivery.ukrposhta.title')}</h4>
-                  <p className="text-sm text-justify">{t('product.delivery.ukrposhta.text')}</p>
+                  <h4 className="font-medium mb-2">{t('product.delivery.meest.title')}</h4>
+                  <p className="text-sm text-justify">{t('product.delivery.meest.text')}</p>
                 </div>
                 <div>
                   <h4 className="font-medium mb-2">{t('product.delivery.novaposhta.title')}</h4>

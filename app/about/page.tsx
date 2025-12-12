@@ -12,7 +12,6 @@ export default function AboutPage() {
     <div className="max-w-7xl mx-auto px-4 py-16">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-heading font-semibold mb-12 text-center uppercase">
-          <span className="block">{t('about.titleLine1')}</span>
           <span className="block">knitt_lyelya.ua</span>
         </h1>
 
