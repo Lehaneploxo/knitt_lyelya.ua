@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Mail, Phone, Instagram, Send, MapPin } from 'lucide-react'
+import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import { toast } from 'sonner'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -167,6 +168,14 @@ export default function ContactsPage() {
                     className="flex items-center justify-center w-12 h-12 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"
                   >
                     <Send className="h-5 w-5" />
+                  </a>
+                  <a
+                    href="https://wa.me/380954440531"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-12 h-12 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"
+                  >
+                    <WhatsAppIcon className="h-5 w-5" />
                   </a>
                 </div>
               </div>

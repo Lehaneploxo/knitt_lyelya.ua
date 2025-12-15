@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Instagram, Send } from 'lucide-react'
+import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export function Footer() {
@@ -52,6 +53,9 @@ export function Footer() {
               </a>
               <a href="https://t.me/+380954440531" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 <Send className="h-6 w-6" />
+              </a>
+              <a href="https://wa.me/380954440531" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                <WhatsAppIcon className="h-6 w-6" />
               </a>
             </div>
           </div>
