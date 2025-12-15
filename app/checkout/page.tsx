@@ -17,7 +17,7 @@ export default function CheckoutPage() {
     lastName: '',
     phone: '',
     email: '',
-    deliveryMethod: 'novaposhta',
+    deliveryMethod: 'meest',
     city: '',
     address: '',
     paymentMethod: 'cash_on_delivery',
@@ -153,21 +153,6 @@ export default function CheckoutPage() {
                   <input
                     type="radio"
                     name="deliveryMethod"
-                    value="novaposhta"
-                    checked={formData.deliveryMethod === 'novaposhta'}
-                    onChange={handleInputChange}
-                    className="mr-3"
-                  />
-                  <div>
-                    <div className="font-medium">{t('checkout.deliveryNovaposhta')}</div>
-                    <div className="text-sm text-gray-600">{t('checkout.deliveryNovaposhtaTime')}</div>
-                  </div>
-                </label>
-
-                <label className="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-primary transition-colors">
-                  <input
-                    type="radio"
-                    name="deliveryMethod"
                     value="meest"
                     checked={formData.deliveryMethod === 'meest'}
                     onChange={handleInputChange}
@@ -176,6 +161,21 @@ export default function CheckoutPage() {
                   <div>
                     <div className="font-medium">{t('checkout.deliveryMeest')}</div>
                     <div className="text-sm text-gray-600">{t('checkout.deliveryMeestTime')}</div>
+                  </div>
+                </label>
+
+                <label className="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-primary transition-colors">
+                  <input
+                    type="radio"
+                    name="deliveryMethod"
+                    value="novaposhta"
+                    checked={formData.deliveryMethod === 'novaposhta'}
+                    onChange={handleInputChange}
+                    className="mr-3"
+                  />
+                  <div>
+                    <div className="font-medium">{t('checkout.deliveryNovaposhta')}</div>
+                    <div className="text-sm text-gray-600">{t('checkout.deliveryNovaposhtaTime')}</div>
                   </div>
                 </label>
               </div>
