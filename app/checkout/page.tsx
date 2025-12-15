@@ -280,7 +280,17 @@ export default function CheckoutPage() {
                     key={`${item.id}-${item.color}-${item.size}`}
                     className="flex gap-3"
                   >
-                    <div className="w-16 h-16 bg-secondary rounded-lg flex-shrink-0"></div>
+                    <div className="w-16 h-16 bg-secondary rounded-lg flex-shrink-0 overflow-hidden">
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={language === 'ua' ? item.name.ua : item.name.en}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-secondary"></div>
+                      )}
+                    </div>
                     <div className="flex-1">
                       <p className="font-medium text-sm line-clamp-2">
                         {language === 'ua' ? item.name.ua : item.name.en}

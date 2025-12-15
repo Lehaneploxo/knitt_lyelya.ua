@@ -48,7 +48,17 @@ export default function CartPage() {
               >
                 <div className="flex gap-4">
                   {/* Image */}
-                  <div className="w-24 h-24 bg-secondary rounded-lg flex-shrink-0"></div>
+                  <div className="w-24 h-24 bg-secondary rounded-lg flex-shrink-0 overflow-hidden">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={language === 'ua' ? item.name.ua : item.name.en}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-secondary"></div>
+                    )}
+                  </div>
 
                   {/* Info */}
                   <div className="flex-1">

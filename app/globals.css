@@ -20,7 +20,7 @@ html {
 body {
   font-family: var(--font-inter);
   background-color: #FAF8F6;
-  color: #1F2937;
+  color: #4A3228;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -60,6 +60,35 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-cormorant);
   font-weight: 500;
   line-height: 1.2;
+  color: #3E2723;
+}
+
+/* Keep white text white and primary text primary */
+h1.text-white, h2.text-white, h3.text-white, h4.text-white, h5.text-white, h6.text-white,
+.text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6 {
+  color: white !important;
+}
+
+h1.text-primary, h2.text-primary, h3.text-primary, h4.text-primary, h5.text-primary, h6.text-primary {
+  color: #D4A574 !important;
+}
+
+/* Force all heading-like elements to be dark brown, except white text and primary colored elements */
+.font-heading:not(.text-white):not(.text-primary),
+.font-semibold:not(.text-white):not(.text-primary),
+.font-bold:not(.text-white):not(.text-primary),
+.font-medium:not(.text-white):not(.text-primary) {
+  color: #3E2723;
+}
+
+/* Specific overrides for darker text */
+.text-gray-900,
+.text-black {
+  color: #3E2723 !important;
+}
+
+.text-gray-800 {
+  color: #4A3228 !important;
 }
 
 /* Optimize image rendering and prevent flickering */
@@ -97,5 +126,14 @@ picture {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Dark brown text utilities */
+  .text-dark-brown {
+    color: #3E2723;
+  }
+
+  .text-medium-brown {
+    color: #4A3228;
   }
 }
