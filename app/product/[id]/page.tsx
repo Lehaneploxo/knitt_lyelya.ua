@@ -303,6 +303,13 @@ export default function ProductPage() {
                     </div>
 
                     <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.storage.title')}</h4>
+                      <div className="space-y-1">
+                        <p>{t('product.care.storage.text1')}</p>
+                      </div>
+                    </div>
+
+                    <div>
                       <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.material.title')}</h4>
                       <div className="space-y-1">
                         <p>{t('product.care.material.text1')}</p>
