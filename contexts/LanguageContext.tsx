@@ -255,6 +255,22 @@ const translations: Record<Language, Record<string, string>> = {
     'material.дерево': 'дерево',
     'material.бавовняний шнур': 'бавовняний шнур',
     'material.шкіра': 'шкіра',
+
+    // Care Instructions
+    'product.care.title': 'Правила експлуатації та догляду',
+    'product.care.subtitle': 'виробів ручної роботи з джуту та бавовняного шнура',
+    'product.care.general.title': '1. Загальні рекомендації',
+    'product.care.general.text': 'Вироби виготовлені вручну з натуральних матеріалів — джуту та бавовняного шнура. Невеликі відмінності у розмірі, фактурі чи відтінку є особливістю ручної роботи та не вважаються дефектом.',
+    'product.care.usage.title': '2. Експлуатація',
+    'product.care.usage.text1': '• Використовуйте виріб лише за призначенням.',
+    'product.care.usage.text2': '• Не перевантажуйте виріб надмірною вагою, щоб уникнути деформації.',
+    'product.care.usage.text3': '• Уникайте тривалого впливу підвищеної вологості та сонячного світла.',
+    'product.care.usage.text4': '• Для збереження форми рекомендується наповнювати виріб папером або тканиною.',
+    'product.care.material.title': '6. Особливості матеріалу',
+    'product.care.material.text1': '• Джут — натуральне волокно, яке може мати легкий природний запах та з часом змінювати відтінок.',
+    'product.care.material.text2': '• Бавовняний шнур може м\'якішати під час використання — це нормальна властивість матеріалу.',
+    'product.care.responsibility.title': '7. Відповідальність',
+    'product.care.responsibility.text': 'Внаслідок неправильного використання або недотримання правил догляду продавець не несе відповідальності за пошкодження виробу.',
   },
   en: {
     // Header
@@ -498,6 +514,22 @@ const translations: Record<Language, Record<string, string>> = {
     'material.дерево': 'wood',
     'material.бавовняний шнур': 'cotton cord',
     'material.шкіра': 'leather',
+
+    // Care Instructions
+    'product.care.title': 'Care and Use Instructions',
+    'product.care.subtitle': 'for handmade products from jute and cotton cord',
+    'product.care.general.title': '1. General Recommendations',
+    'product.care.general.text': 'Products are handmade from natural materials — jute and cotton cord. Minor variations in size, texture, or shade are characteristic of handmade work and are not considered defects.',
+    'product.care.usage.title': '2. Usage',
+    'product.care.usage.text1': '• Use the product only for its intended purpose.',
+    'product.care.usage.text2': '• Do not overload the product with excessive weight to avoid deformation.',
+    'product.care.usage.text3': '• Avoid prolonged exposure to high humidity and sunlight.',
+    'product.care.usage.text4': '• To maintain shape, it is recommended to fill the product with paper or fabric.',
+    'product.care.material.title': '6. Material Features',
+    'product.care.material.text1': '• Jute is a natural fiber that may have a light natural odor and change shade over time.',
+    'product.care.material.text2': '• Cotton cord may soften during use — this is a normal property of the material.',
+    'product.care.responsibility.title': '7. Responsibility',
+    'product.care.responsibility.text': 'Due to improper use or failure to follow care instructions, the seller is not responsible for product damage.',
   },
 }
 

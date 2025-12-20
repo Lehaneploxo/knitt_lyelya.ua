@@ -247,33 +247,75 @@ export default function ProductPage() {
             )}
 
             {activeTab === 'specs' && (
-              <div className="space-y-3">
-                {product.materials && (
-                  <div className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600">{t('product.materials.label')}:</span>
-                    <span className="font-medium">
-                      {product.materials.map((material: string) => t(`material.${material}`)).join(', ')}
-                    </span>
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  {product.materials && (
+                    <div className="flex justify-between py-2 border-b">
+                      <span className="text-gray-600">{t('product.materials.label')}:</span>
+                      <span className="font-medium">
+                        {product.materials.map((material: string) => t(`material.${material}`)).join(', ')}
+                      </span>
+                    </div>
+                  )}
+                  {product.dimensions && (
+                    <div className="flex justify-between py-2 border-b">
+                      <span className="text-gray-600">{t('product.dimensions.label')}:</span>
+                      <span className="font-medium">
+                        {product.dimensions.diameter
+                          ? `Ø ${product.dimensions.diameter} ${product.dimensions.unit}`
+                          : product.dimensions.depth
+                          ? `${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} ${product.dimensions.unit}`
+                          : `${product.dimensions.width} x ${product.dimensions.height} ${product.dimensions.unit}`}
+                      </span>
+                    </div>
+                  )}
+                  {product.quantity && (
+                    <div className="flex justify-between py-2 border-b">
+                      <span className="text-gray-600">{t('product.quantity.set')}:</span>
+                      <span className="font-medium">{product.quantity} {t('product.quantity.pcs')}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Care Instructions */}
+                <div className="mt-8 pt-6 border-t">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {t('product.care.title')}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4 italic">
+                    {t('product.care.subtitle')}
+                  </p>
+
+                  <div className="space-y-4 text-gray-700 text-sm">
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.general.title')}</h4>
+                      <p className="text-justify">{t('product.care.general.text')}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.usage.title')}</h4>
+                      <div className="space-y-1">
+                        <p>{t('product.care.usage.text1')}</p>
+                        <p>{t('product.care.usage.text2')}</p>
+                        <p>{t('product.care.usage.text3')}</p>
+                        <p>{t('product.care.usage.text4')}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.material.title')}</h4>
+                      <div className="space-y-1">
+                        <p>{t('product.care.material.text1')}</p>
+                        <p>{t('product.care.material.text2')}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.responsibility.title')}</h4>
+                      <p className="text-justify">{t('product.care.responsibility.text')}</p>
+                    </div>
                   </div>
-                )}
-                {product.dimensions && (
-                  <div className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600">{t('product.dimensions.label')}:</span>
-                    <span className="font-medium">
-                      {product.dimensions.diameter
-                        ? `Ø ${product.dimensions.diameter} ${product.dimensions.unit}`
-                        : product.dimensions.depth
-                        ? `${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} ${product.dimensions.unit}`
-                        : `${product.dimensions.width} x ${product.dimensions.height} ${product.dimensions.unit}`}
-                    </span>
-                  </div>
-                )}
-                {product.quantity && (
-                  <div className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600">{t('product.quantity.set')}:</span>
-                    <span className="font-medium">{product.quantity} {t('product.quantity.pcs')}</span>
-                  </div>
-                )}
+                </div>
               </div>
             )}
 
