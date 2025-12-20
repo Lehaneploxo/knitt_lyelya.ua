@@ -303,9 +303,30 @@ export default function ProductPage() {
                     </div>
 
                     <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.cleaning.title')}</h4>
+                      <div className="space-y-1">
+                        <p>{t('product.care.cleaning.text1')}</p>
+                        <p>{t('product.care.cleaning.text2')}</p>
+                        <p>{t('product.care.cleaning.text3')}</p>
+                        <p>{t('product.care.cleaning.text4')}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.drying.title')}</h4>
+                      <div className="space-y-1">
+                        <p>{t('product.care.drying.text1')}</p>
+                        <p>{t('product.care.drying.text2')}</p>
+                        <p>{t('product.care.drying.text3')}</p>
+                      </div>
+                    </div>
+
+                    <div>
                       <h4 className="font-semibold text-gray-900 mb-1">{t('product.care.storage.title')}</h4>
                       <div className="space-y-1">
                         <p>{t('product.care.storage.text1')}</p>
+                        <p>{t('product.care.storage.text2')}</p>
+                        <p>{t('product.care.storage.text3')}</p>
                       </div>
                     </div>
 
