@@ -284,6 +284,18 @@ const translations: Record<Language, Record<string, string>> = {
     'product.care.material.text2': '• Бавовняний шнур може м\'якішати під час використання — це нормальна властивість матеріалу.',
     'product.care.responsibility.title': '7. Відповідальність',
     'product.care.responsibility.text': 'Внаслідок неправильного використання або недотримання правил догляду продавець не несе відповідальності за пошкодження виробу.',
+
+    // Contract
+    'contract.title': 'ПУБЛІЧНИЙ ДОГОВІР (ОФЕРТА)',
+    'contract.subtitle': 'купівлі-продажу виробів ручної роботи',
+    'contract.important': 'Важливо: Цей договір є офіційною та публічною пропозицією Продавця (Виконавця) укласти договір купівлі-продажу виробів ручної роботи дистанційним способом відповідно до ст. 633, 641, 642, 656 Цивільного кодексу України.',
+    'contract.accept': 'Прийняти умови',
+    'contract.decline': 'Відхилити',
+    'contract.checkbox': 'Я ознайомився(-лась) та приймаю умови',
+    'contract.link': 'публічного договору (оферти)',
+    'contract.error': 'Будь ласка, прийміть умови договору для продовження',
+    'contract.accepted': 'Ви прийняли умови договору',
+    'contract.declined': 'Для оформлення замовлення необхідно прийняти умови договору',
   },
   en: {
     // Header
@@ -556,6 +568,18 @@ const translations: Record<Language, Record<string, string>> = {
     'product.care.material.text2': '• Cotton cord may soften during use — this is a normal property of the material.',
     'product.care.responsibility.title': '7. Responsibility',
     'product.care.responsibility.text': 'Due to improper use or failure to follow care instructions, the seller is not responsible for product damage.',
+
+    // Contract
+    'contract.title': 'PUBLIC OFFER AGREEMENT',
+    'contract.subtitle': 'for the purchase and sale of handmade products',
+    'contract.important': 'Important: This agreement is an official and public offer from the Seller (Contractor) to conclude a contract for the purchase and sale of handmade products remotely in accordance with Articles 633, 641, 642, 656 of the Civil Code of Ukraine.',
+    'contract.accept': 'Accept Terms',
+    'contract.decline': 'Decline',
+    'contract.checkbox': 'I have read and accept the terms of the',
+    'contract.link': 'public offer agreement',
+    'contract.error': 'Please accept the contract terms to continue',
+    'contract.accepted': 'You have accepted the contract terms',
+    'contract.declined': 'You must accept the contract terms to place an order',
   },
 }
 

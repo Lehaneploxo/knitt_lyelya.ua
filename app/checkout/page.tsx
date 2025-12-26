@@ -5,12 +5,15 @@ import { useRouter } from 'next/navigation'
 import { useCartStore } from '@/store/cartStore'
 import { toast } from 'sonner'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ContractModal from '@/components/ui/ContractModal'
 
 export default function CheckoutPage() {
   const router = useRouter()
   const { items, getTotalPrice, clearCart } = useCartStore()
   const { t, language } = useLanguage()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isContractModalOpen, setIsContractModalOpen] = useState(false)
+  const [isContractAccepted, setIsContractAccepted] = useState(false)
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -33,6 +36,14 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Проверка принятия договора
+    if (!isContractAccepted) {
+      setIsContractModalOpen(true)
+      toast.error(t('contract.error'))
+      return
+    }
+
     setIsSubmitting(true)
 
     // Базовая валидация
@@ -59,6 +70,18 @@ export default function CheckoutPage() {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleContractAccept = () => {
+    setIsContractAccepted(true)
+    setIsContractModalOpen(false)
+    toast.success(t('contract.accepted'))
+  }
+
+  const handleContractDecline = () => {
+    setIsContractAccepted(false)
+    setIsContractModalOpen(false)
+    toast.info(t('contract.declined'))
   }
 
   if (items.length === 0) {
@@ -323,9 +346,31 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
+              {/* Договір (оферта) */}
+              <div className="mb-6">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isContractAccepted}
+                    onChange={(e) => setIsContractAccepted(e.target.checked)}
+                    className="mt-1 h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                  />
+                  <span className="text-sm text-gray-700">
+                    {t('contract.checkbox')}{' '}
+                    <button
+                      type="button"
+                      onClick={() => setIsContractModalOpen(true)}
+                      className="text-primary hover:text-primary-dark underline font-medium"
+                    >
+                      {t('contract.link')}
+                    </button>
+                  </span>
+                </label>
+              </div>
+
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !isContractAccepted}
                 className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? t('checkout.submitting') : t('checkout.submit')}
@@ -334,6 +379,14 @@ export default function CheckoutPage() {
           </div>
         </div>
       </form>
+
+      {/* Модальне вікно договору */}
+      <ContractModal
+        isOpen={isContractModalOpen}
+        onClose={() => setIsContractModalOpen(false)}
+        onAccept={handleContractAccept}
+        onDecline={handleContractDecline}
+      />
     </div>
   )
 }
