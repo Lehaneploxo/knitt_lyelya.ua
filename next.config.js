@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
   },
-};
+  transpilePackages: ['next-sanity', 'sanity'],
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
