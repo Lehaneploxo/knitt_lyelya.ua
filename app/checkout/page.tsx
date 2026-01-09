@@ -53,19 +53,70 @@ export default function CheckoutPage() {
       return
     }
 
-    // Симуляция отправки заказа
     try {
-      // Здесь будет API call для создания заказа
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // Создаем заказ в базе данных
+      const orderResponse = await fetch('/api/orders/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerName: `${formData.firstName} ${formData.lastName}`,
+          customerEmail: formData.email,
+          customerPhone: formData.phone,
+          items: items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+            image: item.image,
+          })),
+          totalAmount: getTotalPrice(),
+          deliveryMethod: formData.deliveryMethod,
+          deliveryAddress: `${formData.city}, ${formData.address}`,
+          paymentMethod: formData.paymentMethod,
+          notes: formData.comment,
+        }),
+      })
 
-      // Очистка корзины
+      const orderData = await orderResponse.json()
+
+      if (!orderData.success) {
+        throw new Error(orderData.error || 'Failed to create order')
+      }
+
+      const { orderNumber } = orderData
+
+      // Если выбрана онлайн оплата - создаем Monobank invoice
+      if (formData.paymentMethod === 'card_online') {
+        const paymentResponse = await fetch('/api/payment/create-invoice', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: getTotalPrice(),
+            orderId: orderNumber,
+            customerEmail: formData.email,
+          }),
+        })
+
+        const paymentData = await paymentResponse.json()
+
+        if (!paymentData.success || !paymentData.pageUrl) {
+          throw new Error('Failed to create payment invoice')
+        }
+
+        // Очищаем корзину
+        clearCart()
+
+        // Перенаправляем на страницу оплаты Monobank
+        window.location.href = paymentData.pageUrl
+        return
+      }
+
+      // Для оплаты при получении - просто очищаем корзину и перенаправляем
       clearCart()
-
       toast.success(t('checkout.success'))
-
-      // Редирект на страницу успеха
-      router.push('/order/success')
+      router.push(`/order/success?orderNumber=${orderNumber}`)
     } catch (error) {
+      console.error('Checkout error:', error)
       toast.error(t('checkout.error'))
     } finally {
       setIsSubmitting(false)

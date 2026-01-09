@@ -33,26 +33,31 @@ export interface Product {
   sku: string
 }
 
-export function getAllProducts(): Product[] {
+// Використовуємо статичний імпорт для всіх даних
+function getProductsFromFile(): Product[] {
   return productsData as Product[]
 }
 
+export function getAllProducts(): Product[] {
+  return getProductsFromFile()
+}
+
 export function getProductsByCategory(category: string): Product[] {
-  return productsData.filter((product) => product.category === category) as Product[]
+  return getProductsFromFile().filter((product) => product.category === category)
 }
 
 export function getProductById(id: string): Product | undefined {
-  return productsData.find((product) => product.id === id) as Product | undefined
+  return getProductsFromFile().find((product) => product.id === id)
 }
 
 export function getFeaturedProducts(): Product[] {
-  return productsData.filter((product) => product.featured) as Product[]
+  return getProductsFromFile().filter((product) => product.featured)
 }
 
 export function getNewProducts(): Product[] {
-  return productsData.filter((product) => product.new).slice(0, 4) as Product[]
+  return getProductsFromFile().filter((product) => product.new).slice(0, 4)
 }
 
 export function getProductsInStock(): Product[] {
-  return productsData.filter((product) => product.inStock) as Product[]
+  return getProductsFromFile().filter((product) => product.inStock)
 }
