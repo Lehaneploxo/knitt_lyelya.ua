@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client } from '@/lib/sanity'
+import { client, writeClient } from '@/lib/sanity'
 import crypto from 'crypto'
 
 // Функція для верифікації підпису webhook (якщо Monobank надає підпис)
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
 
       if (orders) {
         // Оновлюємо статус оплати
-        await client
+        await writeClient
           .patch(orders._id)
           .set({
             paymentStatus,
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Зберігаємо webhook лог для відлагодження
-    await client.create({
+    await writeClient.create({
       _type: 'paymentWebhook',
       invoiceId,
       status,

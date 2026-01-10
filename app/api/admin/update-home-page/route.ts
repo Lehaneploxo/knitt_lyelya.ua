@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client } from '@/lib/sanity'
+import { client, writeClient } from '@/lib/sanity'
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     // Завантаження banner1
     if (banner1) {
       const buffer = Buffer.from(await banner1.arrayBuffer())
-      const asset = await client.assets.upload('image', buffer, {
+      const asset = await writeClient.assets.upload('image', buffer, {
         filename: banner1.name,
       })
       updates.banner1 = {
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     // Завантаження banner2
     if (banner2) {
       const buffer = Buffer.from(await banner2.arrayBuffer())
-      const asset = await client.assets.upload('image', buffer, {
+      const asset = await writeClient.assets.upload('image', buffer, {
         filename: banner2.name,
       })
       updates.banner2 = {
@@ -47,10 +47,10 @@ export async function POST(request: NextRequest) {
 
     if (existingDoc) {
       // Оновлюємо існуючий документ
-      await client.patch(existingDoc._id).set(updates).commit()
+      await writeClient.patch(existingDoc._id).set(updates).commit()
     } else {
       // Створюємо новий документ
-      await client.create({
+      await writeClient.create({
         _type: 'homePage',
         ...updates,
       })

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client, getSettings } from '@/lib/sanity'
+import { writeClient, getSettings } from '@/lib/sanity'
 
 // Функція для генерації номера замовлення
 function generateOrderNumber() {
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Створення замовлення в Sanity
-    const order = await client.create({
+    const order = await writeClient.create({
       _type: 'order',
       orderNumber,
       customerName,

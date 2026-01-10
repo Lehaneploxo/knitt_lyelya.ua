@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client } from '@/lib/sanity'
+import { writeClient } from '@/lib/sanity'
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    await client
+    await writeClient
       .patch(orderId)
       .set({ paymentStatus })
       .commit()

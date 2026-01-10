@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client } from '@/lib/sanity'
+import { writeClient } from '@/lib/sanity'
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     } : undefined
 
     // Створюємо документ в Sanity
-    const result = await client.create({
+    const result = await writeClient.create({
       _type: 'product',
       name_ua: nameUa,
       name_en: nameEn,
