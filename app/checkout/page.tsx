@@ -55,6 +55,12 @@ export default function CheckoutPage() {
 
     try {
       // Создаем заказ в базе данных
+      console.log('Creating order with data:', {
+        customerName: `${formData.firstName} ${formData.lastName}`,
+        customerEmail: formData.email,
+        items: items.length,
+      })
+
       const orderResponse = await fetch('/api/orders/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -77,9 +83,12 @@ export default function CheckoutPage() {
         }),
       })
 
+      console.log('Order response status:', orderResponse.status)
       const orderData = await orderResponse.json()
+      console.log('Order response data:', orderData)
 
       if (!orderData.success) {
+        console.error('Order creation failed:', orderData.error)
         throw new Error(orderData.error || 'Failed to create order')
       }
 
@@ -87,6 +96,8 @@ export default function CheckoutPage() {
 
       // Если выбрана онлайн оплата - создаем Monobank invoice
       if (formData.paymentMethod === 'card_online') {
+        console.log('Creating Monobank invoice for order:', orderNumber)
+
         const paymentResponse = await fetch('/api/payment/create-invoice', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -97,11 +108,16 @@ export default function CheckoutPage() {
           }),
         })
 
+        console.log('Payment response status:', paymentResponse.status)
         const paymentData = await paymentResponse.json()
+        console.log('Payment response data:', paymentData)
 
         if (!paymentData.success || !paymentData.pageUrl) {
+          console.error('Payment invoice creation failed:', paymentData)
           throw new Error('Failed to create payment invoice')
         }
+
+        console.log('Redirecting to Monobank:', paymentData.pageUrl)
 
         // Очищаем корзину
         clearCart()
