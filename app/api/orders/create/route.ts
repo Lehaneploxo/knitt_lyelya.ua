@@ -52,14 +52,21 @@ export async function POST(request: NextRequest) {
       customerName,
       customerEmail,
       customerPhone,
-      items: items.map((item: any) => ({
-        _type: 'object',
-        productId: item.id,
-        name: item.name,
-        quantity: item.quantity,
-        price: item.price,
-      })),
-      totalAmount,
+      items: items.map((item: any) => {
+        // Обробка name - якщо об'єкт, беремо українську версію, інакше як є
+        const itemName = typeof item.name === 'object' && item.name !== null
+          ? (item.name.ua || item.name.en || JSON.stringify(item.name))
+          : String(item.name || 'Товар без назви')
+
+        return {
+          _type: 'object',
+          productId: item.id || '',
+          name: itemName,
+          quantity: Number(item.quantity) || 1,
+          price: Number(item.price) || 0,
+        }
+      }),
+      totalAmount: Number(totalAmount) || 0,
       paymentStatus,
       deliveryMethod: deliveryMethod || '',
       deliveryAddress: deliveryAddress || '',
