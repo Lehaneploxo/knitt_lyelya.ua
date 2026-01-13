@@ -3,13 +3,20 @@ import nodemailer from 'nodemailer'
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('[Email API] Received email send request')
     const { to, orderNumber, customerName, customerEmail, customerPhone, totalAmount, items, deliveryMethod, deliveryAddress, paymentMethod } = await request.json()
+
+    console.log('[Email API] Sending to:', to)
+    console.log('[Email API] Order number:', orderNumber)
 
     const gmailUser = process.env.GMAIL_USER
     const gmailPassword = process.env.GMAIL_APP_PASSWORD
 
+    console.log('[Email API] Gmail user:', gmailUser ? `${gmailUser.substring(0, 5)}***` : 'NOT SET')
+    console.log('[Email API] Gmail password:', gmailPassword ? 'SET' : 'NOT SET')
+
     if (!gmailUser || !gmailPassword) {
-      console.error('Gmail credentials не налаштовано')
+      console.error('[Email API] Gmail credentials не налаштовано')
       return NextResponse.json({ success: false, error: 'Email service not configured' }, { status: 500 })
     }
 
@@ -29,6 +36,8 @@ export async function POST(request: NextRequest) {
     }).join('')
 
     const paymentMethodText = paymentMethod === 'card_online' ? 'Картою онлайн (Monobank)' : 'Оплата при отриманні'
+
+    console.log('[Email API] Attempting to send email...')
 
     // Відправка email
     const result = await transporter.sendMail({
@@ -82,13 +91,13 @@ export async function POST(request: NextRequest) {
       `,
     })
 
-    console.log('Email відправлено:', result.messageId)
+    console.log('[Email API] Email відправлено успішно! Message ID:', result.messageId)
 
     return NextResponse.json({ success: true, messageId: result.messageId })
   } catch (error) {
-    console.error('Email error:', error)
+    console.error('[Email API] Email error:', error)
     return NextResponse.json(
-      { success: false, error: 'Failed to send email' },
+      { success: false, error: 'Failed to send email', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
