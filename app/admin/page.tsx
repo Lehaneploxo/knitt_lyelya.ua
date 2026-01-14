@@ -111,6 +111,28 @@ export default function AdminPage() {
     }
   }
 
+  const handleImport = async () => {
+    if (!confirm('Імпортувати всі товари з JSON в Sanity? Це може зайняти 1-2 хвилини.')) return
+
+    try {
+      toast.info('Починаю імпорт товарів...')
+      const response = await fetch('/api/admin/import-products', {
+        method: 'POST',
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        toast.success(`Імпортовано ${data.imported} товарів! Пропущено: ${data.skipped}`)
+        fetchProducts()
+      } else {
+        toast.error(data.error || 'Помилка імпорту')
+      }
+    } catch (error) {
+      toast.error('Помилка з\'єднання')
+    }
+  }
+
   const getCategoryName = (cat: Category) => {
     switch(cat) {
       case 'ethno': return 'Етно'
@@ -191,12 +213,20 @@ export default function AdminPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">Керування товарами ({products.length})</h2>
-          <Link
-            href="/admin/add"
-            className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 font-medium"
-          >
-            + Додати товар
-          </Link>
+          <div className="flex gap-3">
+            <button
+              onClick={handleImport}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium"
+            >
+              📥 Імпортувати товари в Sanity
+            </button>
+            <Link
+              href="/admin/add"
+              className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 font-medium"
+            >
+              + Додати товар
+            </Link>
+          </div>
         </div>
 
         {loading ? (
