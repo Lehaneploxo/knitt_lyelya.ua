@@ -32,7 +32,23 @@ export async function POST(request: NextRequest) {
     // Формуємо список товарів
     const itemsList = items.map((item: any) => {
       const name = typeof item.name === 'object' ? item.name.ua : item.name
-      return `<li>${name} - ${item.quantity} шт. × ${item.price} грн = ${item.quantity * item.price} грн</li>`
+      const sku = item.id || item.sku || 'N/A'
+      const image = item.image || ''
+
+      return `
+        <li style="margin-bottom: 20px; padding: 15px; background-color: #f9f9f9; border-radius: 8px;">
+          <div style="display: flex; align-items: center; gap: 15px;">
+            ${image ? `<img src="${image}" alt="${name}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;" />` : ''}
+            <div style="flex: 1;">
+              <p style="margin: 0; font-weight: bold; font-size: 16px; color: #333;">${name}</p>
+              <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Артикул: ${sku}</p>
+              <p style="margin: 5px 0 0 0; color: #D4A574; font-size: 14px;">
+                ${item.quantity} шт. × ${item.price} грн = <strong>${item.quantity * item.price} грн</strong>
+              </p>
+            </div>
+          </div>
+        </li>
+      `
     }).join('')
 
     const paymentMethodText = paymentMethod === 'card_online' ? 'Картою онлайн (Monobank)' : 'Оплата при отриманні'

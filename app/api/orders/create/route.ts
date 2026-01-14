@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeClient, getSettings } from '@/lib/sanity'
+import { createOrder, type OrderItem } from '@/lib/supabase'
 
 // Функція для генерації номера замовлення
 function generateOrderNumber() {
@@ -7,7 +7,7 @@ function generateOrderNumber() {
   const random = Math.floor(Math.random() * 1000)
     .toString()
     .padStart(3, '0')
-  return `${timestamp}${random}`
+  return `ORDER-${timestamp}${random}`
 }
 
 export async function POST(request: NextRequest) {
@@ -48,34 +48,35 @@ export async function POST(request: NextRequest) {
       paymentStatus = 'not_paid' // Наложений платіж
     }
 
-    // Створення замовлення в Sanity
-    console.log('[Orders API] Creating order in Sanity, orderNumber:', orderNumber)
-    const order = await writeClient.create({
-      _type: 'order',
-      orderNumber,
-      customerName,
-      customerEmail,
-      customerPhone,
-      items: items.map((item: any) => {
-        // Обробка name - якщо об'єкт, беремо українську версію, інакше як є
-        const itemName = typeof item.name === 'object' && item.name !== null
-          ? (item.name.ua || item.name.en || JSON.stringify(item.name))
-          : String(item.name || 'Товар без назви')
+    // Створення замовлення в Supabase
+    console.log('[Orders API] Creating order in Supabase, orderNumber:', orderNumber)
 
-        return {
-          _type: 'object',
-          productId: item.id || '',
-          name: itemName,
-          quantity: Number(item.quantity) || 1,
-          price: Number(item.price) || 0,
-        }
-      }),
-      totalAmount: Number(totalAmount) || 0,
-      paymentStatus,
-      deliveryMethod: deliveryMethod || '',
-      deliveryAddress: deliveryAddress || '',
-      orderDate: new Date().toISOString(),
+    const orderItems: OrderItem[] = items.map((item: any) => ({
+      id: item.id || '',
+      name: {
+        ua: typeof item.name === 'object' && item.name !== null
+          ? (item.name.ua || item.name.en || String(item.name))
+          : String(item.name || 'Товар без назви'),
+        en: typeof item.name === 'object' ? item.name.en : undefined
+      },
+      quantity: Number(item.quantity) || 1,
+      price: Number(item.price) || 0,
+      image: item.image || undefined
+    }))
+
+    const order = await createOrder({
+      order_number: orderNumber,
+      customer_name: customerName,
+      customer_email: customerEmail,
+      customer_phone: customerPhone,
+      items: orderItems,
+      total_amount: Number(totalAmount) || 0,
+      payment_method: paymentMethod || 'cash_on_delivery',
+      payment_status: paymentStatus,
+      delivery_method: deliveryMethod || '',
+      delivery_address: deliveryAddress || '',
       notes: notes || '',
+      order_date: new Date().toISOString()
     })
 
     // Відправка email (якщо налаштовано)
@@ -116,12 +117,12 @@ export async function POST(request: NextRequest) {
       // Не блокуємо створення замовлення через помилку email
     }
 
-    console.log('[Orders API] Order created successfully:', order._id)
+    console.log('[Orders API] Order created successfully:', order.id)
 
     return NextResponse.json({
       success: true,
       orderNumber,
-      orderId: order._id,
+      orderId: order.id,
     })
   } catch (error) {
     console.error('Error creating order:', error)

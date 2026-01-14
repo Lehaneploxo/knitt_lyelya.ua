@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client, writeClient } from '@/lib/sanity'
+import { getOrderByNumber, updateOrderPaymentStatus } from '@/lib/supabase'
 import crypto from 'crypto'
 
 // Функція для верифікації підпису webhook (якщо Monobank надає підпис)
@@ -30,9 +30,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Оновлення статусу платежу в Sanity
+    // Оновлення статусу платежу в Supabase
     if (reference) {
-      // Reference - це orderId з нашої системи
+      // Reference - це orderNumber з нашої системи
       const orderNumber = reference
 
       // Визначаємо новий статус оплати
@@ -45,67 +45,51 @@ export async function POST(request: NextRequest) {
         paymentStatus = 'processing'
       }
 
-      // Знаходимо замовлення за номером
-      const orders = await client.fetch(
-        `*[_type == "order" && orderNumber == $orderNumber][0]`,
-        { orderNumber }
-      )
+      try {
+        // Знаходимо та оновлюємо замовлення
+        const order = await getOrderByNumber(orderNumber)
 
-      if (orders) {
-        // Оновлюємо статус оплати
-        await writeClient
-          .patch(orders._id)
-          .set({
-            paymentStatus,
-            monobankInvoiceId: invoiceId,
-            monobankStatus: status,
-            paymentAmount: amount ? amount / 100 : undefined,
-            paymentCurrency: ccy === 980 ? 'UAH' : String(ccy),
-            paymentDate: status === 'success' ? new Date().toISOString() : undefined,
-          })
-          .commit()
+        if (order) {
+          // Оновлюємо статус оплати
+          await updateOrderPaymentStatus(orderNumber, paymentStatus)
 
-        console.log(`Order ${orderNumber} payment status updated to ${paymentStatus}`)
+          console.log(`Order ${orderNumber} payment status updated to ${paymentStatus}`)
 
-        // Відправка email клієнту після успішної оплати
-        if (status === 'success' && orders.customerEmail) {
-          try {
-            const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.knittlyelyaua.com'
+          // Відправка email клієнту після успішної оплати
+          if (status === 'success' && order.customer_email) {
+            try {
+              const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.knittlyelyaua.com'
 
-            await fetch(`${baseUrl}/api/send-payment-confirmation`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                customerEmail: orders.customerEmail,
-                customerName: orders.customerName,
-                orderNumber: orders.orderNumber,
-                totalAmount: orders.totalAmount,
-                items: orders.items,
-                deliveryMethod: orders.deliveryMethod,
-                deliveryAddress: orders.deliveryAddress,
-              }),
-            })
+              await fetch(`${baseUrl}/api/send-payment-confirmation`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  customerEmail: order.customer_email,
+                  customerName: order.customer_name,
+                  orderNumber: order.order_number,
+                  totalAmount: order.total_amount,
+                  items: order.items,
+                  deliveryMethod: order.delivery_method,
+                  deliveryAddress: order.delivery_address,
+                }),
+              })
 
-            console.log(`Payment confirmation email sent to ${orders.customerEmail}`)
-          } catch (emailError) {
-            console.error('Failed to send payment confirmation email:', emailError)
-            // Не блокуємо обробку webhook через помилку email
+              console.log(`Payment confirmation email sent to ${order.customer_email}`)
+            } catch (emailError) {
+              console.error('Failed to send payment confirmation email:', emailError)
+              // Не блокуємо обробку webhook через помилку email
+            }
           }
+        } else {
+          console.error(`Order ${orderNumber} not found`)
         }
+      } catch (orderError) {
+        console.error('Failed to update order:', orderError)
       }
     }
 
-    // Зберігаємо webhook лог для відлагодження
-    await writeClient.create({
-      _type: 'paymentWebhook',
-      invoiceId,
-      status,
-      amount: amount ? amount / 100 : null,
-      currency: ccy === 980 ? 'UAH' : String(ccy),
-      reference,
-      receivedAt: new Date().toISOString(),
-      rawData: webhookData,
-    })
+    // Логуємо webhook для відлагодження
+    console.log('Webhook processed successfully:', { invoiceId, status, reference })
 
     return NextResponse.json({ success: true })
   } catch (error) {

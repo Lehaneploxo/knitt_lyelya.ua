@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeClient, client } from '@/lib/sanity'
+import { supabaseAdmin } from '@/lib/supabase'
 
 export async function DELETE(request: NextRequest) {
   try {
@@ -13,26 +13,22 @@ export async function DELETE(request: NextRequest) {
       )
     }
 
-    // Перевіряємо чи є товар в Sanity
-    const existingProduct = await client.fetch(
-      '*[_type == "product" && _id == $id][0]',
-      { id }
-    )
+    // Видаляємо товар з Supabase
+    const { error } = await supabaseAdmin
+      .from('products')
+      .delete()
+      .eq('id', id)
 
-    // Якщо товару немає в Sanity - повертаємо успіх
-    // (товар показується з JSON, але видалити його там не можна на Vercel)
-    if (!existingProduct) {
-      console.log(`Товар ${id} не в Sanity, пропускаю видалення`)
-      return NextResponse.json({
-        success: true,
-        message: 'Product not in Sanity, cannot delete from JSON on Vercel'
-      })
+    if (error) {
+      // Якщо товару немає в Supabase - все одно повертаємо успіх
+      if (error.code === 'PGRST116') {
+        console.log(`Товар ${id} не в Supabase`)
+        return NextResponse.json({ success: true })
+      }
+      throw error
     }
 
-    // Видаляємо товар з Sanity
-    await writeClient.delete(id)
-    console.log(`✅ Товар ${id} видалено з Sanity`)
-
+    console.log(`✅ Товар ${id} видалено з Supabase`)
     return NextResponse.json({ success: true })
   } catch (error: any) {
     console.error('Error deleting product:', error)

@@ -116,7 +116,7 @@ export default function AdminPage() {
 
     try {
       toast.info('Починаю імпорт товарів...')
-      const response = await fetch('/api/admin/import-products', {
+      const response = await fetch('/api/admin/init-products', {
         method: 'POST',
       })
 
@@ -218,7 +218,7 @@ export default function AdminPage() {
               onClick={handleImport}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium"
             >
-              📥 Імпортувати товари в Sanity
+              📥 Імпортувати товари
             </button>
             <Link
               href="/admin/add"
