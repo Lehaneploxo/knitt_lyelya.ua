@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getProductById } from '@/lib/products'
+import { client } from '@/lib/sanity'
 
 export async function GET(
   request: NextRequest,
@@ -7,7 +7,23 @@ export async function GET(
 ) {
   try {
     const { id: productId } = await params
-    const product = getProductById(productId)
+
+    // Читаємо товар з Sanity по _id
+    const product = await client.fetch(
+      `*[_type == "product" && _id == $id][0] {
+        _id,
+        name_ua,
+        name_en,
+        price,
+        description_ua,
+        description_en,
+        category,
+        inStock,
+        sku,
+        images
+      }`,
+      { id: productId }
+    )
 
     if (!product) {
       return NextResponse.json(
@@ -16,19 +32,7 @@ export async function GET(
       )
     }
 
-    // Конвертуємо формат для адмін-панелі
-    const formattedProduct = {
-      _id: product.id,
-      name_ua: product.name.ua,
-      name_en: product.name.en,
-      price: product.price,
-      description_ua: product.description.ua,
-      description_en: product.description.en,
-      category: product.category,
-      inStock: product.inStock
-    }
-
-    return NextResponse.json({ success: true, product: formattedProduct })
+    return NextResponse.json({ success: true, product })
   } catch (error) {
     console.error('Error fetching product:', error)
     return NextResponse.json(

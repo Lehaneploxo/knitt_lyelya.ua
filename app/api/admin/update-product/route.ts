@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { writeClient } from '@/lib/sanity'
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,31 +13,20 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Читаємо JSON файл
-    const filePath = path.join(process.cwd(), 'data', 'products.json')
-    const fileData = fs.readFileSync(filePath, 'utf-8')
-    const products = JSON.parse(fileData)
+    // Оновлюємо товар в Sanity
+    const updates: any = {}
+    if (name_ua !== undefined) updates.name_ua = name_ua
+    if (name_en !== undefined) updates.name_en = name_en
+    if (price !== undefined) updates.price = price
+    if (description_ua !== undefined) updates.description_ua = description_ua
+    if (description_en !== undefined) updates.description_en = description_en
+    if (category !== undefined) updates.category = category
+    if (inStock !== undefined) updates.inStock = inStock
 
-    // Знаходимо товар
-    const productIndex = products.findIndex((p: any) => p.id === id)
-    if (productIndex === -1) {
-      return NextResponse.json(
-        { success: false, error: 'Product not found' },
-        { status: 404 }
-      )
-    }
-
-    // Оновлюємо тільки надані поля
-    if (name_ua !== undefined) products[productIndex].name.ua = name_ua
-    if (name_en !== undefined) products[productIndex].name.en = name_en
-    if (price !== undefined) products[productIndex].price = price
-    if (description_ua !== undefined) products[productIndex].description.ua = description_ua
-    if (description_en !== undefined) products[productIndex].description.en = description_en
-    if (category !== undefined) products[productIndex].category = category
-    if (inStock !== undefined) products[productIndex].inStock = inStock
-
-    // Зберігаємо назад у файл
-    fs.writeFileSync(filePath, JSON.stringify(products, null, 2), 'utf-8')
+    await writeClient
+      .patch(id)
+      .set(updates)
+      .commit()
 
     return NextResponse.json({ success: true })
   } catch (error) {
