@@ -21,6 +21,7 @@ export async function GET(
         id: data.id,
         name: { ua: data.name_ua, en: data.name_en },
         price: data.price,
+        priceEUR: data.price_eur,
         description: { ua: data.description_ua || '', en: data.description_en || '' },
         category: data.category,
         inStock: data.in_stock,

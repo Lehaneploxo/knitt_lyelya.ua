@@ -25,6 +25,7 @@ export async function GET(request: NextRequest) {
         id: p.id,
         name: { ua: p.name_ua, en: p.name_en },
         price: p.price,
+        priceEUR: p.price_eur,
         description: { ua: p.description_ua || '', en: p.description_en || '' },
         category: p.category,
         inStock: p.in_stock,

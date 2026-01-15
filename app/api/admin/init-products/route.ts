@@ -72,12 +72,18 @@ export async function POST() {
           name_ua: product.name.ua,
           name_en: product.name.en,
           price: product.price,
+          price_eur: product.priceEUR || null,
           description_ua: product.description?.ua || '',
           description_en: product.description?.en || '',
           category: product.category,
           in_stock: product.inStock !== false,
           sku: product.sku || product.id,
           images: product.images || [],
+          materials: product.materials || [],
+          colors: product.colors || [],
+          dimensions: product.dimensions || null,
+          is_new: product.new === true,
+          is_bestseller: product.featured === true,
         })
 
         if (error) throw error
