@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client } from '@/lib/sanity'
+import { supabaseAdmin } from '@/lib/supabase'
 import { getProductById } from '@/lib/products'
 
 export async function GET(
@@ -9,32 +9,37 @@ export async function GET(
   try {
     const { id: productId } = await params
 
-    // Спочатку пробуємо читати з Sanity
-    try {
-      const product = await client.fetch(
-        `*[_type == "product" && _id == $id][0] {
-          _id,
-          name_ua,
-          name_en,
-          price,
-          description_ua,
-          description_en,
-          category,
-          inStock,
-          sku,
-          images
-        }`,
-        { id: productId }
-      )
+    // Читаємо товар з Supabase
+    const { data: product, error } = await supabaseAdmin
+      .from('products')
+      .select('*')
+      .eq('id', productId)
+      .single()
 
-      if (product) {
-        return NextResponse.json({ success: true, product })
+    if (!error && product) {
+      // Форматуємо для фронтенду
+      const formattedProduct = {
+        _id: product.id,
+        name_ua: product.name_ua,
+        name_en: product.name_en,
+        price: product.price,
+        description_ua: product.description_ua,
+        description_en: product.description_en,
+        category: product.category,
+        inStock: product.in_stock,
+        sku: product.sku,
+        images: product.images || [],
+        materials: product.materials || [],
+        colors: product.colors || [],
+        dimensions: product.dimensions,
+        isNew: product.is_new,
+        isBestseller: product.is_bestseller
       }
-    } catch (sanityError) {
-      console.log('Sanity unavailable, fallback to JSON')
+      return NextResponse.json({ success: true, product: formattedProduct })
     }
 
     // Fallback до JSON
+    console.log('Supabase: товар не знайдено, fallback до JSON')
     const jsonProduct = getProductById(productId)
     if (!jsonProduct) {
       return NextResponse.json(
@@ -48,12 +53,12 @@ export async function GET(
       name_ua: jsonProduct.name.ua,
       name_en: jsonProduct.name.en,
       price: jsonProduct.price,
-      description_ua: jsonProduct.description.ua,
-      description_en: jsonProduct.description.en,
+      description_ua: jsonProduct.description?.ua || '',
+      description_en: jsonProduct.description?.en || '',
       category: jsonProduct.category,
       inStock: jsonProduct.inStock,
       sku: jsonProduct.sku,
-      images: jsonProduct.images
+      images: jsonProduct.images || []
     }
 
     return NextResponse.json({ success: true, product: formattedProduct })
