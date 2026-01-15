@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
       .from('products')
       .select('*')
       .eq('in_stock', true)
-      .order('created_at', { ascending: false })
+      .order('id', { ascending: true })
 
     if (category) {
       query = query.eq('category', category)

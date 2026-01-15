@@ -125,7 +125,7 @@ export async function getProductsFromSupabase(): Promise<Product[]> {
   const { data, error } = await supabase
     .from('products')
     .select('*')
-    .order('created_at', { ascending: false })
+    .order('id', { ascending: true })
 
   if (error) {
     console.error('Помилка отримання товарів:', error)
@@ -156,7 +156,7 @@ export async function getProductsByCategoryFromSupabase(category: string): Promi
     .select('*')
     .eq('category', category)
     .eq('in_stock', true)
-    .order('created_at', { ascending: false })
+    .order('id', { ascending: true })
 
   if (error) {
     console.error('Помилка отримання товарів:', error)
