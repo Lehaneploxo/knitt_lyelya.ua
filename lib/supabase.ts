@@ -102,3 +102,109 @@ export async function getAllOrders() {
 
   return data
 }
+
+// Типи для товару
+export interface Product {
+  id: string
+  name: { ua: string; en: string }
+  price: number
+  description: { ua: string; en: string }
+  category: string
+  inStock: boolean
+  sku: string
+  images: string[]
+  materials?: string[]
+  colors?: string[]
+  dimensions?: { height?: number; width?: number; depth?: number }
+  isNew?: boolean
+  isBestseller?: boolean
+}
+
+// Функції для роботи з товарами (публічний доступ)
+export async function getProductsFromSupabase(): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Помилка отримання товарів:', error)
+    return []
+  }
+
+  // Форматуємо дані для фронтенду
+  return (data || []).map(p => ({
+    id: p.id,
+    name: { ua: p.name_ua, en: p.name_en },
+    price: p.price,
+    description: { ua: p.description_ua || '', en: p.description_en || '' },
+    category: p.category,
+    inStock: p.in_stock,
+    sku: p.sku,
+    images: p.images || [],
+    materials: p.materials || [],
+    colors: p.colors || [],
+    dimensions: p.dimensions,
+    isNew: p.is_new,
+    isBestseller: p.is_bestseller
+  }))
+}
+
+export async function getProductsByCategoryFromSupabase(category: string): Promise<Product[]> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('category', category)
+    .eq('in_stock', true)
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Помилка отримання товарів:', error)
+    return []
+  }
+
+  return (data || []).map(p => ({
+    id: p.id,
+    name: { ua: p.name_ua, en: p.name_en },
+    price: p.price,
+    description: { ua: p.description_ua || '', en: p.description_en || '' },
+    category: p.category,
+    inStock: p.in_stock,
+    sku: p.sku,
+    images: p.images || [],
+    materials: p.materials || [],
+    colors: p.colors || [],
+    dimensions: p.dimensions,
+    isNew: p.is_new,
+    isBestseller: p.is_bestseller
+  }))
+}
+
+export async function getProductByIdFromSupabase(id: string): Promise<Product | null> {
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('id', id)
+    .single()
+
+  if (error || !data) {
+    console.error('Помилка отримання товару:', error)
+    return null
+  }
+
+  return {
+    id: data.id,
+    name: { ua: data.name_ua, en: data.name_en },
+    price: data.price,
+    description: { ua: data.description_ua || '', en: data.description_en || '' },
+    category: data.category,
+    inStock: data.in_stock,
+    sku: data.sku,
+    images: data.images || [],
+    materials: data.materials || [],
+    colors: data.colors || [],
+    dimensions: data.dimensions,
+    isNew: data.is_new,
+    isBestseller: data.is_bestseller
+  }
+}

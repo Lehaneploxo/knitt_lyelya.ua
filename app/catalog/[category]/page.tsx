@@ -1,10 +1,9 @@
 'use client'
 
-import { use, Suspense } from 'react'
+import { use, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { ProductGrid } from '@/components/product/ProductGrid'
-import { getProductsByCategory } from '@/lib/products'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CatalogPage({
@@ -14,14 +13,27 @@ export default function CatalogPage({
 }) {
   const { category } = use(params)
   const { t } = useLanguage()
+  const [products, setProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  let products: ReturnType<typeof getProductsByCategory> = []
-  try {
-    products = getProductsByCategory(category)
-  } catch (error) {
-    console.error('Error loading products:', error)
-    products = []
-  }
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch(`/api/products?category=${category}`)
+        const data = await response.json()
+        if (data.success) {
+          setProducts(data.products || [])
+        }
+      } catch (error) {
+        console.error('Error loading products:', error)
+        setProducts([])
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProducts()
+  }, [category])
 
   const getCategoryTitle = (cat: string) => {
     switch(cat) {
@@ -77,7 +89,11 @@ export default function CatalogPage({
       </div>
 
       {/* Products Grid */}
-      {products.length > 0 ? (
+      {loading ? (
+        <div className="text-center py-16">
+          <p className="text-gray-600 text-lg">Завантаження...</p>
+        </div>
+      ) : products.length > 0 ? (
         <ProductGrid products={products} />
       ) : (
         <div className="text-center py-16">

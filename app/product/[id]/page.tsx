@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -8,15 +8,33 @@ import { ChevronRight, Minus, Plus, ChevronLeft, ChevronRight as ChevronRightIco
 import { useCartStore } from '@/store/cartStore'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { toast } from 'sonner'
-import { getProductById } from '@/lib/products'
 import { ImageZoom } from '@/components/ui/ImageZoom'
 import { SwipeableImageCarousel } from '@/components/ui/SwipeableImageCarousel'
 
 export default function ProductPage() {
   const params = useParams()
   const id = params.id as string
-  const product = getProductById(id)
   const { language, t } = useLanguage()
+  const [product, setProduct] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch(`/api/products/${id}`)
+        const data = await response.json()
+        if (data.success && data.product) {
+          setProduct(data.product)
+        }
+      } catch (error) {
+        console.error('Error loading product:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    if (id) fetchProduct()
+  }, [id])
 
   const [quantity, setQuantity] = useState(1)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -24,6 +42,14 @@ export default function ProductPage() {
   const [activeTab, setActiveTab] = useState<'description' | 'specs' | 'delivery'>('description')
 
   const addItem = useCartStore((state) => state.addItem)
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <p className="text-gray-600 text-lg">Завантаження...</p>
+      </div>
+    )
+  }
 
   if (!product) {
     return (
@@ -99,7 +125,7 @@ export default function ProductPage() {
           {/* Thumbnails */}
           {images.length > 1 && (
             <div className="grid grid-cols-4 gap-4">
-              {images.map((image, index) => (
+              {images.map((image: string, index: number) => (
                 <div
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
