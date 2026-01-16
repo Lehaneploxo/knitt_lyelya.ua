@@ -22,12 +22,18 @@ export async function POST() {
           name_ua TEXT NOT NULL,
           name_en TEXT NOT NULL,
           price DECIMAL(10, 2) NOT NULL,
+          price_eur DECIMAL(10, 2),
           description_ua TEXT,
           description_en TEXT,
           category TEXT NOT NULL,
           in_stock BOOLEAN DEFAULT true,
           sku TEXT,
           images JSONB,
+          materials JSONB,
+          colors JSONB,
+          dimensions JSONB,
+          is_new BOOLEAN DEFAULT false,
+          is_bestseller BOOLEAN DEFAULT false,
           created_at TIMESTAMPTZ DEFAULT NOW(),
           updated_at TIMESTAMPTZ DEFAULT NOW()
         );

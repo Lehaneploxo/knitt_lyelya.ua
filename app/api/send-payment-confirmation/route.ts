@@ -86,7 +86,11 @@ export async function POST(request: NextRequest) {
             <div style="margin-top: 30px; padding: 20px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 8px;">
               <p style="margin: 0; color: #856404;">
                 📞 Якщо у вас є запитання, зв'яжіться з нами:<br>
-                Instagram: <a href="https://instagram.com/knitt_lyelya.ua" style="color: #D4A574;">@knitt_lyelya.ua</a>
+                <a href="tel:+380954440531" style="color: #D4A574; font-weight: bold;">+38095 444 0531</a><br>
+                <span style="font-size: 14px;">
+                  <a href="https://t.me/+380954440531" style="color: #0088cc; text-decoration: none;">Telegram</a> ·
+                  <a href="https://wa.me/380954440531" style="color: #25D366; text-decoration: none;">WhatsApp</a>
+                </span>
               </p>
             </div>
           </div>

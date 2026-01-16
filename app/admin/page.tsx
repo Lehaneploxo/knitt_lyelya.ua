@@ -112,7 +112,7 @@ export default function AdminPage() {
   }
 
   const handleImport = async () => {
-    if (!confirm('Імпортувати всі товари з JSON в Sanity? Це може зайняти 1-2 хвилини.')) return
+    if (!confirm('Імпортувати всі товари з JSON в Supabase? Це може зайняти 1-2 хвилини.')) return
 
     try {
       toast.info('Починаю імпорт товарів...')
@@ -127,6 +127,28 @@ export default function AdminPage() {
         fetchProducts()
       } else {
         toast.error(data.error || 'Помилка імпорту')
+      }
+    } catch (error) {
+      toast.error('Помилка з\'єднання')
+    }
+  }
+
+  const handleReimport = async () => {
+    if (!confirm('ПОВНИЙ РЕІМПОРТ: Оновити ВСІ товари з JSON? Це перезапише всі дані включаючи матеріали та розміри.')) return
+
+    try {
+      toast.info('Починаю повний реімпорт товарів...')
+      const response = await fetch('/api/admin/reimport-products', {
+        method: 'POST',
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        toast.success(`Оновлено: ${data.updated}, Створено: ${data.created}, Помилок: ${data.errors}`)
+        fetchProducts()
+      } else {
+        toast.error(data.error || 'Помилка реімпорту')
       }
     } catch (error) {
       toast.error('Помилка з\'єднання')
@@ -218,7 +240,13 @@ export default function AdminPage() {
               onClick={handleImport}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-medium"
             >
-              📥 Імпортувати товари
+              📥 Імпортувати нові
+            </button>
+            <button
+              onClick={handleReimport}
+              className="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 font-medium"
+            >
+              🔄 Повний реімпорт
             </button>
             <Link
               href="/admin/add"
