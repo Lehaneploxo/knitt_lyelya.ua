@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createOrder, type OrderItem } from '@/lib/supabase'
+import { createOrder, type OrderItem, supabaseAdmin } from '@/lib/supabase'
 
-// Функція для генерації номера замовлення
-function generateOrderNumber() {
-  const timestamp = Date.now().toString().slice(-6)
-  const random = Math.floor(Math.random() * 1000)
-    .toString()
-    .padStart(3, '0')
-  return `ORDER-${timestamp}${random}`
+// Функція для генерації номера замовлення: 2026-01-16-0001
+async function generateOrderNumber() {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+
+  // Рахуємо кількість існуючих замовлень
+  const { count, error } = await supabaseAdmin
+    .from('orders')
+    .select('*', { count: 'exact', head: true })
+
+  const orderCount = (count || 0) + 1
+  const orderNum = String(orderCount).padStart(4, '0')
+
+  return `${year}-${month}-${day}-${orderNum}`
 }
 
 export async function POST(request: NextRequest) {
@@ -38,7 +47,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Генерація номера замовлення
-    const orderNumber = generateOrderNumber()
+    const orderNumber = await generateOrderNumber()
 
     // Визначення статусу оплати
     let paymentStatus = 'not_paid'
