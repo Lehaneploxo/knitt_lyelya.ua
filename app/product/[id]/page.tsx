@@ -296,9 +296,9 @@ export default function ProductPage() {
                           if (d.width) parts.push(d.width)
                           if (d.height) parts.push(d.height)
                           if (d.depth) parts.push(d.depth)
+                          if (d.handle) parts.push(d.handle)
                           let result = parts.join(' x ')
                           if (d.unit) result += ` ${d.unit}`
-                          if (d.handle) result += `, ручка ${d.handle} ${d.unit}`
                           return result
                         })()}
                       </span>
