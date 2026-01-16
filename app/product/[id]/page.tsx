@@ -287,11 +287,20 @@ export default function ProductPage() {
                     <div className="flex justify-between py-2 border-b">
                       <span className="text-gray-600">{t('product.dimensions.label')}:</span>
                       <span className="font-medium">
-                        {product.dimensions.diameter
-                          ? `Ø ${product.dimensions.diameter} ${product.dimensions.unit}`
-                          : product.dimensions.depth
-                          ? `${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} ${product.dimensions.unit}`
-                          : `${product.dimensions.width} x ${product.dimensions.height} ${product.dimensions.unit}`}
+                        {(() => {
+                          const d = product.dimensions
+                          if (d.diameter) {
+                            return `Ø ${d.diameter} ${d.unit}`
+                          }
+                          const parts = []
+                          if (d.width) parts.push(d.width)
+                          if (d.height) parts.push(d.height)
+                          if (d.depth) parts.push(d.depth)
+                          let result = parts.join(' x ')
+                          if (d.unit) result += ` ${d.unit}`
+                          if (d.handle) result += `, ручка ${d.handle} ${d.unit}`
+                          return result
+                        })()}
                       </span>
                     </div>
                   )}
