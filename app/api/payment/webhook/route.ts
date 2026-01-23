@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getOrderByNumber, updateOrderPaymentStatus } from '@/lib/supabase'
 import crypto from 'crypto'
+import nodemailer from 'nodemailer'
 
 // Функція для верифікації підпису webhook (якщо Monobank надає підпис)
 function verifyWebhookSignature(body: string, signature: string, secret: string): boolean {
@@ -55,26 +56,89 @@ export async function POST(request: NextRequest) {
 
           console.log(`Order ${orderNumber} payment status updated to ${paymentStatus}`)
 
-          // Відправка email клієнту після успішної оплати
+          // Відправка email клієнту після успішної оплати напряму через nodemailer
           if (status === 'success' && order.customer_email) {
             try {
-              const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.knittlyelyaua.com'
+              const gmailUser = process.env.GMAIL_USER
+              const gmailPassword = process.env.GMAIL_APP_PASSWORD
 
-              await fetch(`${baseUrl}/api/send-payment-confirmation`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  customerEmail: order.customer_email,
-                  customerName: order.customer_name,
-                  orderNumber: order.order_number,
-                  totalAmount: order.total_amount,
-                  items: order.items,
-                  deliveryMethod: order.delivery_method,
-                  deliveryAddress: order.delivery_address,
-                }),
-              })
+              if (gmailUser && gmailPassword) {
+                const transporter = nodemailer.createTransport({
+                  service: 'gmail',
+                  auth: {
+                    user: gmailUser,
+                    pass: gmailPassword,
+                  },
+                })
 
-              console.log(`Payment confirmation email sent to ${order.customer_email}`)
+                // Формуємо список товарів
+                const itemsList = (order.items || []).map((item: any) => {
+                  const name = typeof item.name === 'object' ? item.name.ua : item.name
+                  return `
+                    <tr>
+                      <td style="padding: 10px; border-bottom: 1px solid #eee;">${name}</td>
+                      <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: center;">${item.quantity}</td>
+                      <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: right;">${item.price} грн</td>
+                    </tr>
+                  `
+                }).join('')
+
+                await transporter.sendMail({
+                  from: `"knitt_lyelya.ua" <${gmailUser}>`,
+                  to: order.customer_email,
+                  subject: `✅ Оплата підтверджена - Замовлення #${order.order_number}`,
+                  html: `
+                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                      <div style="background-color: #4CAF50; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                        <h1 style="color: white; margin: 0;">Оплату отримано!</h1>
+                      </div>
+                      <div style="background-color: white; padding: 30px; border: 1px solid #eee; border-radius: 0 0 8px 8px;">
+                        <p>Шановний(а) <strong>${order.customer_name}</strong>,</p>
+                        <p>Дякуємо за оплату! Ваше замовлення <strong>#${order.order_number}</strong> успішно оплачено.</p>
+
+                        <h3 style="color: #D4A574; margin-top: 20px;">Деталі замовлення:</h3>
+                        <table style="width: 100%; border-collapse: collapse;">
+                          <thead>
+                            <tr style="background-color: #f5f5f5;">
+                              <th style="padding: 10px; text-align: left;">Товар</th>
+                              <th style="padding: 10px; text-align: center;">К-сть</th>
+                              <th style="padding: 10px; text-align: right;">Ціна</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            ${itemsList}
+                          </tbody>
+                        </table>
+                        <p style="font-size: 18px; font-weight: bold; text-align: right; margin-top: 15px;">
+                          Всього: ${order.total_amount} грн
+                        </p>
+
+                        <h3 style="color: #D4A574; margin-top: 20px;">Доставка:</h3>
+                        <p><strong>Спосіб:</strong> ${order.delivery_method === 'meest' ? 'Meest' : 'Нова Пошта'}</p>
+                        <p><strong>Адреса:</strong> ${order.delivery_address}</p>
+
+                        <div style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+                          <h4 style="margin-top: 0; color: #333;">Що далі?</h4>
+                          <p style="margin-bottom: 0;">Ми підготуємо ваше замовлення та відправимо найближчим часом. Ви отримаєте ТТН для відстеження.</p>
+                        </div>
+
+                        <p style="margin-top: 30px; color: #666;">
+                          З питаннями звертайтесь:<br>
+                          📱 Телефон: +380 (XX) XXX-XX-XX<br>
+                          💬 Telegram / WhatsApp
+                        </p>
+                      </div>
+                      <div style="text-align: center; margin-top: 20px; color: #999; font-size: 12px;">
+                        <p>© 2025 knitt_lyelya.ua</p>
+                      </div>
+                    </div>
+                  `,
+                })
+
+                console.log(`Payment confirmation email sent directly to ${order.customer_email}`)
+              } else {
+                console.error('Gmail credentials not configured for payment confirmation email')
+              }
             } catch (emailError) {
               console.error('Failed to send payment confirmation email:', emailError)
               // Не блокуємо обробку webhook через помилку email
