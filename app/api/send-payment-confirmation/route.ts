@@ -10,7 +10,8 @@ export async function POST(request: NextRequest) {
       totalAmount,
       items,
       deliveryMethod,
-      deliveryAddress
+      deliveryAddress,
+      notes
     } = await request.json()
 
     const gmailUser = process.env.GMAIL_USER
@@ -72,6 +73,11 @@ export async function POST(request: NextRequest) {
             <h3 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px; margin-top: 30px;">Доставка</h3>
             <p><strong>Спосіб доставки:</strong> ${deliveryMethodText}</p>
             <p><strong>Адреса:</strong> ${deliveryAddress}</p>
+
+            ${notes ? `
+            <h3 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px; margin-top: 30px;">Ваш коментар</h3>
+            <p style="background-color: #fff8e1; padding: 15px; border-radius: 8px; border-left: 4px solid #D4A574;">${notes}</p>
+            ` : ''}
 
             <div style="margin-top: 40px; padding: 20px; background-color: #f0f0f0; border-radius: 8px;">
               <h3 style="color: #D4A574; margin-top: 0;">Що далі?</h3>

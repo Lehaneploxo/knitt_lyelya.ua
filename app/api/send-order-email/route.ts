@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer'
 export async function POST(request: NextRequest) {
   try {
     console.log('[Email API] Received email send request')
-    const { to, orderNumber, customerName, customerEmail, customerPhone, totalAmount, items, deliveryMethod, deliveryAddress, paymentMethod } = await request.json()
+    const { to, orderNumber, customerName, customerEmail, customerPhone, totalAmount, items, deliveryMethod, deliveryAddress, paymentMethod, notes } = await request.json()
 
     console.log('[Email API] Sending to:', to)
     console.log('[Email API] Order number:', orderNumber)
@@ -89,6 +89,11 @@ export async function POST(request: NextRequest) {
 
             <h3 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px; margin-top: 30px;">Оплата</h3>
             <p><strong>Спосіб оплати:</strong> ${paymentMethodText}</p>
+
+            ${notes ? `
+            <h3 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px; margin-top: 30px;">Коментар до замовлення</h3>
+            <p style="background-color: #fff8e1; padding: 15px; border-radius: 8px; border-left: 4px solid #D4A574;">${notes}</p>
+            ` : ''}
 
             <div style="margin-top: 40px; padding: 20px; background-color: #f0f0f0; border-radius: 8px; text-align: center;">
               <p style="margin: 0; color: #666;">

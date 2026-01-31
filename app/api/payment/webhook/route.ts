@@ -117,6 +117,11 @@ export async function POST(request: NextRequest) {
                         <p><strong>Спосіб:</strong> ${order.delivery_method === 'meest' ? 'Meest' : 'Нова Пошта'}</p>
                         <p><strong>Адреса:</strong> ${order.delivery_address}</p>
 
+                        ${order.notes ? `
+                        <h3 style="color: #D4A574; margin-top: 20px;">Ваш коментар:</h3>
+                        <p style="background-color: #fff8e1; padding: 15px; border-radius: 8px; border-left: 4px solid #D4A574;">${order.notes}</p>
+                        ` : ''}
+
                         <div style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
                           <h4 style="margin-top: 0; color: #333;">Що далі?</h4>
                           <p style="margin-bottom: 0;">Ми підготуємо ваше замовлення та відправимо найближчим часом. Ви отримаєте ТТН для відстеження.</p>
