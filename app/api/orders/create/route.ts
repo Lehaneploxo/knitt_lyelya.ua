@@ -134,6 +134,15 @@ export async function POST(request: NextRequest) {
 
         const paymentMethodText = paymentMethod === 'card_online' ? 'Картою онлайн (Monobank)' : 'Оплата при отриманні'
 
+        // Формуємо блок коментаря
+        const notesBlock = notes && notes.trim() ? `
+          <h3 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px; margin-top: 30px;">Коментар до замовлення</h3>
+          <p style="background-color: #fff8e1; padding: 15px; border-radius: 8px; border-left: 4px solid #D4A574;">${notes}</p>
+        ` : ''
+
+        console.log('[Orders API] Notes value:', notes)
+        console.log('[Orders API] Notes block:', notesBlock ? 'ADDED' : 'EMPTY')
+
         const result = await transporter.sendMail({
           from: `"knitt_lyelya.ua" <${gmailUser}>`,
           to: notificationEmail,
@@ -168,10 +177,7 @@ export async function POST(request: NextRequest) {
                 <h3 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px; margin-top: 30px;">Оплата</h3>
                 <p><strong>Спосіб оплати:</strong> ${paymentMethodText}</p>
 
-                ${notes ? `
-                <h3 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px; margin-top: 30px;">Коментар до замовлення</h3>
-                <p style="background-color: #fff8e1; padding: 15px; border-radius: 8px; border-left: 4px solid #D4A574;">${notes}</p>
-                ` : ''}
+                ${notesBlock}
 
                 <div style="margin-top: 40px; padding: 20px; background-color: #f0f0f0; border-radius: 8px; text-align: center;">
                   <p style="margin: 0; color: #666;">
