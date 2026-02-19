@@ -14,6 +14,7 @@ export default function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isContractModalOpen, setIsContractModalOpen] = useState(false)
   const [isContractAccepted, setIsContractAccepted] = useState(false)
+  const [orderSubmitted, setOrderSubmitted] = useState(false)
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -128,9 +129,10 @@ export default function CheckoutPage() {
       }
 
       // Для оплаты при получении - просто очищаем корзину и перенаправляем
+      setOrderSubmitted(true)
       clearCart()
       toast.success(t('checkout.success'))
-      router.push(`/order/success?orderNumber=${orderNumber}`)
+      router.push(`/checkout/complete?orderNumber=${orderNumber}`)
     } catch (error) {
       console.error('Checkout error:', error)
       toast.error(t('checkout.error'))
@@ -151,7 +153,7 @@ export default function CheckoutPage() {
     toast.info(t('contract.declined'))
   }
 
-  if (items.length === 0) {
+  if (items.length === 0 && !orderSubmitted) {
     router.push('/cart')
     return null
   }
