@@ -1,11 +1,28 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCartStore } from '@/store/cartStore'
 import { toast } from 'sonner'
 import { useLanguage } from '@/contexts/LanguageContext'
 import ContractModal from '@/components/ui/ContractModal'
+
+interface NpCity {
+  Ref: string
+  Present: string
+  MainDescription: string
+  Area: string
+  SettlementTypeCode: string
+  DeliveryCity: string
+}
+
+interface NpWarehouse {
+  Ref: string
+  Description: string
+  ShortAddress: string
+  CityDescription: string
+  WarehouseIndex: string
+}
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -21,24 +38,133 @@ export default function CheckoutPage() {
     lastName: '',
     phone: '',
     email: '',
-    deliveryMethod: 'meest',
+    deliveryMethod: 'novaposhta',
     city: '',
     address: '',
     paymentMethod: 'cash_on_delivery',
     comment: '',
   })
 
+  // Nova Poshta state
+  const [npCityQuery, setNpCityQuery] = useState('')
+  const [npCityResults, setNpCityResults] = useState<NpCity[]>([])
+  const [npCityOpen, setNpCityOpen] = useState(false)
+  const [npCityLoading, setNpCityLoading] = useState(false)
+  const [npSelectedCity, setNpSelectedCity] = useState<NpCity | null>(null)
+
+  const [npWarehouseQuery, setNpWarehouseQuery] = useState('')
+  const [npWarehouseResults, setNpWarehouseResults] = useState<NpWarehouse[]>([])
+  const [npWarehouseOpen, setNpWarehouseOpen] = useState(false)
+  const [npWarehouseLoading, setNpWarehouseLoading] = useState(false)
+  const [npSelectedWarehouse, setNpSelectedWarehouse] = useState<NpWarehouse | null>(null)
+
+  const cityDropdownRef = useRef<HTMLDivElement>(null)
+  const warehouseDropdownRef = useRef<HTMLDivElement>(null)
+
+  // Debounced city search
+  useEffect(() => {
+    if (formData.deliveryMethod !== 'novaposhta') return
+    if (npCityQuery.length < 2) {
+      setNpCityResults([])
+      setNpCityOpen(false)
+      return
+    }
+    const timer = setTimeout(async () => {
+      setNpCityLoading(true)
+      try {
+        const res = await fetch('/api/novaposhta', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'searchCities', query: npCityQuery }),
+        })
+        const data = await res.json()
+        const addresses: NpCity[] = data?.data?.[0]?.Addresses || []
+        setNpCityResults(addresses)
+        setNpCityOpen(addresses.length > 0)
+      } catch {
+        setNpCityResults([])
+      } finally {
+        setNpCityLoading(false)
+      }
+    }, 400)
+    return () => clearTimeout(timer)
+  }, [npCityQuery, formData.deliveryMethod])
+
+  // Debounced warehouse search
+  useEffect(() => {
+    if (!npSelectedCity) return
+    const timer = setTimeout(async () => {
+      setNpWarehouseLoading(true)
+      try {
+        const res = await fetch('/api/novaposhta', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'getWarehouses',
+            cityRef: npSelectedCity.DeliveryCity || npSelectedCity.Ref,
+            query: npWarehouseQuery,
+          }),
+        })
+        const data = await res.json()
+        const warehouses: NpWarehouse[] = data?.data || []
+        setNpWarehouseResults(warehouses)
+        setNpWarehouseOpen(warehouses.length > 0)
+      } catch {
+        setNpWarehouseResults([])
+      } finally {
+        setNpWarehouseLoading(false)
+      }
+    }, 400)
+    return () => clearTimeout(timer)
+  }, [npWarehouseQuery, npSelectedCity])
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (cityDropdownRef.current && !cityDropdownRef.current.contains(e.target as Node)) {
+        setNpCityOpen(false)
+      }
+      if (warehouseDropdownRef.current && !warehouseDropdownRef.current.contains(e.target as Node)) {
+        setNpWarehouseOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  const selectCity = (city: NpCity) => {
+    setNpSelectedCity(city)
+    setNpCityQuery(city.Present)
+    setNpCityOpen(false)
+    // Reset warehouse when city changes
+    setNpSelectedWarehouse(null)
+    setNpWarehouseQuery('')
+    setNpWarehouseResults([])
+  }
+
+  const selectWarehouse = (wh: NpWarehouse) => {
+    setNpSelectedWarehouse(wh)
+    setNpWarehouseQuery(wh.Description)
+    setNpWarehouseOpen(false)
+  }
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+    // Reset NP fields when switching delivery method
+    if (name === 'deliveryMethod' && value !== 'novaposhta') {
+      setNpSelectedCity(null)
+      setNpSelectedWarehouse(null)
+      setNpCityQuery('')
+      setNpWarehouseQuery('')
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Проверка принятия договора
     if (!isContractAccepted) {
       setIsContractModalOpen(true)
       toast.error(t('contract.error'))
@@ -47,21 +173,38 @@ export default function CheckoutPage() {
 
     setIsSubmitting(true)
 
-    // Базовая валидация
     if (!formData.firstName || !formData.lastName || !formData.phone || !formData.email) {
       toast.error(t('checkout.errorRequired'))
       setIsSubmitting(false)
       return
     }
 
-    try {
-      // Создаем заказ в базе данных
-      console.log('Creating order with data:', {
-        customerName: `${formData.firstName} ${formData.lastName}`,
-        customerEmail: formData.email,
-        items: items.length,
-      })
+    // Nova Poshta validation
+    if (formData.deliveryMethod === 'novaposhta') {
+      if (!npSelectedCity) {
+        toast.error(t('checkout.npSelectCity'))
+        setIsSubmitting(false)
+        return
+      }
+      if (!npSelectedWarehouse) {
+        toast.error(t('checkout.npSelectWarehouse'))
+        setIsSubmitting(false)
+        return
+      }
+    } else {
+      if (!formData.city || !formData.address) {
+        toast.error(t('checkout.errorRequired'))
+        setIsSubmitting(false)
+        return
+      }
+    }
 
+    const deliveryAddress =
+      formData.deliveryMethod === 'novaposhta'
+        ? `${npSelectedCity?.Present}, ${npSelectedWarehouse?.Description}`
+        : `${formData.city}, ${formData.address}`
+
+    try {
       const orderResponse = await fetch('/api/orders/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -78,27 +221,21 @@ export default function CheckoutPage() {
           })),
           totalAmount: getTotalPrice(),
           deliveryMethod: formData.deliveryMethod,
-          deliveryAddress: `${formData.city}, ${formData.address}`,
+          deliveryAddress,
           paymentMethod: formData.paymentMethod,
           notes: formData.comment,
         }),
       })
 
-      console.log('Order response status:', orderResponse.status)
       const orderData = await orderResponse.json()
-      console.log('Order response data:', orderData)
 
       if (!orderData.success) {
-        console.error('Order creation failed:', orderData.error)
         throw new Error(orderData.error || 'Failed to create order')
       }
 
       const { orderNumber } = orderData
 
-      // Если выбрана онлайн оплата - создаем Monobank invoice
       if (formData.paymentMethod === 'card_online') {
-        console.log('Creating Monobank invoice for order:', orderNumber)
-
         const paymentResponse = await fetch('/api/payment/create-invoice', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -109,26 +246,17 @@ export default function CheckoutPage() {
           }),
         })
 
-        console.log('Payment response status:', paymentResponse.status)
         const paymentData = await paymentResponse.json()
-        console.log('Payment response data:', paymentData)
 
         if (!paymentData.success || !paymentData.pageUrl) {
-          console.error('Payment invoice creation failed:', paymentData)
           throw new Error('Failed to create payment invoice')
         }
 
-        console.log('Redirecting to Monobank:', paymentData.pageUrl)
-
-        // Очищаем корзину
         clearCart()
-
-        // Перенаправляем на страницу оплаты Monobank
         window.location.href = paymentData.pageUrl
         return
       }
 
-      // Для оплаты при получении - просто очищаем корзину и перенаправляем
       setOrderSubmitted(true)
       clearCart()
       toast.success(t('checkout.success'))
@@ -241,7 +369,24 @@ export default function CheckoutPage() {
               </h2>
 
               <div className="space-y-4 mb-6">
-                <label className="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-primary transition-colors">
+                <label className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-colors ${formData.deliveryMethod === 'novaposhta' ? 'border-primary bg-primary/5' : 'border-gray-300 hover:border-primary'}`}>
+                  <input
+                    type="radio"
+                    name="deliveryMethod"
+                    value="novaposhta"
+                    checked={formData.deliveryMethod === 'novaposhta'}
+                    onChange={handleInputChange}
+                    className="mr-3"
+                  />
+                  <div className="flex items-center gap-3">
+                    <div>
+                      <div className="font-medium">{t('checkout.deliveryNovaposhta')}</div>
+                      <div className="text-sm text-gray-600">{t('checkout.deliveryNovaposhtaTime')}</div>
+                    </div>
+                  </div>
+                </label>
+
+                <label className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-colors ${formData.deliveryMethod === 'meest' ? 'border-primary bg-primary/5' : 'border-gray-300 hover:border-primary'}`}>
                   <input
                     type="radio"
                     name="deliveryMethod"
@@ -255,52 +400,136 @@ export default function CheckoutPage() {
                     <div className="text-sm text-gray-600">{t('checkout.deliveryMeestTime')}</div>
                   </div>
                 </label>
+              </div>
 
-                <label className="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-primary transition-colors">
-                  <input
-                    type="radio"
-                    name="deliveryMethod"
-                    value="novaposhta"
-                    checked={formData.deliveryMethod === 'novaposhta'}
-                    onChange={handleInputChange}
-                    className="mr-3"
-                  />
-                  <div>
-                    <div className="font-medium">{t('checkout.deliveryNovaposhta')}</div>
-                    <div className="text-sm text-gray-600">{t('checkout.deliveryNovaposhtaTime')}</div>
+              {/* Nova Poshta autocomplete fields */}
+              {formData.deliveryMethod === 'novaposhta' && (
+                <div className="space-y-4">
+                  {/* City search */}
+                  <div ref={cityDropdownRef} className="relative">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t('checkout.npCity')} *
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={npCityQuery}
+                        onChange={(e) => {
+                          setNpCityQuery(e.target.value)
+                          setNpSelectedCity(null)
+                          setNpSelectedWarehouse(null)
+                          setNpWarehouseQuery('')
+                        }}
+                        placeholder={t('checkout.npCityPlaceholder')}
+                        autoComplete="off"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent pr-10"
+                      />
+                      {npCityLoading && (
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                          <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                        </div>
+                      )}
+                      {npSelectedCity && !npCityLoading && (
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500">✓</div>
+                      )}
+                    </div>
+                    {npCityOpen && npCityResults.length > 0 && (
+                      <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                        {npCityResults.map((city) => (
+                          <button
+                            key={city.Ref}
+                            type="button"
+                            onClick={() => selectCity(city)}
+                            className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0 transition-colors"
+                          >
+                            <span className="font-medium text-sm">{city.Present}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                </label>
-              </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('checkout.city')} *
-                  </label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
+                  {/* Warehouse search — shown only after city selected */}
+                  {npSelectedCity && (
+                    <div ref={warehouseDropdownRef} className="relative">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('checkout.npWarehouse')} *
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={npWarehouseQuery}
+                          onChange={(e) => {
+                            setNpWarehouseQuery(e.target.value)
+                            setNpSelectedWarehouse(null)
+                          }}
+                          placeholder={t('checkout.npWarehousePlaceholder')}
+                          autoComplete="off"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent pr-10"
+                        />
+                        {npWarehouseLoading && (
+                          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                            <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                          </div>
+                        )}
+                        {npSelectedWarehouse && !npWarehouseLoading && (
+                          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500">✓</div>
+                        )}
+                      </div>
+                      {npWarehouseOpen && npWarehouseResults.length > 0 && (
+                        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                          {npWarehouseResults.map((wh) => (
+                            <button
+                              key={wh.Ref}
+                              type="button"
+                              onClick={() => selectWarehouse(wh)}
+                              className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0 transition-colors"
+                            >
+                              <span className="text-sm font-medium">{wh.Description}</span>
+                              {wh.ShortAddress && (
+                                <p className="text-xs text-gray-500 mt-0.5">{wh.ShortAddress}</p>
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
+              )}
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('checkout.address')} *
-                  </label>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
+              {/* Meest fields */}
+              {formData.deliveryMethod === 'meest' && (
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t('checkout.city')} *
+                    </label>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t('checkout.address')} *
+                    </label>
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Payment */}
@@ -449,7 +678,6 @@ export default function CheckoutPage() {
         </div>
       </form>
 
-      {/* Модальне вікно договору */}
       <ContractModal
         isOpen={isContractModalOpen}
         onClose={() => setIsContractModalOpen(false)}
