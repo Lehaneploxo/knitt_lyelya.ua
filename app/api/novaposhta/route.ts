@@ -29,9 +29,9 @@ export async function POST(request: NextRequest) {
       modelName: 'AddressGeneral',
       calledMethod: 'getWarehouses',
       methodProperties: {
-        SettlementRef: cityRef || '',
+        CityRef: cityRef || '',
         FindByString: query || '',
-        Limit: 50,
+        Limit: 100,
         Page: page,
       },
     }

@@ -60,6 +60,14 @@ export default function CheckoutPage() {
 
   const cityDropdownRef = useRef<HTMLDivElement>(null)
   const warehouseDropdownRef = useRef<HTMLDivElement>(null)
+  const warehouseInputRef = useRef<HTMLInputElement>(null)
+
+  // Auto-focus warehouse input when city is selected
+  useEffect(() => {
+    if (npSelectedCity) {
+      setTimeout(() => warehouseInputRef.current?.focus(), 100)
+    }
+  }, [npSelectedCity])
 
   // Debounced city search
   useEffect(() => {
@@ -457,11 +465,15 @@ export default function CheckoutPage() {
                       </label>
                       <div className="relative">
                         <input
+                          ref={warehouseInputRef}
                           type="text"
                           value={npWarehouseQuery}
                           onChange={(e) => {
                             setNpWarehouseQuery(e.target.value)
                             setNpSelectedWarehouse(null)
+                          }}
+                          onFocus={() => {
+                            if (npWarehouseResults.length > 0) setNpWarehouseOpen(true)
                           }}
                           placeholder={t('checkout.npWarehousePlaceholder')}
                           autoComplete="off"
