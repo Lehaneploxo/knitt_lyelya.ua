@@ -1,11 +1,12 @@
 'use client'
 
+import { Suspense } from 'react'
 import Link from 'next/link'
 import { CheckCircle } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useSearchParams } from 'next/navigation'
 
-export default function OrderSuccessPage() {
+function OrderSuccessContent() {
   const { t } = useLanguage()
   const searchParams = useSearchParams()
 
@@ -80,15 +81,15 @@ export default function OrderSuccessPage() {
           </Link>
         </div>
 
-        <div className="mt-12 pt-8 border-t">
-          <p className="text-gray-600 text-justify">
-            {t('orderSuccess.contactUs')}
-          </p>
-          <p className="text-gray-900 font-medium mt-2 text-justify">
-            📞 +380 XX XXX XX XX | ✉️ info@knitt-lyelya.ua
-          </p>
-        </div>
       </div>
     </div>
+  )
+}
+
+export default function OrderSuccessPage() {
+  return (
+    <Suspense fallback={<div className="max-w-3xl mx-auto px-4 py-16 text-center">Завантаження...</div>}>
+      <OrderSuccessContent />
+    </Suspense>
   )
 }
