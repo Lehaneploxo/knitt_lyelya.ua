@@ -191,7 +191,7 @@ export default function HomePage() {
         <div className="max-w-xl mx-auto">
           <blockquote
             className="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/p/DR4VRdDDCo6/?utm_source=ig_embed&amp;utm_campaign=loading"
+            data-instgrm-permalink="https://www.instagram.com/reel/DYAZbu-smwT/?utm_source=ig_embed&amp;utm_campaign=loading"
             data-instgrm-version="14"
             style={{
               background: '#FFF',
@@ -207,7 +207,7 @@ export default function HomePage() {
           >
             <div style={{ padding: '16px' }}>
               <a
-                href="https://www.instagram.com/p/DR4VRdDDCo6/?utm_source=ig_embed&amp;utm_campaign=loading"
+                href="https://www.instagram.com/reel/DYAZbu-smwT/?utm_source=ig_embed&amp;utm_campaign=loading"
                 style={{
                   background: '#FFFFFF',
                   lineHeight: '0',
