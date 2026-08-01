@@ -24,6 +24,19 @@ interface NpWarehouse {
   WarehouseIndex: string
 }
 
+interface MeestCity {
+  cityID: string
+  name: string
+  region: string
+}
+
+interface MeestBranch {
+  branchID: string
+  num: string | number
+  address: string
+  schedule: string
+}
+
 export default function CheckoutPage() {
   const router = useRouter()
   const { items, getTotalPrice, clearCart } = useCartStore()
@@ -58,16 +71,112 @@ export default function CheckoutPage() {
   const [npWarehouseLoading, setNpWarehouseLoading] = useState(false)
   const [npSelectedWarehouse, setNpSelectedWarehouse] = useState<NpWarehouse | null>(null)
 
+  // Meest state
+  const [meestCityQuery, setMeestCityQuery] = useState('')
+  const [meestCityResults, setMeestCityResults] = useState<MeestCity[]>([])
+  const [meestCityOpen, setMeestCityOpen] = useState(false)
+  const [meestCityLoading, setMeestCityLoading] = useState(false)
+  const [meestSelectedCity, setMeestSelectedCity] = useState<MeestCity | null>(null)
+
+  const [meestBranchQuery, setMeestBranchQuery] = useState('')
+  const [meestBranchAll, setMeestBranchAll] = useState<MeestBranch[]>([])
+  const [meestBranchResults, setMeestBranchResults] = useState<MeestBranch[]>([])
+  const [meestBranchOpen, setMeestBranchOpen] = useState(false)
+  const [meestBranchLoading, setMeestBranchLoading] = useState(false)
+  const [meestSelectedBranch, setMeestSelectedBranch] = useState<MeestBranch | null>(null)
+
   const cityDropdownRef = useRef<HTMLDivElement>(null)
   const warehouseDropdownRef = useRef<HTMLDivElement>(null)
   const warehouseInputRef = useRef<HTMLInputElement>(null)
+  const meestCityDropdownRef = useRef<HTMLDivElement>(null)
+  const meestBranchDropdownRef = useRef<HTMLDivElement>(null)
+  const meestBranchInputRef = useRef<HTMLInputElement>(null)
 
-  // Auto-focus warehouse input when city is selected
+  // Auto-focus warehouse input when NP city is selected
   useEffect(() => {
     if (npSelectedCity) {
       setTimeout(() => warehouseInputRef.current?.focus(), 100)
     }
   }, [npSelectedCity])
+
+  // Auto-focus Meest branch input when city is selected
+  useEffect(() => {
+    if (meestSelectedCity) {
+      setTimeout(() => meestBranchInputRef.current?.focus(), 100)
+    }
+  }, [meestSelectedCity])
+
+  // Debounced Meest city search
+  useEffect(() => {
+    if (formData.deliveryMethod !== 'meest') return
+    if (meestCityQuery.length < 2) {
+      setMeestCityResults([])
+      setMeestCityOpen(false)
+      return
+    }
+    const timer = setTimeout(async () => {
+      setMeestCityLoading(true)
+      try {
+        const res = await fetch('/api/meest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'searchCities', query: meestCityQuery }),
+        })
+        const data = await res.json()
+        const cities: MeestCity[] = data?.cities || []
+        setMeestCityResults(cities.slice(0, 50))
+        setMeestCityOpen(cities.length > 0)
+      } catch {
+        setMeestCityResults([])
+      } finally {
+        setMeestCityLoading(false)
+      }
+    }, 400)
+    return () => clearTimeout(timer)
+  }, [meestCityQuery, formData.deliveryMethod])
+
+  // Fetch all Meest branches for the selected city once (not on every keystroke)
+  useEffect(() => {
+    if (!meestSelectedCity) {
+      setMeestBranchAll([])
+      return
+    }
+    let cancelled = false
+    setMeestBranchLoading(true)
+    fetch('/api/meest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'getBranches', cityId: meestSelectedCity.cityID }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return
+        setMeestBranchAll(data?.branches || [])
+      })
+      .catch(() => {
+        if (!cancelled) setMeestBranchAll([])
+      })
+      .finally(() => {
+        if (!cancelled) setMeestBranchLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [meestSelectedCity])
+
+  // Filter the already-fetched branch list locally as the user types — no extra requests
+  useEffect(() => {
+    const MAX_VISIBLE = 50
+    const matches = meestBranchQuery
+      ? meestBranchAll.filter(
+          (b) =>
+            b.address?.toLowerCase().includes(meestBranchQuery.toLowerCase()) ||
+            String(b.num).includes(meestBranchQuery)
+        )
+      : meestBranchAll
+    setMeestBranchResults(matches.slice(0, MAX_VISIBLE))
+    setMeestBranchOpen(matches.length > 0)
+  }, [meestBranchQuery, meestBranchAll])
 
   // Debounced city search
   useEffect(() => {
@@ -135,6 +244,12 @@ export default function CheckoutPage() {
       if (warehouseDropdownRef.current && !warehouseDropdownRef.current.contains(e.target as Node)) {
         setNpWarehouseOpen(false)
       }
+      if (meestCityDropdownRef.current && !meestCityDropdownRef.current.contains(e.target as Node)) {
+        setMeestCityOpen(false)
+      }
+      if (meestBranchDropdownRef.current && !meestBranchDropdownRef.current.contains(e.target as Node)) {
+        setMeestBranchOpen(false)
+      }
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
@@ -161,12 +276,19 @@ export default function CheckoutPage() {
   ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-    // Reset NP fields when switching delivery method
-    if (name === 'deliveryMethod' && value !== 'novaposhta') {
-      setNpSelectedCity(null)
-      setNpSelectedWarehouse(null)
-      setNpCityQuery('')
-      setNpWarehouseQuery('')
+    if (name === 'deliveryMethod') {
+      if (value !== 'novaposhta') {
+        setNpSelectedCity(null)
+        setNpSelectedWarehouse(null)
+        setNpCityQuery('')
+        setNpWarehouseQuery('')
+      }
+      if (value !== 'meest') {
+        setMeestSelectedCity(null)
+        setMeestSelectedBranch(null)
+        setMeestCityQuery('')
+        setMeestBranchQuery('')
+      }
     }
   }
 
@@ -199,9 +321,17 @@ export default function CheckoutPage() {
         setIsSubmitting(false)
         return
       }
-    } else {
-      if (!formData.city || !formData.address) {
-        toast.error(t('checkout.errorRequired'))
+    }
+
+    // Meest validation
+    if (formData.deliveryMethod === 'meest') {
+      if (!meestSelectedCity) {
+        toast.error(t('checkout.npSelectCity'))
+        setIsSubmitting(false)
+        return
+      }
+      if (!meestSelectedBranch) {
+        toast.error(t('checkout.npSelectWarehouse'))
         setIsSubmitting(false)
         return
       }
@@ -210,6 +340,8 @@ export default function CheckoutPage() {
     const deliveryAddress =
       formData.deliveryMethod === 'novaposhta'
         ? `${npSelectedCity?.Present}, ${npSelectedWarehouse?.Description}`
+        : formData.deliveryMethod === 'meest'
+        ? `${meestSelectedCity?.name}, відділення №${meestSelectedBranch?.num} - ${meestSelectedBranch?.address}`
         : `${formData.city}, ${formData.address}`
 
     try {
@@ -510,36 +642,117 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              {/* Meest fields */}
+              {/* Meest autocomplete fields */}
               {formData.deliveryMethod === 'meest' && (
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
+                <div className="space-y-4">
+                  {/* Meest City search */}
+                  <div ref={meestCityDropdownRef} className="relative">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('checkout.city')} *
+                      {t('checkout.npCity')} *
                     </label>
-                    <input
-                      type="text"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    />
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={meestCityQuery}
+                        onChange={(e) => {
+                          setMeestCityQuery(e.target.value)
+                          setMeestSelectedCity(null)
+                          setMeestSelectedBranch(null)
+                          setMeestBranchQuery('')
+                        }}
+                        placeholder={t('checkout.npCityPlaceholder')}
+                        autoComplete="off"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent pr-10"
+                      />
+                      {meestCityLoading && (
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                          <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                        </div>
+                      )}
+                      {meestSelectedCity && !meestCityLoading && (
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500">✓</div>
+                      )}
+                    </div>
+                    {meestCityOpen && meestCityResults.length > 0 && (
+                      <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                        {meestCityResults.map((city) => (
+                          <button
+                            key={city.cityID}
+                            type="button"
+                            onClick={() => {
+                              setMeestSelectedCity(city)
+                              setMeestCityQuery(city.name)
+                              setMeestCityOpen(false)
+                              setMeestSelectedBranch(null)
+                              setMeestBranchQuery('')
+                              setMeestBranchResults([])
+                            }}
+                            className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0 transition-colors"
+                          >
+                            <span className="font-medium text-sm">{city.name}</span>
+                            {city.region && (
+                              <p className="text-xs text-gray-500 mt-0.5">{city.region}</p>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('checkout.address')} *
-                    </label>
-                    <input
-                      type="text"
-                      name="address"
-                      value={formData.address}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    />
-                  </div>
+                  {/* Meest Branch search — shown only after city selected */}
+                  {meestSelectedCity && (
+                    <div ref={meestBranchDropdownRef} className="relative">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        {t('checkout.npWarehouse')} *
+                      </label>
+                      <div className="relative">
+                        <input
+                          ref={meestBranchInputRef}
+                          type="text"
+                          value={meestBranchQuery}
+                          onChange={(e) => {
+                            setMeestBranchQuery(e.target.value)
+                            setMeestSelectedBranch(null)
+                          }}
+                          onFocus={() => {
+                            if (meestBranchResults.length > 0) setMeestBranchOpen(true)
+                          }}
+                          placeholder={t('checkout.npWarehousePlaceholder')}
+                          autoComplete="off"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent pr-10"
+                        />
+                        {meestBranchLoading && (
+                          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                            <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                          </div>
+                        )}
+                        {meestSelectedBranch && !meestBranchLoading && (
+                          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500">✓</div>
+                        )}
+                      </div>
+                      {meestBranchOpen && meestBranchResults.length > 0 && (
+                        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                          {meestBranchResults.map((branch) => (
+                            <button
+                              key={branch.branchID}
+                              type="button"
+                              onClick={() => {
+                                setMeestSelectedBranch(branch)
+                                setMeestBranchQuery(`№${branch.num} - ${branch.address}`)
+                                setMeestBranchOpen(false)
+                              }}
+                              className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0 transition-colors"
+                            >
+                              <span className="text-sm font-medium">Відділення №{branch.num}</span>
+                              {branch.address && (
+                                <p className="text-xs text-gray-500 mt-0.5">{branch.address}</p>
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
