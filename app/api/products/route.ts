@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
       .from('products')
       .select('*')
       .eq('in_stock', true)
+      .order('is_new', { ascending: false })
       .order('id', { ascending: true })
 
     if (category) {
