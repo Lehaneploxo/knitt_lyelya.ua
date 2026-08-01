@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { setOrderInvoiceId } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
   try {
@@ -41,7 +42,7 @@ export async function POST(request: NextRequest) {
         destination: `Оплата замовлення в магазині ${shopName}`,
         comment: customerEmail || '',
       },
-      redirectUrl: `${baseUrl}/order/success?orderId=${orderId}`,
+      redirectUrl: `${baseUrl}/checkout/complete?orderId=${orderId}`,
       webHookUrl: `${baseUrl}/api/payment/webhook`,
       validity: 3600, // 1 година
       paymentType: 'debit',
@@ -72,6 +73,18 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json()
     console.log('[Payment API] Invoice created successfully:', data.invoiceId)
+
+    // Зберігаємо invoiceId у замовленні, щоб webhook міг перевірити,
+    // що запит стосується саме цього створеного рахунку
+    try {
+      await setOrderInvoiceId(orderId, data.invoiceId)
+    } catch (dbError) {
+      console.error('[Payment API] Failed to save invoiceId to order:', dbError)
+      return NextResponse.json(
+        { success: false, error: 'Failed to link invoice to order' },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
       success: true,

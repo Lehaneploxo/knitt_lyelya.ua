@@ -3,24 +3,60 @@ import { getOrderByNumber, updateOrderPaymentStatus } from '@/lib/supabase'
 import crypto from 'crypto'
 import nodemailer from 'nodemailer'
 
-// Функція для верифікації підпису webhook (якщо Monobank надає підпис)
-function verifyWebhookSignature(body: string, signature: string, secret: string): boolean {
-  const hash = crypto.createHmac('sha256', secret).update(body).digest('base64')
-  return hash === signature
+// Публічний ключ Monobank кешується в пам'яті процесу (він не змінюється на льоту)
+let cachedPublicKeyPem: string | null = null
+
+async function getMonobankPublicKeyPem(): Promise<string> {
+  if (cachedPublicKeyPem) return cachedPublicKeyPem
+
+  const token = process.env.MONOBANK_TOKEN
+  if (!token) {
+    throw new Error('MONOBANK_TOKEN is not configured')
+  }
+
+  const res = await fetch('https://api.monobank.ua/api/merchant/pubkey', {
+    headers: { 'X-Token': token },
+  })
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch Monobank public key: ${res.status}`)
+  }
+
+  const data = await res.json()
+  const keyLines = (data.key as string).match(/.{1,64}/g) || []
+  cachedPublicKeyPem = `-----BEGIN PUBLIC KEY-----\n${keyLines.join('\n')}\n-----END PUBLIC KEY-----\n`
+  return cachedPublicKeyPem
+}
+
+// Перевірка підпису webhook офіційним публічним ключем Monobank (ECDSA)
+async function verifyWebhookSignature(rawBody: string, signatureBase64: string): Promise<boolean> {
+  try {
+    const publicKey = await getMonobankPublicKeyPem()
+    const verifier = crypto.createVerify('SHA256')
+    verifier.update(rawBody)
+    verifier.end()
+    return verifier.verify(publicKey, signatureBase64, 'base64')
+  } catch (error) {
+    console.error('Webhook signature verification failed:', error)
+    return false
+  }
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text()
+
+    // Обов'язкова перевірка підпису - без неї будь-хто може підробити webhook
+    // і позначити неоплачене замовлення як оплачене
+    const signature = request.headers.get('x-sign')
+    if (!signature || !(await verifyWebhookSignature(body, signature))) {
+      console.error('Rejected webhook: invalid or missing signature')
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
+    }
+
     const webhookData = JSON.parse(body)
 
     console.log('Received webhook from Monobank:', webhookData)
-
-    // Верифікація підпису (опціонально, якщо Monobank надає)
-    // const signature = request.headers.get('x-sign')
-    // if (signature && !verifyWebhookSignature(body, signature, process.env.MONOBANK_TOKEN!)) {
-    //   return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
-    // }
 
     const { invoiceId, status, amount, ccy, reference } = webhookData
 
@@ -51,6 +87,20 @@ export async function POST(request: NextRequest) {
         const order = await getOrderByNumber(orderNumber)
 
         if (order) {
+          // Перевіряємо, що webhook стосується саме того рахунку,
+          // який ми самі створили для цього замовлення
+          if (!order.invoice_id || order.invoice_id !== invoiceId) {
+            console.error(`Invoice mismatch for order ${orderNumber}: expected ${order.invoice_id}, got ${invoiceId}`)
+            return NextResponse.json({ error: 'Invoice mismatch' }, { status: 400 })
+          }
+
+          // Перевіряємо суму та валюту, щоб виключити оплату "не тієї" суми
+          const expectedAmount = Math.round(Number(order.total_amount) * 100)
+          if (status === 'success' && (amount !== expectedAmount || ccy !== 980)) {
+            console.error(`Amount mismatch for order ${orderNumber}: expected ${expectedAmount}/980, got ${amount}/${ccy}`)
+            return NextResponse.json({ error: 'Amount mismatch' }, { status: 400 })
+          }
+
           // Оновлюємо статус оплати
           await updateOrderPaymentStatus(orderNumber, paymentStatus)
 

@@ -32,6 +32,7 @@ export interface Order {
   order_date?: string
   created_at?: string
   updated_at?: string
+  invoice_id?: string
 }
 
 export interface OrderItem {
@@ -67,6 +68,22 @@ export async function getOrderByNumber(orderNumber: string) {
 
   if (error) {
     console.error('Помилка отримання замовлення:', error)
+    throw error
+  }
+
+  return data
+}
+
+export async function setOrderInvoiceId(orderNumber: string, invoiceId: string) {
+  const { data, error } = await supabaseAdmin
+    .from('orders')
+    .update({ invoice_id: invoiceId })
+    .eq('order_number', orderNumber)
+    .select()
+    .single()
+
+  if (error) {
+    console.error('Помилка збереження invoiceId:', error)
     throw error
   }
 
