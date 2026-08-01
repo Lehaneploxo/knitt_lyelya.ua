@@ -56,6 +56,8 @@ async function getToken(): Promise<string> {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username: MEEST_LOGIN?.trim(), password: MEEST_PASSWORD?.trim() }),
+    signal: AbortSignal.timeout(10000),
+    cache: 'no-store',
   })
   const data = await res.json()
   if (data.status !== 'OK') throw new Error(`Meest auth failed: ${JSON.stringify(data)}`)
@@ -76,6 +78,8 @@ async function meestFetch(path: string, body: unknown): Promise<Record<string, u
     method: 'POST',
     headers: { 'Content-Type': 'application/json', token },
     body: JSON.stringify(body),
+    signal: AbortSignal.timeout(10000),
+    cache: 'no-store',
   })
   const data = await res.json()
   if (data.status !== 'OK' && cachedToken) {
@@ -85,6 +89,8 @@ async function meestFetch(path: string, body: unknown): Promise<Record<string, u
       method: 'POST',
       headers: { 'Content-Type': 'application/json', token: retryToken },
       body: JSON.stringify(body),
+      signal: AbortSignal.timeout(10000),
+      cache: 'no-store',
     })
     return retryRes.json()
   }
