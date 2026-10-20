@@ -105,14 +105,14 @@
     "id": "home_004",
     "category": "home",
     "name": {
-      "ua": "Набір підтарільників Ажур",
-      "en": "Placemat set"
+      "ua": "Набір Ажур",
+      "en": "Openwork set"
     },
     "description": {
-      "ua": "Вишуканий набір з 2 підтарільників з ажурним плетінням з натурального джуту. Діаметр 26 см. Витончена робота майстра створює унікальний візерунок. Ідеальний подарунок для цінителів ручної роботи.",
-      "en": "Exquisite set of 2 placemats with openwork weaving from natural jute. Diameter 26 cm. Delicate craftsmanship creates a unique pattern. Perfect gift for handmade enthusiasts."
+      "ua": "Вишуканий набір з 2 підтарільників з ажурним плетінням з натурального джуту та хлібного кошика. Діаметр підтарільників - 26 см, розміри кошика - 20 см в діаметрі, висота - 7 см. Матеріал - джут, дерево. Ідеальний подарунок для цінителів ручної роботи.",
+      "en": "An exquisite set of 2 openwork placemats woven from natural jute, complete with a bread basket. Placemat diameter: 26 cm; basket: 20 cm in diameter, 7 cm high. Materials: jute, wood. A perfect gift for lovers of handmade items."
     },
-    "price": 450,
+    "price": 930,
     "currency": "UAH",
     "images": [
       "/images/products/4home.placemat1.JPG",
@@ -123,13 +123,9 @@
       "натуральний"
     ],
     "materials": [
-      "джут"
+      "джут",
+      "дерево"
     ],
-    "dimensions": {
-      "diameter": 26,
-      "unit": "cm"
-    },
-    "quantity": 2,
     "inStock": true,
     "featured": false,
     "new": false,
@@ -208,14 +204,14 @@
     "id": "home_007",
     "category": "home",
     "name": {
-      "ua": "Набір підтарільників Соняx",
-      "en": "Placemat set Sunflower"
+      "ua": "Набір До сніданку",
+      "en": "Breakfast set"
     },
     "description": {
-      "ua": "Чарівний набір з 2 підтарільників з візерунком соняшника у поєднанні натурального джуту та чорного кольору. Діаметр 21 см. Символ сонця та радості на вашому столі. Унікальний дизайн та якісне виконання.",
-      "en": "Charming set of 2 placemats with sunflower pattern combining natural jute and black color. Diameter 21 cm. Symbol of sun and joy on your table. Unique design and quality craftsmanship."
+      "ua": "Набір в стилі етно з 2 підтарільників з візерунком соняшника і прямокутного хлібного кошика, що додасть затишної атмосфери до вашого сніданку. Матеріал: натуральний джут бежевого і чорного кольору, дерево. Діаметр підтарільників 21 см, кошик - 17/25 см, висота 6,5 см.",
+      "en": "An ethno-style set of 2 placemats with a sunflower pattern and a rectangular bread basket that will bring a cozy atmosphere to your breakfast. Materials: natural jute in beige and black, wood. Placemat diameter: 21 cm; basket: 17×25 cm, 6.5 cm high."
     },
-    "price": 420,
+    "price": 876,
     "currency": "UAH",
     "images": [
       "/images/products/7home.placemat1.JPG",
@@ -227,13 +223,9 @@
       "чорний"
     ],
     "materials": [
-      "джут"
+      "джут",
+      "дерево"
     ],
-    "dimensions": {
-      "diameter": 21,
-      "unit": "cm"
-    },
-    "quantity": 2,
     "inStock": true,
     "featured": false,
     "new": false,
@@ -420,17 +412,17 @@
     "id": "home_013",
     "category": "home",
     "name": {
-      "ua": "Кошик для смаколиків",
-      "en": "Bread basket"
+      "ua": "Набір Ажур",
+      "en": "Openwork set"
     },
     "description": {
-      "ua": "матеріал - джут, дерево, колір - натурального джуту, діаметр - 20 см, висота - 7 см",
-      "en": "material - jute, wood, colour - natural, d - 20 cm, h - 7 cm"
+      "ua": "Набір з 4 підтарільників з ажурним плетінням з натурального джуту та хлібного кошика. Діаметр підтарільників - 26 см, розміри кошика - 20 см в діаметрі, висота - 7 см. Матеріал - джут, дерево. Чудовий подарунок для тих, хто цінує екологічне сервірування.",
+      "en": "A set of 4 openwork placemats woven from natural jute, complete with a bread basket. Placemat diameter: 26 cm; basket: 20 cm in diameter, 7 cm high. Materials: jute, wood. A wonderful gift for those who value eco-friendly table setting."
     },
-    "price": 480,
+    "price": 1235,
     "currency": "UAH",
     "images": [
-      "/images/products/1home.organizer.jute1JPG.jpg",
+      "/images/products/Home-013-1.JPG",
       "/images/products/1home.organizer.jute2.JPG",
       "/images/products/1home.organizer.jute3.JPG"
     ],
@@ -441,11 +433,6 @@
       "джут",
       "дерево"
     ],
-    "dimensions": {
-      "diameter": 20,
-      "height": 7,
-      "unit": "cm"
-    },
     "inStock": true,
     "featured": false,
     "new": false,
@@ -455,19 +442,19 @@
     "id": "home_014",
     "category": "home",
     "name": {
-      "ua": "Кошик для смаколиків",
-      "en": "Bread basket"
+      "ua": "Набір Обідній",
+      "en": "Dinner set"
     },
     "description": {
-      "ua": "матеріал - джут, дерево, колір - натурального джуту, діаметр - 25 см, висота - 7 см",
-      "en": "material - jute, wood, colour - natural, d - 25 cm, h - 7 cm"
+      "ua": "Набір для екосервірування обіднього столу з 4 підтарільників з натурального джуту і хлібного кошика. Кожен виріб, виготовлений вручну, додасть природного тепла вашому дому. Матеріал - натуральний джут, дерево. Розміри: діаметр кошика - 25 см, висота - 7 см, діаметр підтарільників - 30 см.",
+      "en": "A set for eco-friendly dinner table setting: 4 natural jute placemats and a bread basket. Each handmade piece will bring natural warmth to your home. Materials: natural jute, wood. Sizes: basket 25 cm in diameter, 7 cm high; placemat diameter 30 cm."
     },
-    "price": 550,
+    "price": 1340,
     "currency": "UAH",
     "images": [
-      "/images/products/2home.organizer.jute1.JPG",
-      "/images/products/2home.organizer.jute2.JPG",
-      "/images/products/2home.organizer.jute3.JPG"
+      "/images/products/Home-014-1.JPG",
+      "/images/products/Home-014-2.JPG",
+      "/images/products/Home-014-3.JPG"
     ],
     "colors": [
       "натуральний"
@@ -476,11 +463,6 @@
       "джут",
       "дерево"
     ],
-    "dimensions": {
-      "diameter": 25,
-      "height": 7,
-      "unit": "cm"
-    },
     "inStock": true,
     "featured": false,
     "new": false,
@@ -490,33 +472,28 @@
     "id": "home_015",
     "category": "home",
     "name": {
-      "ua": "Кошик для смаколиків",
-      "en": "Bread basket"
+      "ua": "Набір До сніданку",
+      "en": "Breakfast set"
     },
     "description": {
-      "ua": "матеріал - джут, дерево, колір - натурального джуту, 25/17 см, висота - 6,5 см",
-      "en": "material - jute, wood, colour - natural, 25/17 cm, h - 6,5 cm"
+      "ua": "Набір «До сніданку» з 4 підтарільників з візерунком соняшника і прямокутного хлібного кошика. Матеріал: натуральний джут бежевого і чорного кольору, дерево. Діаметр підтарільників 21 см, кошик - 17/25 см, висота 6,5 см. Для поціновувачів екосервірування в етностилі.",
+      "en": "The “Breakfast” set of 4 placemats with a sunflower pattern and a rectangular bread basket. Materials: natural jute in beige and black, wood. Placemat diameter: 21 cm; basket: 17×25 cm, 6.5 cm high. For lovers of eco-friendly table setting in ethno style."
     },
-    "price": 550,
+    "price": 1235,
     "currency": "UAH",
     "images": [
-      "/images/products/3home.organizer.jute1.JPG",
-      "/images/products/3home.organizer.jute2.JPG",
+      "/images/products/Home-015-1.JPG",
+      "/images/products/Home-015-2.JPG",
       "/images/products/3home.organizer.jute3.JPG"
     ],
     "colors": [
-      "натуральний"
+      "натуральний",
+      "чорний"
     ],
     "materials": [
       "джут",
       "дерево"
     ],
-    "dimensions": {
-      "width": 25,
-      "depth": 17,
-      "height": 6.5,
-      "unit": "cm"
-    },
     "inStock": true,
     "featured": false,
     "new": false,
@@ -916,6 +893,40 @@
     "featured": false,
     "new": false,
     "sku": "HOME-026"
+  },
+  {
+    "id": "home_027",
+    "category": "home",
+    "name": {
+      "ua": "Набір блакитних підтарільників",
+      "en": "Blue placemat set"
+    },
+    "description": {
+      "ua": "Набір блакитних підтарільників ручної роботи з натурального джуту діаметром 28 см, в наборі 4 шт. Для яскравого акценту у сервіруванні. Чудовий подарунок для друзів.",
+      "en": "A set of handmade light blue placemats made from natural jute, 28 cm in diameter, 4 pcs per set. For a bright accent in your table setting. A wonderful gift for friends."
+    },
+    "price": 910,
+    "currency": "UAH",
+    "images": [
+      "/images/products/Home-027-1.JPG",
+      "/images/products/Home-027-2.JPG",
+      "/images/products/Home-027-3.JPG"
+    ],
+    "colors": [
+      "голубий"
+    ],
+    "materials": [
+      "джут"
+    ],
+    "dimensions": {
+      "diameter": 28,
+      "unit": "cm"
+    },
+    "quantity": 4,
+    "inStock": true,
+    "featured": false,
+    "new": true,
+    "sku": "HOME-027"
   },
   {
     "id": "ethno_001",
