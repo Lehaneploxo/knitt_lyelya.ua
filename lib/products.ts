@@ -23,7 +23,9 @@ export interface Product {
     height?: number
     depth?: number
     diameter?: number
-    unit: string
+    unit?: string
+    // Для наборів з кількох виробів різного розміру
+    text?: { ua: string; en: string }
   }
   weight?: number
   quantity?: number

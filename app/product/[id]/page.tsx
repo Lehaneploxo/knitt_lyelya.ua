@@ -289,6 +289,9 @@ export default function ProductPage() {
                       <span className="font-medium">
                         {(() => {
                           const d = product.dimensions
+                          if (d.text) {
+                            return language === 'ua' ? d.text.ua : d.text.en
+                          }
                           if (d.diameter) {
                             return `Ø ${d.diameter} ${d.unit}`
                           }

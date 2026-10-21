@@ -129,7 +129,13 @@
     "inStock": true,
     "featured": false,
     "new": false,
-    "sku": "HOME-004"
+    "sku": "HOME-004",
+    "dimensions": {
+      "text": {
+        "ua": "підтарільники Ø 26 см; кошик Ø 20 см, висота 7 см",
+        "en": "placemats Ø 26 cm; basket Ø 20 cm, height 7 cm"
+      }
+    }
   },
   {
     "id": "home_005",
@@ -229,7 +235,13 @@
     "inStock": true,
     "featured": false,
     "new": false,
-    "sku": "HOME-007"
+    "sku": "HOME-007",
+    "dimensions": {
+      "text": {
+        "ua": "підтарільники Ø 21 см; кошик 17 x 25 см, висота 6,5 см",
+        "en": "placemats Ø 21 cm; basket 17 x 25 cm, height 6.5 cm"
+      }
+    }
   },
   {
     "id": "home_008",
@@ -436,7 +448,13 @@
     "inStock": true,
     "featured": false,
     "new": false,
-    "sku": "HOME-013"
+    "sku": "HOME-013",
+    "dimensions": {
+      "text": {
+        "ua": "підтарільники Ø 26 см; кошик Ø 20 см, висота 7 см",
+        "en": "placemats Ø 26 cm; basket Ø 20 cm, height 7 cm"
+      }
+    }
   },
   {
     "id": "home_014",
@@ -466,7 +484,13 @@
     "inStock": true,
     "featured": false,
     "new": false,
-    "sku": "HOME-014"
+    "sku": "HOME-014",
+    "dimensions": {
+      "text": {
+        "ua": "підтарільники Ø 30 см; кошик Ø 25 см, висота 7 см",
+        "en": "placemats Ø 30 cm; basket Ø 25 cm, height 7 cm"
+      }
+    }
   },
   {
     "id": "home_015",
@@ -497,7 +521,13 @@
     "inStock": true,
     "featured": false,
     "new": false,
-    "sku": "HOME-015"
+    "sku": "HOME-015",
+    "dimensions": {
+      "text": {
+        "ua": "підтарільники Ø 21 см; кошик 17 x 25 см, висота 6,5 см",
+        "en": "placemats Ø 21 cm; basket 17 x 25 cm, height 6.5 cm"
+      }
+    }
   },
   {
     "id": "home_016",
@@ -954,7 +984,13 @@
     "inStock": true,
     "featured": false,
     "new": true,
-    "sku": "HOME-028"
+    "sku": "HOME-028",
+    "dimensions": {
+      "text": {
+        "ua": "серветка Ø 26 см; підставки під чашки Ø 13 см",
+        "en": "placemat Ø 26 cm; coasters Ø 13 cm"
+      }
+    }
   },
   {
     "id": "home_029",
@@ -984,7 +1020,13 @@
     "inStock": true,
     "featured": false,
     "new": true,
-    "sku": "HOME-029"
+    "sku": "HOME-029",
+    "dimensions": {
+      "text": {
+        "ua": "серветка Ø 30 см; підставки під чашки Ø 12 см",
+        "en": "placemat Ø 30 cm; coasters Ø 12 cm"
+      }
+    }
   },
   {
     "id": "home_030",
@@ -1014,7 +1056,11 @@
     "inStock": true,
     "featured": false,
     "new": true,
-    "sku": "HOME-030"
+    "sku": "HOME-030",
+    "dimensions": {
+      "diameter": 13,
+      "unit": "cm"
+    }
   },
   {
     "id": "home_031",
@@ -1044,7 +1090,11 @@
     "inStock": true,
     "featured": false,
     "new": true,
-    "sku": "HOME-031"
+    "sku": "HOME-031",
+    "dimensions": {
+      "diameter": 13,
+      "unit": "cm"
+    }
   },
   {
     "id": "home_032",
@@ -1074,7 +1124,13 @@
     "inStock": true,
     "featured": false,
     "new": true,
-    "sku": "HOME-032"
+    "sku": "HOME-032",
+    "dimensions": {
+      "text": {
+        "ua": "підставка під заварник Ø 20 см; підставки під чашки Ø 12 см",
+        "en": "teapot stand Ø 20 cm; coasters Ø 12 cm"
+      }
+    }
   },
   {
     "id": "ethno_001",
