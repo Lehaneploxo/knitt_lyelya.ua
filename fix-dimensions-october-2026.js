@@ -9,16 +9,16 @@ const fs = require('fs')
 const text = (ua, en) => ({ text: { ua, en } })
 
 const DIMENSIONS = {
-  home_004: text('підтарільники Ø 26 см; кошик Ø 20 см, висота 7 см', 'placemats Ø 26 cm; basket Ø 20 cm, height 7 cm'),
-  home_013: text('підтарільники Ø 26 см; кошик Ø 20 см, висота 7 см', 'placemats Ø 26 cm; basket Ø 20 cm, height 7 cm'),
-  home_007: text('підтарільники Ø 21 см; кошик 17 x 25 см, висота 6,5 см', 'placemats Ø 21 cm; basket 17 x 25 cm, height 6.5 cm'),
-  home_015: text('підтарільники Ø 21 см; кошик 17 x 25 см, висота 6,5 см', 'placemats Ø 21 cm; basket 17 x 25 cm, height 6.5 cm'),
-  home_014: text('підтарільники Ø 30 см; кошик Ø 25 см, висота 7 см', 'placemats Ø 30 cm; basket Ø 25 cm, height 7 cm'),
-  home_028: text('серветка Ø 26 см; підставки під чашки Ø 13 см', 'placemat Ø 26 cm; coasters Ø 13 cm'),
-  home_029: text('серветка Ø 30 см; підставки під чашки Ø 12 см', 'placemat Ø 30 cm; coasters Ø 12 cm'),
+  home_004: text('Ø 26 см, Ø 20 см, h 7 см', 'Ø 26 cm, Ø 20 cm, h 7 cm'),
+  home_013: text('Ø 26 см, Ø 20 см, h 7 см', 'Ø 26 cm, Ø 20 cm, h 7 cm'),
+  home_007: text('Ø 21 см, 17 x 25 см, h 6,5 см', 'Ø 21 cm, 17 x 25 cm, h 6.5 cm'),
+  home_015: text('Ø 21 см, 17 x 25 см, h 6,5 см', 'Ø 21 cm, 17 x 25 cm, h 6.5 cm'),
+  home_014: text('Ø 30 см, Ø 25 см, h 7 см', 'Ø 30 cm, Ø 25 cm, h 7 cm'),
+  home_028: text('Ø 26 см, Ø 13 см', 'Ø 26 cm, Ø 13 cm'),
+  home_029: text('Ø 30 см, Ø 12 см', 'Ø 30 cm, Ø 12 cm'),
   home_030: { diameter: 13, unit: 'cm' },
   home_031: { diameter: 13, unit: 'cm' },
-  home_032: text('підставка під заварник Ø 20 см; підставки під чашки Ø 12 см', 'teapot stand Ø 20 cm; coasters Ø 12 cm'),
+  home_032: text('Ø 20 см, Ø 12 см', 'Ø 20 cm, Ø 12 cm'),
 }
 
 function updateJson() {
