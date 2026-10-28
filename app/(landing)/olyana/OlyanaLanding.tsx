@@ -4,6 +4,8 @@ import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import Image from 'next/image'
 import {
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
   CreditCard,
   Gem,
   Gift,
@@ -15,6 +17,8 @@ import {
   ShieldCheck,
   Truck,
   Wallet,
+  X,
+  ZoomIn,
 } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 
@@ -77,11 +81,14 @@ const OTHER_BAGS = [
 // Скріншоти реальних відгуків з Instagram (public/landing/olyana/reviews/).
 // Порожній масив — блок відгуків не показується.
 const REVIEWS: { src: string; alt: string }[] = [
-  { src: `${ASSETS}/reviews/review-4.jpg`, alt: 'Відгук: сумочка неймовірна, я в захваті, чудовий подарунок собі на день народження' },
-  { src: `${ASSETS}/reviews/review-2.jpg`, alt: 'Відгук: забрала посилочку, сумочка неймовірна' },
-  { src: `${ASSETS}/reviews/review-3.jpg`, alt: 'Відгук: отримала сумочку, я в захваті, особливе дякую за пакування' },
-  { src: `${ASSETS}/reviews/review-1.jpg`, alt: 'Відгук: дякую за роботу, бажаю творчого натхнення' },
+  { src: `${ASSETS}/reviews/otzyv-6.jpg`, alt: 'Відгук: сумочка неймовірна, я в захваті, чудовий подарунок собі на день народження' },
+  { src: `${ASSETS}/reviews/otzyv-4.jpg`, alt: 'Відгук: забрала посилочку, сумочка неймовірна, покажу в Європі' },
+  { src: `${ASSETS}/reviews/otzyv-3.jpg`, alt: 'Відгук: це не сумка, а суцільне задоволення від якості та фасону' },
+  { src: `${ASSETS}/reviews/otzyv-2.jpg`, alt: 'Відгук: отримала сумку, вона дуже гарна і зручна' },
+  { src: `${ASSETS}/reviews/otzyv-1.jpg`, alt: 'Відгук: дякую за таку чудову сумку, вона дуже зручна' },
+  { src: `${ASSETS}/reviews/otzyv-5.jpg`, alt: 'Відгук: дякую за роботу, бажаю творчого натхнення' },
 ]
+const REVIEW_SIZE = { width: 900, height: 1599 }
 
 // Інлайн, бо globals.css перефарбовує .font-heading у коричневий
 const PRICE_COLOR = '#B88A5E'
@@ -167,6 +174,178 @@ function Ornament() {
       </svg>
       <span className="h-px w-16 bg-gray-300" />
     </div>
+  )
+}
+
+// Стрічка відгуків: свайп/стрілки, крапки-індикатори, перегляд на весь екран
+function ReviewsCarousel() {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [current, setCurrent] = useState(0)
+  const [atStart, setAtStart] = useState(true)
+  const [atEnd, setAtEnd] = useState(false)
+  const [opened, setOpened] = useState<number | null>(null)
+  const touchX = useRef<number | null>(null)
+
+  const onScroll = () => {
+    const track = trackRef.current
+    if (!track) return
+    const card = track.children[0] as HTMLElement | undefined
+    const step = card ? card.offsetWidth + 16 : track.clientWidth
+    const end = track.scrollLeft + track.clientWidth > track.scrollWidth - 8
+    setCurrent(end ? REVIEWS.length - 1 : Math.round(track.scrollLeft / step))
+    setAtStart(track.scrollLeft < 8)
+    setAtEnd(end)
+  }
+
+  useEffect(() => {
+    onScroll()
+    window.addEventListener('resize', onScroll)
+    return () => window.removeEventListener('resize', onScroll)
+  }, [])
+
+  const scrollToCard = (index: number) => {
+    const card = trackRef.current?.children[index] as HTMLElement | undefined
+    if (!card || !trackRef.current) return
+    trackRef.current.scrollTo({ left: card.offsetLeft - trackRef.current.offsetLeft, behavior: 'smooth' })
+  }
+
+  const scrollByPage = (dir: 1 | -1) => {
+    const track = trackRef.current
+    if (track) track.scrollBy({ left: dir * track.clientWidth * 0.8, behavior: 'smooth' })
+  }
+
+  const step = (dir: 1 | -1) =>
+    setOpened((i) => (i === null ? i : (i + dir + REVIEWS.length) % REVIEWS.length))
+
+  // Клавіатура та блокування прокрутки сторінки під час перегляду
+  useEffect(() => {
+    if (opened === null) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpened(null)
+      if (e.key === 'ArrowRight') step(1)
+      if (e.key === 'ArrowLeft') step(-1)
+    }
+    const overflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = overflow
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [opened])
+
+  const arrowClass =
+    'absolute top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-primary-dark shadow-lg ring-1 ring-gray-200 transition hover:bg-primary-dark hover:text-white disabled:pointer-events-none disabled:opacity-0 md:flex'
+
+  return (
+    <>
+      <div className="relative mt-8">
+        <button type="button" onClick={() => scrollByPage(-1)} disabled={atStart} aria-label="Попередні відгуки" className={arrowClass} style={{ left: -12 }}>
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+        <div
+          ref={trackRef}
+          onScroll={onScroll}
+          className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:scroll-px-0 md:px-0"
+        >
+          {REVIEWS.map((review, i) => (
+            <button
+              key={review.src}
+              type="button"
+              onClick={() => {
+                setOpened(i)
+                window.dataLayer?.push({ event: 'landing_review_open', review_index: i + 1 })
+              }}
+              aria-label={`Відкрити відгук ${i + 1} з ${REVIEWS.length}`}
+              className="group relative w-[68%] shrink-0 snap-start overflow-hidden rounded-2xl border border-gray-200 bg-secondary shadow-card transition-shadow hover:shadow-lg sm:w-[42%] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)]"
+            >
+              <img
+                src={review.src}
+                alt={review.alt}
+                {...REVIEW_SIZE}
+                loading="lazy"
+                className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+              <span className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-primary-dark shadow-md transition group-hover:bg-primary-dark group-hover:text-white">
+                <ZoomIn className="h-4 w-4" />
+              </span>
+            </button>
+          ))}
+        </div>
+        <button type="button" onClick={() => scrollByPage(1)} disabled={atEnd} aria-label="Наступні відгуки" className={arrowClass} style={{ right: -12 }}>
+          <ChevronRight className="h-6 w-6" />
+        </button>
+      </div>
+
+      <div className="mt-5 flex items-center justify-center gap-2">
+        {REVIEWS.map((review, i) => (
+          <button
+            key={review.src}
+            type="button"
+            onClick={() => scrollToCard(i)}
+            aria-label={`Відгук ${i + 1}`}
+            className={`h-2 rounded-full transition-all ${i === current ? 'w-6 bg-primary-dark' : 'w-2 bg-gray-300 hover:bg-gray-400'}`}
+          />
+        ))}
+      </div>
+      <p className="mt-3 text-center text-sm text-gray-500">
+        Гортайте, щоб побачити всі {REVIEWS.length} відгуків · натисніть, щоб збільшити
+      </p>
+
+      {opened !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Перегляд відгуку"
+          onClick={() => setOpened(null)}
+          onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+          onTouchEnd={(e) => {
+            if (touchX.current === null) return
+            const dx = e.changedTouches[0].clientX - touchX.current
+            if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1)
+            touchX.current = null
+          }}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+        >
+          <img
+            key={REVIEWS[opened].src}
+            src={REVIEWS[opened].src}
+            alt={REVIEWS[opened].alt}
+            {...REVIEW_SIZE}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[calc(100dvh-6rem)] w-auto max-w-full rounded-xl object-contain shadow-2xl"
+          />
+          <span className="absolute left-1/2 top-4 -translate-x-1/2 rounded-full bg-white/10 px-3 py-1 text-sm text-white">
+            {opened + 1} / {REVIEWS.length}
+          </span>
+          <button type="button" onClick={() => setOpened(null)} aria-label="Закрити" className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25">
+            <X className="h-6 w-6" />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              step(-1)
+            }}
+            aria-label="Попередній відгук"
+            className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25 md:left-6 md:h-14 md:w-14"
+          >
+            <ChevronLeft className="h-7 w-7" />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              step(1)
+            }}
+            aria-label="Наступний відгук"
+            className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25 md:right-6 md:h-14 md:w-14"
+          >
+            <ChevronRight className="h-7 w-7" />
+          </button>
+        </div>
+      )}
+    </>
   )
 }
 
@@ -378,19 +557,7 @@ export default function OlyanaLanding() {
         <section className="bg-white">
           <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
             <h2 className="text-center font-heading text-3xl md:text-4xl">Відгуки наших клієнтів</h2>
-            <div className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0">
-              {REVIEWS.map((review) => (
-                <img
-                  key={review.src}
-                  src={review.src}
-                  alt={review.alt}
-                  width={640}
-                  height={1135}
-                  loading="lazy"
-                  className="w-[70%] shrink-0 snap-center rounded-xl border border-gray-200 shadow-card md:w-full"
-                />
-              ))}
-            </div>
+            <ReviewsCarousel />
           </div>
         </section>
       )}
