@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import './globals.css'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
 import { Toaster } from 'sonner'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 
@@ -57,11 +55,7 @@ export default function RootLayout({
           />
         </noscript>
         <LanguageProvider>
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
+          {children}
           <Toaster position="top-right" richColors />
         </LanguageProvider>
       </body>

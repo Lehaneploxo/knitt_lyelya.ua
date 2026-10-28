@@ -1,13 +1,52 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Minus, Plus, X, ShoppingBag } from 'lucide-react'
 import { useCartStore } from '@/store/cartStore'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function CartPage() {
-  const { items, updateQuantity, removeItem, getTotalPrice } = useCartStore()
+  const { items, updateQuantity, removeItem, getTotalPrice, addItem } = useCartStore()
   const { t, language } = useLanguage()
+  const [adding, setAdding] = useState(false)
+
+  // /cart?add=<id> — кнопка «Купити» з лендингу кладе товар у кошик
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    const addId = url.searchParams.get('add')
+    if (!addId) return
+
+    // Прибираємо параметр, щоб оновлення сторінки не додавало товар вдруге
+    url.searchParams.delete('add')
+    window.history.replaceState(null, '', url.pathname + url.search)
+
+    if (useCartStore.getState().items.some((i) => i.id === addId)) return
+
+    setAdding(true)
+    fetch(`/api/products/${encodeURIComponent(addId)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.product) {
+          addItem({
+            id: data.product.id,
+            name: data.product.name,
+            price: data.product.price,
+            image: data.product.images?.[0] || '',
+          })
+        }
+      })
+      .catch((error) => console.error('Error adding product from link:', error))
+      .finally(() => setAdding(false))
+  }, [addItem])
+
+  if (adding) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <p className="text-gray-600 text-lg">Завантаження...</p>
+      </div>
+    )
+  }
 
   if (items.length === 0) {
     return (
