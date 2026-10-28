@@ -33,9 +33,9 @@ type Media = { type: 'video'; src: string; poster: string } | { type: 'image'; s
 
 const MEDIA: Media[] = [
   { type: 'video', src: `${ASSETS}/olyana.mp4`, poster: `${ASSETS}/olyana-poster.jpg` },
-  { type: 'image', src: `${ASSETS}/olyana-1.jpg` },
-  { type: 'image', src: `${ASSETS}/olyana-2.jpg` },
-  { type: 'image', src: `${ASSETS}/olyana-3.jpg` },
+  { type: 'image', src: `${ASSETS}/olyana-1-v2.jpg` },
+  { type: 'image', src: `${ASSETS}/olyana-2-v2.jpg` },
+  { type: 'image', src: `${ASSETS}/olyana-3-v2.jpg` },
 ]
 
 const HOOKS = [

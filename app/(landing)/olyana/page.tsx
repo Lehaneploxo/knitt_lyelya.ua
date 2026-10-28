@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     url: '/',
     title: 'Сумка Оляна — ручна робота з натурального джуту',
     description,
-    images: [{ url: '/landing/olyana/og.jpg', width: 1200, height: 630, alt: 'Сумка Оляна' }],
+    images: [{ url: '/landing/olyana/og-v2.jpg', width: 1200, height: 630, alt: 'Сумка Оляна' }],
   },
 }
 
