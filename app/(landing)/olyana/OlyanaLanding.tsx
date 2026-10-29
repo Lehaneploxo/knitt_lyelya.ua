@@ -168,7 +168,7 @@ function Ornament() {
             width={6}
             height={6}
             transform={`rotate(45 ${9 + i * 13} 5)`}
-            fill={i % 2 === 0 ? '#A3302A' : '#3E2723'}
+            fill="#3E2723"
           />
         ))}
       </svg>
