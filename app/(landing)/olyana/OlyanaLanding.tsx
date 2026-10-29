@@ -36,10 +36,10 @@ const ASSETS = '/landing/olyana'
 type Media = { type: 'video'; src: string; poster: string } | { type: 'image'; src: string }
 
 const MEDIA: Media[] = [
-  { type: 'video', src: `${ASSETS}/olyana.mp4`, poster: `${ASSETS}/olyana-poster.jpg` },
-  { type: 'image', src: `${ASSETS}/olyana-1-v2.jpg` },
-  { type: 'image', src: `${ASSETS}/olyana-2-v2.jpg` },
-  { type: 'image', src: `${ASSETS}/olyana-3-v2.jpg` },
+  { type: 'video', src: `${ASSETS}/olyana-v2.mp4`, poster: `${ASSETS}/olyana-poster-v2.jpg` },
+  { type: 'image', src: `${ASSETS}/olyana-1-v3.jpg` },
+  { type: 'image', src: `${ASSETS}/olyana-2-v3.jpg` },
+  { type: 'image', src: `${ASSETS}/olyana-3-v3.jpg` },
 ]
 
 const HOOKS = [
@@ -54,7 +54,7 @@ const SPECS = [
   ['Колір', 'натуральний джут, червоний, чорний'],
   ['Розміри', '35/38–47/9,5 см'],
   ['Тип', 'шопер'],
-  ['Колекція', 'Етно'],
+  ['Колекція', 'ЕТНО'],
 ]
 
 const BENEFITS = [
@@ -444,8 +444,8 @@ export default function OlyanaLanding() {
             ))}
           </ul>
 
-          <p className="mt-6 text-sm uppercase tracking-[0.25em] text-gray-500">Пропонуємо:</p>
-          <h1 className="mt-1 font-heading text-4xl md:text-5xl">{PRODUCT.name}</h1>
+          <p className="mt-6 w-fit rounded-md bg-[#A3302A] px-3 py-1 text-sm font-semibold uppercase tracking-[0.25em] text-white">Пропонуємо:</p>
+          <h1 className="mt-3 font-heading text-4xl md:text-5xl">{PRODUCT.name}</h1>
           <p className="mt-2 text-gray-600">
             В&apos;язаний шопер з натурального джуту з етнічним орнаментом. Ручна робота.
           </p>
